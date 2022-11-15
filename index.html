@@ -2,40 +2,415 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sentient Autonomics - Industrial Software Optimization</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+  <!-- <link href="/static/css/vendor/aos.css" rel="stylesheet"> -->
+  <link href="/static/css/vendor/fa.min.css" rel="stylesheet">
+  <link href="/static/css/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/vendor/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/css/vendor/boxicons.min.css" rel="stylesheet">
+  <link href="/static/css/vendor/glightbox.min.css" rel="stylesheet">
+  <link href="/static/css/vendor/remixicon.css" rel="stylesheet">
+  <link href="/static/css/vendor/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/static/css/style.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="container h-100">
-    <div class="row align-items-center h-100">
-      <div class="col-lg-4 col-md-8 mx-auto" style="margin-top: 20vh;">
-        <div class="card h-100 bg-light">
-          <div class="card-body text-center">
-            <img src="https://mystickermania.com/cdn/stickers/anime/spy-family-anya-peace-512x512.png" alt="" width="130" height="130">
-            <form class="mt-5 mb-5" action="dashboard/index.html">
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" autocomplete="off">
-                <label for="nama">Masukkan nama anda</label>
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="index.html">SA - Logo</a></h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="fas fa-chevron-down mx-2"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="fas fa-chevron-right mx-2"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+        </ul> <i class="fas fa-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+          data-aos="fade-up" data-aos-delay="200">
+          <h1>Better Solutions For Your Industries</h1>
+          <h2>We are team of talented designers making an A.I. solutions</h2>
+          <div class="d-flex justify-content-center justify-content-lg-start"> <a href="#about"
+              class="btn-get-started scrollto">Get Started</a> <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q"
+              class="glightbox btn-watch-video"><i class="fas fa-play mx-2"></i><span>Watch Video</span></a></div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200"> <img
+            src="/static/img/hero-img.png" class="img-fluid animated" alt=""></div>
+      </div>
+    </div>
+  </section>
+  <main id="main">
+    <section id="clients" class="clients section-bg">
+      <div class="container">
+        <div class="row" data-aos="zoom-in">
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center text-secondary">
+            <h4>Our clients:</h4>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center"> <img
+              src="/static/img/clients/client-1.png" class="img-fluid" alt=""></div>
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center"> <img
+              src="/static/img/clients/client-2.png" class="img-fluid" alt=""></div>
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center"> <img
+              src="/static/img/clients/client-3.png" class="img-fluid" alt=""></div>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>About Us</h2>
+        </div>
+        <div class="row content">
+          <div class="col-lg-6">
+            <p> We are expertise at optimizing any Industrial process with creating a data-driven software for
+              Industrial process control and optimization
+              Any limited and old technology will be limitless with these method </p>
+            <ul>
+              <li><i class="fas fa-check-double me-2 fc-primary"></i> Machine Learning </li>
+              <li><i class="fas fa-check-double me-2 fc-primary"></i> Big Data </li>
+              <li><i class="fas fa-check-double me-2 fc-primary"></i> Deep Learning </li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <p> With A.I. and Machine learning technology, Sentienta Autonomics will help the clients smoothly make a
+              transition to
+              data-driven solutions for their industrial process control.</p> <a href="#" class="btn-learn-more">Learn
+              More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Services</h2>
+          <p> Using highly flexibility on industrial machine, we can help in any action of services that can handling
+            industrial machine optimization. </p>
+        </div>
+        <div class="row">
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-3x fa-brain fc-primary"></i></div>
+              <h4><a href="#">A.I. Consulting</a></h4>
+              <p> Designing a software solution powered by artificial intelligence and implementing
+                the solution for the production system. </p>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
+            data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-3x fa-arrow-trend-up fc-primary"></i></div>
+              <h4><a href="#">Process Optimization</a></h4>
+              <p> We provide services to optimize complex industrial processes using our machine learning expertise.
+              </p>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
+            data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-3x fa-chart-simple fc-primary"></i></div>
+              <h4><a href="#">Data Science support tools</a></h4>
+              <p> Help your data science team easily maintain, view, and retrieve the models with their configurations.
+              </p>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
+            data-aos-delay="400">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-3x fa-code fc-primary"></i></div>
+              <h4><a href="">API Development</a></h4>
+              <p> Integrate our system with the existing easily. </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="team" class="team">
+      <div class="container" data-aos="zoom-in">
+        <div class="section-title">
+          <h2>Our Team</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+            sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
+            ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
+              <div class="pic"><img src="/static/img/team/team-1.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Kamen Pavlov</h4> <span>Co-Founder, CEO</span>
+                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                <div class="social"> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a> 
+                  <a href="https://www.linkedin.com/in/kamen-pavlov-82822b129/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                </div>
               </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="userid" name="userid" placeholder="Masukkan User ID" autocomplete="off">
-                <label for="userid">Masukkan User ID anda</label>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
+              <div class="pic"><img src="/static/img/team/team-2.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Emiliyan Pavlov</h4> <span>Developer</span>
+                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                <div class="social"> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a> 
+                  <a href="https://www.linkedin.com/in/emiliyan-pavlov-080051152/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                </div>
               </div>
-              <button type="submit" class="btn btn-lg btn-primary ">Submit</button>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
+              <div class="pic"><img src="/static/img/team/team-3.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Irzam Hardiansyah</h4> <span>Researcher</span>
+                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                <div class="social"> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a> 
+                  <a href="https://www.linkedin.com/in/irzam-hardiansyah-23805786/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
+              <div class="pic"><img src="/static/img/team/team-4.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Said Irfan</h4> <span>Business Development, M&A</span>
+                <p> Strong passion for business development, M&A and partnerships.</p>
+                <div class="social"> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a> 
+                  <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a> 
+                  <a href="https://www.linkedin.com/in/said-irfan-923a2b3/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+            sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
+            ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+        <div class="faq-list">
+          <ul>
+            <li data-aos="fade-up" data-aos-delay="100"> <i class="bx bx-help-circle icon-help"></i> <a
+                data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Non consectetur
+                a erat nam at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i
+                  class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                <p> Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet
+                  non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor
+                  purus non.</p>
+              </div>
+            </li>
+            <li data-aos="fade-up" data-aos-delay="200"> <i class="bx bx-help-circle icon-help"></i> <a
+                data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Feugiat
+                scelerisque varius morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i
+                  class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                <p> Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum
+                  velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend
+                  donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in
+                  cursus turpis massa tincidunt dui.</p>
+              </div>
+            </li>
+            <li data-aos="fade-up" data-aos-delay="300"> <i class="bx bx-help-circle icon-help"></i> <a
+                data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Dolor sit amet
+                consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i
+                  class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                <p> Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus
+                  pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit.
+                  Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis
+                  tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
+              </div>
+            </li>
+            <li data-aos="fade-up" data-aos-delay="400"> <i class="bx bx-help-circle icon-help"></i> <a
+                data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Tempus quam
+                pellentesque nec nam aliquam sem et tortor consequat? <i class="bx bx-chevron-down icon-show"></i><i
+                  class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                <p> Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in
+                  est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl
+                  suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.</p>
+              </div>
+            </li>
+            <li data-aos="fade-up" data-aos-delay="500"> <i class="bx bx-help-circle icon-help"></i> <a
+                data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Tortor vitae
+                purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i
+                  class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+                <p> Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo
+                  integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc
+                  eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section> -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Contact Us</h2>
+          <p> We are happy to talk with you. Just write us any message and we can discuss about anything! </p>
+        </div>
+        <div class="row">
+          <div class="col-lg-5 d-flex align-items-stretch">
+            <div class="info">
+              <div class="address"> 
+                <div class="icon"><i class="fas fa-location-dot"></i></div>
+                <h4>Location:</h4>
+                <p>Sofia, Bulgaria</p>
+              </div>
+              <div class="email"> 
+                <div class="icon"><i class="fas fa-envelope"></i></div>
+                <h4>Email:</h4>
+                <p>info@sentient-autonomics.com</p>
+              </div>
+              <div class="phone"> 
+                <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                <h4>Call:</h4>
+                <p>+35 989 995 2053</p>
+              </div> <iframe
+                src="https://maps.google.com/maps?q=sofia&t=&z=5&ie=UTF8&iwloc=&output=embed"
+                frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="form-group col-md-6"> <label for="name">Your Name</label> <input type="text" name="name"
+                    class="form-control" id="name" required></div>
+                <div class="form-group col-md-6"> <label for="name">Your Email</label> <input type="email"
+                    class="form-control" name="email" id="email" required></div>
+              </div>
+              <div class="form-group"> <label for="name">Subject</label> <input type="text" class="form-control"
+                  name="subject" id="subject" required></div>
+              <div class="form-group"> <label for="name">Message</label><textarea class="form-control" name="message"
+                  rows="10" required></textarea></div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
           </div>
         </div>
       </div>
+    </section>
+  </main>
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>Sentient Autonomics</h3>
+            <p> Sofia,<br> Bulgaria <br><br> <strong>Phone:</strong>
+              +35 989 995 2053<br> <strong>Email:</strong> info@sentient-autonomics.com<br></p>
+          </div>
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="fas fa-chevron-right me-2"></i> <a href="#">Home</a></li>
+              <li><i class="fas fa-chevron-right me-2"></i> <a href="#">About us</a></li>
+              <li><i class="fas fa-chevron-right me-2"></i> <a href="#">Services</a></li>
+              <li><i class="fas fa-chevron-right me-2"></i> <a href="#">Terms of service</a></li>
+              <li><i class="fas fa-chevron-right me-2"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="fas fa-chevron-right me-2"></i> <a href="#">Web Design</a></li>
+              <li><i class="fas fa-chevron-right me-2"></i> <a href="#">Web Development</a></li>
+              <li><i class="fas fa-chevron-right me-2"></i> <a href="#">Product Management</a></li>
+              <li><i class="fas fa-chevron-right me-2"></i> <a href="#">Marketing</a></li>
+              <li><i class="fas fa-chevron-right me-2"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Social Networks</h4>
+            <p>Getting closer with us using social networks</p>
+            <div class="social-links mt-3"> 
+              <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a> 
+              <a href="#" class="instagram"><i class="fab fa-instagram"></i></a> 
+              <a href="#" class="google-plus"><i class="fab fa-google-plus-g"></i></a> 
+              <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-    crossorigin="anonymous"></script>
+    <div class="container footer-bottom clearfix">
+      <div class="copyright"> &copy; Copyright <strong><span>Sentient Autonomics</span></strong>. All Rights Reserved</div>
+      <div class="credits"> Designed by Ichsan </div>
+    </div>
+  </footer>
+  <div id="preloader"></div> <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="fas fa-angle-up text-white"></i></a>
+  <script data-cfasync="false" src="/static/js/email-decode.min.js"></script>
+  <!-- <script src="/static/js/vendor/aos.js"></script> -->
+  <script src="/static/js/vendor/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/vendor/glightbox.min.js"></script>
+  <script src="/static/js/vendor/isotope.pkgd.min.js"></script>
+  <script src="/static/js/vendor/swiper-bundle.min.js"></script>
+  <script src="/static/js/vendor/noframework.waypoints.js"></script>
+  <script src="/static/js/vendor/validate.js"></script>
+  <script src="/static/js/vendor/fa.min.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script async src='https://www.googletagmanager.com/gtag/js?id=G-P7JSYB1CSP'></script>
+  <script>if (window.self == window.top) { window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-P7JSYB1CSP'); }</script>
 </body>
 
 </html>
