@@ -13,6 +13,40 @@ function loadVariable(variable_name) {
     return localStorage.getItem(variable_name);
 }
 
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+function showPosition(position) {
+    console.log(position);
+    getWaktuShalat(position.coords.latitude, position.coords.longitude, position.coords.altitude);
+    
+    $.get({
+        url: "https://api.bigdatacloud.net/data/reverse-geocode-client",
+        jsonpCallback: "callback",
+        data: {latitude: position.coords.latitude, longitude: position.coords.longitude, localityLanguage: 'id'},
+        dataType: "json",
+        success: function (location) {
+            console.log(location);
+
+            saveVariable('reverse_geocode', location);
+            $('#location-selected').html(`${location.city}, ${location.countryName}`);
+        },
+        error: function(e, s, h) {
+            console.log(`Error reverse geocode:`, e, h);
+
+            var location = loadVariable('reverse_geocode');
+            $('#location-selected').html(`${location.city}, ${location.countryName}`);
+        },
+        complete: function() {
+            refreshTabelShalat();
+        }
+    });
+}
+
 function getWaktuShalat(lat=null, lon=null, alt=null) {
     try {
         let date_now = now.toISOString().split('T')[0];
@@ -38,8 +72,8 @@ function getWaktuShalat(lat=null, lon=null, alt=null) {
             data: datasent,
             timeout: 15000,
             success: function (data) {
-                console.log(`Get: ${datasent}`);
-                console.log(data);
+                saveVariable('waktu_shalat', data);
+
                 $('#waktu-subuh').html(data.data.timings.Fajr);
                 $('#waktu-dhuhur').html(data.data.timings.Dhuhr);
                 $('#waktu-ashar').html(data.data.timings.Asr);
@@ -47,9 +81,18 @@ function getWaktuShalat(lat=null, lon=null, alt=null) {
                 $('#waktu-isya').html(data.data.timings.Isha);
 
                 update_time['waktu_shalat'] = new Date();
+                refreshTabelShalat();
             },
             error: function (jqXHR, status, errorThrown) {
-                console.log(`Error: ${jqXHR} - ${errorThrown}`);
+                console.log(`Error: `, jqXHR, errorThrown);
+
+                var data = loadVariable('waktu_shalat');
+                
+                $('#waktu-subuh').html(data.data.timings.Fajr);
+                $('#waktu-dhuhur').html(data.data.timings.Dhuhr);
+                $('#waktu-ashar').html(data.data.timings.Asr);
+                $('#waktu-maghrib').html(data.data.timings.Maghrib);
+                $('#waktu-isya').html(data.data.timings.Isha);
             },
         });
     }
@@ -114,6 +157,49 @@ function ubah_str_waktu(number) {
     return number_str
 }
 
+function refreshTabelShalat() {
+    var current_date = now.toISOString().split('T')[0];
+    var param_shalat = {}, waktu_shalat_terdekat=10e10, shalat_terdekat;
+    for (shalat of ['isya','maghrib','ashar','dhuhur','subuh']) {
+        var params = {};
+        params['waktu'] = $(`#waktu-${shalat}`).html();
+        params['waktu_terdekat'] = new Date(`${current_date}T${params['waktu']}`);
+        
+        while ((params['waktu_terdekat'] - now) > 86400000){
+            params['waktu_terdekat'].setDate(params['waktu_terdekat'].getDate() - 1);
+        }
+        while ((params['waktu_terdekat'] - now) < 0){
+            params['waktu_terdekat'].setDate(params['waktu_terdekat'].getDate() + 1);
+        }
+        params['jarak'] = params['waktu_terdekat'] - now;
+        if (params['jarak'] < waktu_shalat_terdekat){
+            waktu_shalat_terdekat = params['jarak'];
+            shalat_terdekat = shalat;
+        }
+
+        param_shalat[shalat] = params;
+    }
+
+    let time_diff = {
+        'jam': Math.floor(waktu_shalat_terdekat / 1000 / 60 / 60),
+        'min': Math.floor(waktu_shalat_terdekat / 1000 / 60) % 60,
+        'det': Math.floor(waktu_shalat_terdekat / 1000) % 60
+    };
+
+    var message = `Waktu ${shalat_terdekat.at(0).toUpperCase()}${shalat_terdekat.slice(1)} kurang <b>`;
+    var msgcount = 0;
+    for (satuan in time_diff){
+        if (msgcount > 1){break}
+        msgcount += 1
+        message += `${time_diff[satuan]} ${satuan} `;
+    }
+    message += '</b>';
+    
+    $('#shalat-message').html(message);
+    $('.table-shalat tr').removeClass('active');
+    $(`#waktu-${shalat_terdekat}`).parent().parent().addClass('active');
+}
+
 setInterval(() => {
     now = new Date();
 
@@ -149,6 +235,12 @@ setInterval(() => {
 }, 1000);
 
 setInterval(() => {
+    refreshTabelShalat();
+}, 60000);
+
+setInterval(() => {
     getWaktuShalat();
     getQuranMotivation();
-}, 60000);
+}, 600000);
+
+getLocation();

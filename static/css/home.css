@@ -1,11 +1,3 @@
-body {
-    background-image: url('/static/images/boat.jpg'); 
-    background-position: center; 
-    background-size: cover;
-    height: 100%;
-    overflow: hidden;
-}
-
 .overlay {
     position: absolute;
     top: 0;
@@ -25,7 +17,8 @@ body {
   }
 
 .localtime {
-    font-size: 60em;
+    font-size: 80pt;
+    font-weight: 700;
     font-family: 'Inter', sans-serif;
     display: block;
     margin-bottom: 0rem;
