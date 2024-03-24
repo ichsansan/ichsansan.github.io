@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Masjid Board</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="css/vendor/fa_all.css">
+    <link rel="stylesheet" href="css/home.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <style>
+      body {
+        background-image: url('images/darussaadah.jpg'); 
+        background-position: center; 
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="container-fluid">
+      <div class="settings-button">
+        <div class="float-end mt-2 me-1">
+          <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#modalSettings" onclick="openSettings();">
+            <i class="fas fa-gears"></i>
+          </button>
+          <button class="btn btn-sm">
+            <i class="fas fa-arrow-rotate-right" id="refreshBtn" onclick="getLocation(true);"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xxl-3 col-xl-5 col-lg-6 col-md-12">
+          <div class="card mt-3 blurry">
+            <div class="card-body">
+              <div class="localtime text-center">
+                <span id="hour"></span>:<span id="minute"></span>
+              </div>
+              <div class="m-auto row">
+                <div class="col-auto">
+                  <i class="fas fa-calendar-days me-2"></i>
+                </div>
+                <div class="col-auto">
+                  <div>
+                    <span id="day"></span>
+                    (<span class="timezone"></span>)
+                  </div>
+                  <div>
+                    <span id="hijri-day"></span>
+                  </div>
+                </div>
+                <p id="shalat-message"></p>
+              </div>
+    
+              <div class="d-none d-md-block">
+                <div class="table-responsive mt-2">
+                  <div class="h5">Waktu Shalat:</div>
+                  <table class="table table-shalat table-lg table-borderless table-hover">
+                    <tbody>
+                      <tr class="">
+                        <td scope="row">Subuh</td>
+                        <td class="text-center">
+                          <span id="waktu-subuh"></span>
+                          <span class="timezone"></span>
+                        </td>
+                      </tr>
+                      <tr class="">
+                        <td scope="row">Dhuhur</td>
+                        <td class="text-center">
+                          <span id="waktu-dhuhur"></span>
+                          <span class="timezone"></span>
+                        </td>
+                      </tr>
+                      <tr class="">
+                        <td scope="row">Ashar</td>
+                        <td class="text-center">
+                          <span id="waktu-ashar"></span>
+                          <span class="timezone"></span>
+                        </td>
+                      </tr>
+                      <tr class="">
+                        <td scope="row">Maghrib</td>
+                        <td class="text-center">
+                          <span id="waktu-maghrib"></span>
+                          <span class="timezone"></span>
+                        </td>
+                      </tr>
+                      <tr class="">
+                        <td scope="row">Isya</td>
+                        <td class="text-center">
+                          <span id="waktu-isya"></span>
+                          <span class="timezone"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-9 col-xl-7 col-lg-6 col-md-12 d-grid mt-5 my-md-auto">
+          <figure>
+            <blockquote class="blockquote motivation-arabic" style="color: #000; text-shadow: 0px 0px 14px #FFF;">
+              وَلَا تَهِنُوۡا وَ لَا تَحۡزَنُوۡا وَاَنۡتُمُ الۡاَعۡلَوۡنَ اِنۡ كُنۡتُمۡ مُّؤۡمِنِيۡنَ‏
+            </blockquote>
+            <figcaption class="blockquote-footer motivation-indonesia">
+              "Janganlah kamu bersikap lemah dan janganlah pula kamu bersedih hati, padahal kamulah orang orang yang paling tinggi derajatnya jika kamu beriman." (QS. Ali Imran: 139)
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="position-absolute sticky-bottom w-100" style="background-color: #FFF0;">
+      <marquee id="teks-berjalan" behavior="scroll" direction="left" scrollamount="10">
+        <i class="fas fa-circle mx-3"></i>
+        <span>Sidang Isbat secara mufakat menetapkan 1 Ramadan 1445 H jatuh pada Selasa, 12 Maret 2024</span>
+        <i class="fas fa-circle mx-3"></i>
+        <span>PT Freeport Indonesia bersama PT Perusahaan Listrik Negara (Persero) menandatangani perjanjian Renewable Energy Certificates (REC) di Surabaya, Jumat (8/3/2024)</span>
+        <i class="fas fa-circle mx-3"></i>
+      </marquee>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalSettings" tabindex="-1" role="dialog" aria-labelledby="modalSettingsId"
+      aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalSettingsId">
+              Settings
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <h5>Lokasi</h5>
+                <hr>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="latitude" class="form-label">Lintang</label>
+                    <input type="number" class="form-control" name="latitude" id="latitude" placeholder="" step="0.000001" disabled />
+                  </div>
+                  <div class="mb-3">
+                    <label for="longitude" class="form-label">Bujur</label>
+                    <input type="number" class="form-control" name="longitude" id="longitude" placeholder="" step="0.000001" disabled />
+                  </div>
+                  <p>Geser pin pada peta <span class="d-none d-md-inline-flex">di samping</span><span class="d-inline-flex d-md-none">di bawah</span> sesuai lokasi anda</p>
+                  <div class="mb-3 d-none">
+                    <label for="accuracy" class="form-label">Accuracy</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="accuracy" disabled/>
+                      <span class="input-group-text">m</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3" style="height: 300px;">
+                  <div id="map"></div>
+                </div>
+                <h5>Teks Berjalan</h5>
+                <hr>
+                <div class="mb-3">
+                  <label for="setting-teks-berjalan" class="form-label">Isi teks (dipisah dengan enter)</label>
+                  <textarea type="text" class="form-control" name="setting-teks-berjalan" id="setting-teks-berjalan" placeholder="" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="modalSaveBtn" onclick="saveSettings();">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.2.0/svg.min.js" integrity="sha512-EmfT33UCuNEdtd9zuhgQClh7gidfPpkp93WO8GEfAP3cLD++UM1AG9jsTUitCI9DH5nF72XaFePME92r767dHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  
+  <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+    ({key: "AIzaSyDfKoYGMlbgLbPUHgvvXeXGhZDY-ZLcfos", v: "weekly"});</script>
+  <!-- <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfKoYGMlbgLbPUHgvvXeXGhZDY-ZLcfos&callback=initMap&libraries=marker&v=weekly"
+    defer
+  ></script> -->
+  <script src="js/vendor/bootstrap.bundle.min.js"></script>
+  <script src="js/vendor/fa_all.js"></script>
+  <script src="js/vendor/jquery.min.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/localmaps.js"></script>
+</html>

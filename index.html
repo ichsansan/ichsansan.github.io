@@ -1,207 +1,741 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Masjid Board</title>
-    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
 
-    <link rel="stylesheet" href="static/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/vendor/fa_all.css">
-    <link rel="stylesheet" href="static/css/home.css">
+<head>
+  <meta charset="utf-8">
+  <title>Ichsan - Personal Portfolio</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
 
-    <style>
-      body {
-        background-image: url('static/images/darussaadah.jpg'); 
-        background-position: center; 
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 100%;
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="overlay"></div>
-    <div class="container-fluid">
-      <div class="settings-button">
-        <div class="float-end mt-2 me-1">
-          <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#modalSettings" onclick="openSettings();">
-            <i class="fas fa-gears"></i>
-          </button>
-          <button class="btn btn-sm">
-            <i class="fas fa-arrow-rotate-right" id="refreshBtn" onclick="getLocation(true);"></i>
-          </button>
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/fa_all.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+  <!-- Spinner Start -->
+  <div id="spinner"
+    class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <!-- Spinner End -->
+
+
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light fixed-top shadow py-lg-0 px-4 px-lg-5 wow fadeIn"
+    data-wow-delay="0.1s">
+    <a href="index.html" class="navbar-brand d-block d-lg-none">
+      <h1 class="text-primary fw-bold m-0">ProMan</h1>
+    </a>
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between py-4 py-lg-0" id="navbarCollapse">
+      <div class="navbar-nav ms-auto py-0">
+        <a href="#home" class="nav-item nav-link active">Home</a>
+        <a href="#about" class="nav-item nav-link">About</a>
+        <a href="#skill" class="nav-item nav-link">Skills</a>
+      </div>
+      <a href="index.html" class="navbar-brand bg-secondary py-3 px-4 mx-3 d-none d-lg-block">
+        <h1 class="text-primary fw-bold m-0">ProMan</h1>
+      </a>
+      <div class="navbar-nav me-auto py-0">
+        <a href="#competencies" class="nav-item nav-link">Competencies</a>
+        <a href="#project" class="nav-item nav-link">Projects</a>
+        <a href="#contact" class="nav-item nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+
+  <!-- Header Start -->
+  <div class="container-fluid bg-light my-6 mt-0" id="home">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6 py-6 pb-0 pt-lg-0">
+          <h3 class="text-primary mb-3">I'm</h3>
+          <h1 class="display-3 mb-3">Ichsan Pratama Adi</h1>
+          <h2 class="typed-text-output d-inline"></h2>
+          <div class="typed-text d-none">Data Scientist, Backend Developer, Electrician</div>
+          <div class="d-flex align-items-center pt-5">
+            <a target="_blank" href="/Ichsan_Pratama_CV_Resume.pdf" class="btn btn-primary py-3 px-5 me-5">Download CV</a>
+            <a class="btn btn-whatsapp" href="whatsapp://send?phone=6285878177947&text=Hi%20Ichsan%21">
+              <span>
+                <i class="fab fa-2x fa-whatsapp"></i>
+              </span>
+            </a>
+            <h5 class="ms-4 mb-0 d-none d-sm-block">Send a Message</h5>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img class="img-fluid" src="img/profile-ich.png" alt="">
         </div>
       </div>
+    </div>
+  </div>
+  <!-- Header End -->
+
+
+  <!-- About Start -->
+  <div class="container-xxl py-6" id="about">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="d-flex align-items-center mb-5">
+            <div class="years flex-shrink-0 text-center me-4">
+              <h1 class="display-1 mb-0">4+</h1>
+              <h5 class="mb-0">Years</h5>
+            </div>
+            <h3 class="lh-base mb-0">of working experience as a data scientist & backend developer</h3>
+          </div>
+          <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam
+            ipsum. Clita clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor eos.</p>
+          <p class="mb-3"><i class="far fa-check-circle text-primary me-3"></i>Afordable Prices</p>
+          <p class="mb-3"><i class="far fa-check-circle text-primary me-3"></i>High Quality Product</p>
+          <p class="mb-3"><i class="far fa-check-circle text-primary me-3"></i>On Time Project Delivery</p>
+          <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+        </div>
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6">
+              <img class="img-fluid rounded" src="img/about-1.jpg" alt="">
+            </div>
+            <div class="col-sm-6">
+              <img class="img-fluid rounded" src="img/about-2.jpg" alt="">
+            </div>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <h5 class="border-end pe-3 me-3 mb-0">Projects Completed</h5>
+            <h2 class="text-primary fw-bold mb-0" data-toggle="counter-up">3</h2>
+          </div>
+          <p class="mb-4">Has completed 3 projects on Digitalization Power Plants, including Realibility Optimization System, and Boiler Auto Tuning.</p>
+          <div class="d-flex align-items-center mb-3">
+            <h5 class="border-end pe-3 me-3 mb-0">Power Plants Visited</h5>
+            <h2 class="text-primary fw-bold mb-0" data-toggle="counter-up">8</h2>
+          </div>
+          <p class="mb-0">Developed an optimization system for multiple coal fired power plants in Indonesia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- About End -->
+
+
+  <!-- Expertise Start -->
+  <div class="container-xxl py-6 pb-5" id="skill">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+          <h1 class="display-5 mb-5">Skills & Experience</h1>
+          <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam
+            ipsum clita dolor duo clita sit.</p>
+          <h3 class="mb-4">My Skills</h3>
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <div class="skill mb-4">
+                <div class="d-flex justify-content-between">
+                  <h6 class="font-weight-bold">Python</h6>
+                  <h6 class="font-weight-bold">95%</h6>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="95" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill mb-4">
+                <div class="d-flex justify-content-between">
+                  <h6 class="font-weight-bold">HTML</h6>
+                  <h6 class="font-weight-bold">68%</h6>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="68" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill mb-4">
+                <div class="d-flex justify-content-between">
+                  <h6 class="font-weight-bold">Javascript</h6>
+                  <h6 class="font-weight-bold">54%</h6>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="54" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="skill mb-4">
+                <div class="d-flex justify-content-between">
+                  <h6 class="font-weight-bold">Machine Learning</h6>
+                  <h6 class="font-weight-bold">82%</h6>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow="82" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill mb-4">
+                <div class="d-flex justify-content-between">
+                  <h6 class="font-weight-bold">Linux Environment</h6>
+                  <h6 class="font-weight-bold">65%</h6>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar bg-dark" role="progressbar" aria-valuenow="65" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="skill mb-4">
+                <div class="d-flex justify-content-between">
+                  <h6 class="font-weight-bold">Cloud Computing</h6>
+                  <h6 class="font-weight-bold">57%</h6>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar bg-info" role="progressbar" aria-valuenow="57" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+          <ul class="nav nav-pills rounded border border-2 border-primary mb-5">
+            <li class="nav-item w-50">
+              <button class="nav-link w-100 py-3 fs-5 active" data-bs-toggle="pill" href="#tab-1">Education</button>
+            </li>
+            <li class="nav-item w-50">
+              <button class="nav-link w-100 py-3 fs-5" data-bs-toggle="pill" href="#tab-2">Experience</button>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+              <div class="row gy-5 gx-4">
+                <div class="col-sm-6" id="master-degree" data-bs-placement="left" data-bs-custom-class="primary-popover"
+                    data-bs-toggle="popover" data-bs-title="Master Degree" data-bs-trigger="hover focus"
+                    data-bs-content="Majors in Electronics engineering, with GPA 3.84 (Cumlaude).">
+                  <h5>Master Degree</h5>
+                  <hr class="text-primary my-2">
+                  <p class="text-primary mb-1">2017 - 2019</p>
+                  <p class="text-muted small mb-0">(Electronics field)</p>
+                  <span>Electrical Engineering at</span>
+                  <h6 class="mb-0">Institut Teknologi Sepuluh Nopember</h6>
+                </div>
+                <div class="col-sm-6" id="bachelor-degree" data-bs-placement="left" data-bs-custom-class="primary-popover"
+                    data-bs-toggle="popover" data-bs-title="Bachelor Degree" data-bs-trigger="hover focus"
+                    data-bs-content="Majors in Electronics engineering, with GPA 3.19.">
+                  <h5>Bachelor Degree</h5>
+                  <hr class="text-primary my-2">
+                  <p class="text-primary mb-1">2012 - 2017</p>
+                  <span>Electrical Engineering at</span>
+                  <h6 class="mb-0">Institut Teknologi Sepuluh Nopember</h6>
+                </div>
+                <div class="col-sm-6" id="digitalent-degree" data-bs-placement="left" data-bs-custom-class="primary-popover"
+                    data-bs-toggle="popover" data-bs-title="Digital Talent Scholarship" data-bs-trigger="hover focus"
+                    data-bs-content="Artificial Intelligence and Machine Learning training organized by KOMINFO, and got 
+                    certificate as the Top 25 from 250 participant.">
+                  <h5>Digitalent Scholarship</h5>
+                  <hr class="text-primary my-2">
+                  <p class="text-primary mb-1">2019</p>
+                  <p class="small mb-1">Artificial Intelligence and Machine Learning training organized by</p>
+                  <h6 class="mb-0">KOMINFO</h6>
+                </div>
+              </div>
+            </div>
+            <div id="tab-2" class="tab-pane fade show p-0">
+              <div class="row gy-5 gx-4">
+                <div class="col-sm-4" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+                  <h5>Electrician</h5>
+                  <hr class="text-primary my-2">
+                  <p class="text-primary mb-1">Dec 2023 - Present</p>
+                  <h6 class="mb-0">PT Sandvik SMC</h6>
+                </div>
+                <div class="col-sm-8">
+                  <ul>
+                    <li>
+                      Perform regular maintenance and troubleshooting of mobile equipment for
+                      underground mining operations.</li>
+                    <li>
+                      Conduct inspections and repairs to ensure equipment reliability and minimize
+                      downtime</li>
+                  </ul>
+                </div>
+                <div class="col-sm-4">
+                  <h5>Data Scientist & Backend Developer</h5>
+                  <hr class="text-primary my-2">
+                  <p class="text-primary mb-1">2019 - 2023</p>
+                  <h6 class="mb-0">PT Sarana Maju Lestari</h6>
+                </div>
+                <div class="col-sm-8">
+                  <ul>
+                    <li>
+                      Played a key role in the digitalization projects of PJB's Power Plant, named SOKET, as
+                      a Data Scientist and Backend Developer, responsible for preprocessing raw data,
+                      including data filtering based on statistical analysis.</li>
+                    <li>
+                      Developed a Reliability Module based on LSTM and Autoencoder, enabling accurate
+                      prediction of future events and effective anomaly detection.</li>
+                    <li>
+                      Maintained and optimized the Boiler Auto Tuning (BAT) model, specializing in
+                      Combustion Optimization process, utilizing Machine Learning techniques to enhance
+                      the efficiency of the combustion process in Power Plants.</li>
+                    <li>
+                      Implemented real-time monitoring and maintenance applications for the
+                      Combustion Process, ensuring optimal performance and minimizing downtime.</li>
+                    <li>
+                      Dockerized the project's API and deployed it on a CentOS server, ensuring scalability
+                      and ease of deployment.</li>
+                    <li>
+                      Maintained clear and concise documentation of all processes and methodologies,
+                      facilitating seamless knowledge transfer and collaboration among team members.</li>
+                    <li>
+                      Collaborated with cross-functional teams to ensure the successful implementation
+                      and integration of the digitalization projects.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Expertise End -->
+
+
+  <!-- Service Start -->
+  <div class="container-fluid bg-light my-5 py-6" id="competencies">
+    <div class="container">
+      <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="col-lg-6">
+          <h1 class="display-5 mb-0">Core Competencies</h1>
+        </div>
+        <div class="col-lg-6 text-lg-end">
+          <a class="btn btn-primary py-3 px-5" href="">Hire Me</a>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="service-item d-flex flex-column flex-sm-row bg-white rounded h-100 p-4 p-lg-5">
+            <div class="bg-icon flex-shrink-0 mb-3">
+              <i class="fab fa-python fa-2x text-dark"></i>
+            </div>
+            <div class="ms-sm-4">
+              <h4 class="mb-3">Python Proficiency and Integration</h4>
+              <span>Possess advanced skills in Python programming and utilize it seamlessly to interact with hardware, 
+                databases, web applications, and develop end-to-end machine learning solutions.</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="service-item d-flex flex-column flex-sm-row bg-white rounded h-100 p-4 p-lg-5">
+            <div class="bg-icon flex-shrink-0 mb-3">
+              <i class="fas fa-code fa-2x text-dark"></i>
+            </div>
+            <div class="ms-sm-4">
+              <h4 class="mb-3">Linux Environment and Collaboration</h4>
+              <span>Experienced working within Linux environments, particularly GCP, and adept at executing 
+                diverse tasks. Additionally, I excel in collaborative settings, synchronizing work efficiently via 
+                git repositories and cloud servers.</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="service-item d-flex flex-column flex-sm-row bg-white rounded h-100 p-4 p-lg-5">
+            <div class="bg-icon flex-shrink-0 mb-3">
+              <i class="fa fa-database fa-2x text-dark"></i>
+            </div>
+            <div class="ms-sm-4">
+              <h4 class="mb-3">Data Handling and Processing</h4>
+              <span>I specialize in managing time series data and conducting image processing tasks with precision.</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="service-item d-flex flex-column flex-sm-row bg-white rounded h-100 p-4 p-lg-5">
+            <div class="bg-icon flex-shrink-0 mb-3">
+              <i class="fas fa-circle-nodes fa-2x text-dark"></i>
+            </div>
+            <div class="ms-sm-4">
+              <h4 class="mb-3">Machine Learning Expertise</h4>
+              <span>With extensive experience in machine learning, I am proficient in classification, regression, 
+                and clustering techniques.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Service End -->
+
+
+  <!-- Projects Start -->
+  <div class="container-xxl py-6 pt-5" id="project">
+    <div class="container">
+      <div class="row g-5 mb-5 align-items-center wow fadeInUp" data-wow-delay="0.1s">
+        <div class="col-lg-6">
+          <h1 class="display-5 mb-0">My Projects</h1>
+        </div>
+        <div class="col-lg-6 text-lg-end">
+          <ul class="list-inline mx-n3 mb-0" id="portfolio-flters">
+            <li class="mx-3 active" data-filter="*">All Projects</li>
+            <li class="mx-3" data-filter=".first">Optimization</li>
+            <li class="mx-3" data-filter=".second">Full Stack</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row g-4 portfolio-container wow fadeInUp" data-wow-delay="0.1s">
+        <div class="col-lg-4 col-md-6 portfolio-item first">
+          <div class="portfolio-img rounded overflow-hidden">
+            <img class="img-fluid" src="img/portfolio-ich-1-square.png" alt="" style="width: 100%; height: 100%; background-size: cover;">
+            <div class="portfolio-btn">
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="img/portfolio-ich-1.svg"
+                data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href=""><i class="fa fa-link"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 portfolio-item second">
+          <div class="portfolio-img rounded overflow-hidden">
+            <img class="img-fluid" src="img/portfolio-ich-3-square.png" alt="">
+            <div class="portfolio-btn">
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="img/portfolio-ich-3.png"
+                data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href=""><i class="fa fa-link"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 portfolio-item second">
+          <div class="portfolio-img rounded overflow-hidden">
+            <img class="img-fluid" src="img/portfolio-ich-4-square.png" alt="">
+            <div class="portfolio-btn">
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="img/portfolio-ich-4.png"
+                data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href=""><i class="fa fa-link"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 portfolio-item second">
+          <div class="portfolio-img rounded overflow-hidden">
+            <img class="img-fluid" src="img/portfolio-ich-5-square.png" alt="">
+            <div class="portfolio-btn">
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="img/portfolio-ich-5.png"
+                data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href=""><i class="fa fa-link"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 portfolio-item second">
+          <div class="portfolio-img rounded overflow-hidden">
+            <img class="img-fluid" src="img/portfolio-ich-6-square.png" alt="">
+            <div class="portfolio-btn">
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="img/portfolio-ich-6.png"
+                data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href=""><i class="fa fa-link"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 portfolio-item second">
+          <div class="portfolio-img rounded overflow-hidden">
+            <img class="img-fluid" src="img/portfolio-ich-7-square.png" alt="">
+            <div class="portfolio-btn">
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href="/masjid-board"><i class="fa fa-eye"></i></a>
+              <a class="btn btn-lg-square btn-outline-secondary border-2 mx-1" href=""><i class="fa fa-link"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Projects End -->
+
+
+  <!-- Team Start -->
+  <div class="container-xxl py-0 pb-0" id="team"></div>
+  <!-- <div class="container-xxl py-6 pb-5" id="team">
+    <div class="container">
+      <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="col-lg-6">
+          <h1 class="display-5 mb-0">Team Members</h1>
+        </div>
+        <div class="col-lg-6 text-lg-end">
+          <a class="btn btn-primary py-3 px-5" href="">Contact Us</a>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="team-item position-relative">
+            <img class="img-fluid rounded" src="img/team-1.jpg" alt="">
+            <div class="team-text bg-white rounded-end p-4">
+              <div>
+                <h5>Full Name</h5>
+                <span>Designer</span>
+              </div>
+              <i class="fa fa-arrow-right fa-2x text-primary"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="team-item position-relative">
+            <img class="img-fluid rounded" src="img/team-2.jpg" alt="">
+            <div class="team-text bg-white rounded-end p-4">
+              <div>
+                <h5>Full Name</h5>
+                <span>Designer</span>
+              </div>
+              <i class="fa fa-arrow-right fa-2x text-primary"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+          <div class="team-item position-relative">
+            <img class="img-fluid rounded" src="img/team-3.jpg" alt="">
+            <div class="team-text bg-white rounded-end p-4">
+              <div>
+                <h5>Full Name</h5>
+                <span>Designer</span>
+              </div>
+              <i class="fa fa-arrow-right fa-2x text-primary"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- Team End -->
+
+
+  <!-- Testimonial Start -->
+  <div class="container-fluid bg-light py-5 my-5" id="testimonial"></div>
+  <!-- <div class="container-fluid bg-light py-5 my-5" id="testimonial">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Testimonial</h1>
+      <div class="row justify-content-center">
+        <div class="col-lg-3 d-none d-lg-block">
+          <div class="testimonial-left h-100">
+            <img class="img-fluid wow fadeIn" data-wow-delay="0.1s" src="img/testimonial-1.jpg" alt="">
+            <img class="img-fluid wow fadeIn" data-wow-delay="0.3s" src="img/testimonial-2.jpg" alt="">
+            <img class="img-fluid wow fadeIn" data-wow-delay="0.5s" src="img/testimonial-3.jpg" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+          <div class="owl-carousel testimonial-carousel">
+            <div class="testimonial-item text-center">
+              <div class="position-relative mb-5">
+                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="img/testimonial-1.jpg"
+                  alt="">
+                <div class="testimonial-icon">
+                  <i class="fa fa-quote-left text-primary"></i>
+                </div>
+              </div>
+              <p class="fs-5 fst-italic">Dolores sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem
+                ipsum. At lorem lorem magna ut et, nonumy et labore et tempor diam tempor erat.</p>
+              <hr class="w-25 mx-auto">
+              <h5>Client Name</h5>
+              <span>Profession</span>
+            </div>
+            <div class="testimonial-item text-center">
+              <div class="position-relative mb-5">
+                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="img/testimonial-2.jpg"
+                  alt="">
+                <div class="testimonial-icon">
+                  <i class="fa fa-quote-left text-primary"></i>
+                </div>
+              </div>
+              <p class="fs-5 fst-italic">Dolores sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem
+                ipsum. At lorem lorem magna ut et, nonumy et labore et tempor diam tempor erat.</p>
+              <hr class="w-25 mx-auto">
+              <h5>Client Name</h5>
+              <span>Profession</span>
+            </div>
+            <div class="testimonial-item text-center">
+              <div class="position-relative mb-5">
+                <img class="img-fluid rounded-circle border border-secondary p-2 mx-auto" src="img/testimonial-3.jpg"
+                  alt="">
+                <div class="testimonial-icon">
+                  <i class="fa fa-quote-left text-primary"></i>
+                </div>
+              </div>
+              <p class="fs-5 fst-italic">Dolores sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem
+                ipsum. At lorem lorem magna ut et, nonumy et labore et tempor diam tempor erat.</p>
+              <hr class="w-25 mx-auto">
+              <h5>Client Name</h5>
+              <span>Profession</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 d-none d-lg-block">
+          <div class="testimonial-right h-100">
+            <img class="img-fluid wow fadeIn" data-wow-delay="0.1s" src="img/testimonial-1.jpg" alt="">
+            <img class="img-fluid wow fadeIn" data-wow-delay="0.3s" src="img/testimonial-2.jpg" alt="">
+            <img class="img-fluid wow fadeIn" data-wow-delay="0.5s" src="img/testimonial-3.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- Testimonial End -->
+
+
+  <!-- Contact Start -->
+  <div class="container-xxl pb-5 pt-5" id="contact">
+    <div class="container py-5">
+      <div class="row g-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="col-lg-6">
+          <h1 class="display-5 mb-0">Let's Work Together</h1>
+        </div>
+        <div class="col-lg-6 text-lg-end">
+          <a class="btn btn-primary py-3 px-5" href="mailto:ichsan.application@gmail.com?subject=Hi%20Ichsan%21">Say Hello</a>
+        </div>
+      </div>
+      <div class="row g-5">
+        <div class="col wow fadeInUp" data-wow-delay="0.1s">
+          <p class="mb-2">My homebase:</p>
+          <h3 class="fw-bold">Safira Garden, Sidoarjo, ID</h3>
+          <hr class="w-100">
+          <p class="mb-2">Call me:</p>
+          <a href="whatsapp://send?phone=6285878177947&text=Hi%20Ichsan%21" class="btn btn-outline-success float-end">
+            <i class="fab fa-whatsapp"></i>
+            <span class="ms-2 d-none d-sm-inline">WhatsApp a message</span>
+          </a>
+          <h3 class="fw-bold">+62 858 7817 7947</h3>
+          <hr class="w-100">
+          <p class="mb-2">Mail me:</p>
+          <a href="mailto:ichsan.application@gmail.com?subject=Hi%20Ichsan%21" class="btn btn-outline-primary float-end d-none d-sm-inline">
+            <i class="fas fa-envelope"></i>
+            <span class="ms-2">Send mail</span>
+          </a>
+          <h3 class="fw-bold">ichsan.application@gmail.com</h3>
+          <hr class="w-100">
+          <p class="mb-2">Follow me:</p>
+          <div class="d-flex pt-2">
+            <a class="btn btn-square btn-primary me-2" href="https://www.linkedin.com/in/ichsanpratamaadi"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="d-none col-lg-7 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+          <p class="mb-4">Get in touch by filling this form</p>
+          <div id="form-communication">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="name" placeholder="Your Name">
+                  <label for="name">Your Name</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="email" class="form-control" id="email" placeholder="Your Email">
+                  <label for="email">Your Email</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="subject" placeholder="Subject">
+                  <label for="subject">Subject</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-floating">
+                  <textarea class="form-control" placeholder="Leave a message here" id="message"
+                    style="height: 100px"></textarea>
+                  <label for="message">Message</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary py-3 px-5" onclick="sendMessage()">Send Message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Contact End -->
+
+
+  <!-- Map Start -->
+  <div class="container-xxl pt-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container-xxl pt-5 px-0">
+      <div class="bg-dark">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7912.074297867033!2d112.69149314483491!3d-7.461142332175836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e123526e49e1%3A0x82ab3b124e687b7e!2sSepande%2C%20Kec.%20Candi%2C%20Kabupaten%20Sidoarjo%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1711261356359!5m2!1sid!2sid"
+          frameborder="0" style="width: 100%; height: 450px; border:0;" allowfullscreen="" aria-hidden="false"
+          tabindex="0"></iframe>
+      </div>
+    </div>
+  </div>
+  <!-- Map End -->
+
+
+  <!-- Copyright Start -->
+  <div class="container-fluid bg-dark text-white py-4">
+    <div class="container">
       <div class="row">
-        <div class="col-xxl-3 col-xl-5 col-lg-6 col-md-12">
-          <div class="card mt-3 blurry">
-            <div class="card-body">
-              <div class="localtime text-center">
-                <span id="hour"></span>:<span id="minute"></span>
-              </div>
-              <div class="m-auto row">
-                <div class="col-auto">
-                  <i class="fas fa-calendar-days me-2"></i>
-                </div>
-                <div class="col-auto">
-                  <div>
-                    <span id="day"></span>
-                    (<span class="timezone"></span>)
-                  </div>
-                  <div>
-                    <span id="hijri-day"></span>
-                  </div>
-                </div>
-                <p id="shalat-message"></p>
-              </div>
-    
-              <div class="d-none d-md-block">
-                <div class="table-responsive mt-2">
-                  <div class="h5">Waktu Shalat:</div>
-                  <table class="table table-shalat table-lg table-borderless table-hover">
-                    <tbody>
-                      <tr class="">
-                        <td scope="row">Subuh</td>
-                        <td class="text-center">
-                          <span id="waktu-subuh"></span>
-                          <span class="timezone"></span>
-                        </td>
-                      </tr>
-                      <tr class="">
-                        <td scope="row">Dhuhur</td>
-                        <td class="text-center">
-                          <span id="waktu-dhuhur"></span>
-                          <span class="timezone"></span>
-                        </td>
-                      </tr>
-                      <tr class="">
-                        <td scope="row">Ashar</td>
-                        <td class="text-center">
-                          <span id="waktu-ashar"></span>
-                          <span class="timezone"></span>
-                        </td>
-                      </tr>
-                      <tr class="">
-                        <td scope="row">Maghrib</td>
-                        <td class="text-center">
-                          <span id="waktu-maghrib"></span>
-                          <span class="timezone"></span>
-                        </td>
-                      </tr>
-                      <tr class="">
-                        <td scope="row">Isya</td>
-                        <td class="text-center">
-                          <span id="waktu-isya"></span>
-                          <span class="timezone"></span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          &copy; <a class="border-bottom text-secondary" href="#">ichsansan.github.io</a>, All Right Reserved.
         </div>
-        <div class="col-xxl-9 col-xl-7 col-lg-6 col-md-12 d-grid mt-5 my-md-auto">
-          <figure>
-            <blockquote class="blockquote motivation-arabic" style="color: #000; text-shadow: 0px 0px 14px #FFF;">
-              وَلَا تَهِنُوۡا وَ لَا تَحۡزَنُوۡا وَاَنۡتُمُ الۡاَعۡلَوۡنَ اِنۡ كُنۡتُمۡ مُّؤۡمِنِيۡنَ‏
-            </blockquote>
-            <figcaption class="blockquote-footer motivation-indonesia">
-              "Janganlah kamu bersikap lemah dan janganlah pula kamu bersedih hati, padahal kamulah orang orang yang paling tinggi derajatnya jika kamu beriman." (QS. Ali Imran: 139)
-            </figcaption>
-          </figure>
+        <div class="col-md-6 text-center text-md-end">
+          <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+          Designed By <a class="border-bottom text-secondary" href="https://htmlcodex.com">HTML Codex</a>
+          <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
         </div>
       </div>
     </div>
+  </div>
+  </div>
+  <!-- Copyright End -->
 
-    <div class="position-absolute sticky-bottom w-100" style="background-color: #FFF0;">
-      <marquee id="teks-berjalan" behavior="scroll" direction="left" scrollamount="10">
-        <i class="fas fa-circle mx-3"></i>
-        <span>Sidang Isbat secara mufakat menetapkan 1 Ramadan 1445 H jatuh pada Selasa, 12 Maret 2024</span>
-        <i class="fas fa-circle mx-3"></i>
-        <span>PT Freeport Indonesia bersama PT Perusahaan Listrik Negara (Persero) menandatangani perjanjian Renewable Energy Certificates (REC) di Surabaya, Jumat (8/3/2024)</span>
-        <i class="fas fa-circle mx-3"></i>
-      </marquee>
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalSettings" tabindex="-1" role="dialog" aria-labelledby="modalSettingsId"
-      aria-hidden="true">
-      <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalSettingsId">
-              Settings
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="row">
-                <h5>Lokasi</h5>
-                <hr>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="latitude" class="form-label">Lintang</label>
-                    <input type="number" class="form-control" name="latitude" id="latitude" placeholder="" step="0.000001" disabled />
-                  </div>
-                  <div class="mb-3">
-                    <label for="longitude" class="form-label">Bujur</label>
-                    <input type="number" class="form-control" name="longitude" id="longitude" placeholder="" step="0.000001" disabled />
-                  </div>
-                  <p>Geser pin pada peta <span class="d-none d-md-inline-flex">di samping</span><span class="d-inline-flex d-md-none">di bawah</span> sesuai lokasi anda</p>
-                  <div class="mb-3 d-none">
-                    <label for="accuracy" class="form-label">Accuracy</label>
-                    <div class="input-group">
-                      <input type="number" class="form-control" id="accuracy" disabled/>
-                      <span class="input-group-text">m</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3" style="height: 300px;">
-                  <div id="map"></div>
-                </div>
-                <h5>Teks Berjalan</h5>
-                <hr>
-                <div class="mb-3">
-                  <label for="setting-teks-berjalan" class="form-label">Isi teks (dipisah dengan enter)</label>
-                  <textarea type="text" class="form-control" name="setting-teks-berjalan" id="setting-teks-berjalan" placeholder="" rows="5"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Close
-            </button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="modalSaveBtn" onclick="saveSettings();">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
-  
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.2.0/svg.min.js" integrity="sha512-EmfT33UCuNEdtd9zuhgQClh7gidfPpkp93WO8GEfAP3cLD++UM1AG9jsTUitCI9DH5nF72XaFePME92r767dHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-  
-  <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-    ({key: "AIzaSyDfKoYGMlbgLbPUHgvvXeXGhZDY-ZLcfos", v: "weekly"});</script>
-  <!-- <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfKoYGMlbgLbPUHgvvXeXGhZDY-ZLcfos&callback=initMap&libraries=marker&v=weekly"
-    defer
-  ></script> -->
-  <script src="static/js/vendor/bootstrap.bundle.min.js"></script>
-  <script src="static/js/vendor/fa_all.js"></script>
-  <script src="static/js/vendor/jquery.min.js"></script>
-  <script src="static/js/home.js"></script>
-  <script src="static/js/localmaps.js"></script>
+
+  <!-- JavaScript Libraries -->
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/lib/jquery/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/typed/typed.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/isotope/isotope.pkgd.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.js"></script>
+  <script src="lib/fontawesome/fa_all.js"></script>
+
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+  <script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+  </script>
+</body>
+
 </html>
