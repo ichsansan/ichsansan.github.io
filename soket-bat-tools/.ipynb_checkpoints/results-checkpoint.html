@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laporan Kemanfaatan BAT - {{data.sheet1.unitName}}</title>
+  <link href="/static/css/bs.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #FFF;">
+  <main class="container my-4 py-2">
+    <!-- Sheet 1 -->
+    <div class="text-center" style="display: block; margin-bottom: 10vh;" id="sheet1-content">
+      <h3 class="mb-4">Kertas Kerja Perhitungan Efektivitas Boiler Optimization</h3>
+      <table class="table table-bordered text-start">
+        <tbody>
+          <tr>
+            <th scope="row">Date</th>
+            <td><b>{{data.sheet1.startDate}}</b> - <b>{{data.sheet1.endDate}}</b></td>
+          </tr>
+          <tr>
+            <th scope="row">Unit</th>
+            <td>{{data.sheet1.unitName}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Data</th>
+            <td>Completeness {{data.sheet1.dataCompleteness}} %</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <table class="table mb-0 text-start">
+                <tbody>
+                  <tr>
+                    <th scope="row">Enable Hours Modul Bopt (%)</th>
+                    <td class="text-center">{{data.sheet1.percentage}} %</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Enable Hours SOPT (%)</th>
+                    <td class="text-center">{{data.sheet1.sopt.enablePercentage}} %</td>
+                  </tr>
+                  {% if data.sheet1.copt %}
+                  <tr>
+                    <th scope="row">Enable Hours COPT (%)</th>
+                    <td class="text-center">{{data.sheet1.copt.enablePercentage}} %</td>
+                  </tr>
+                  {% endif %}
+                  <tr>
+                    <th scope="row">Enable Hours Modul BOpt (Hours)</th>
+                    <td class="text-center">{{data.sheet1.enableHour}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Enable Hours SOPT (Hours)</th>
+                    <td class="text-center">{{data.sheet1.sopt.enableHours}}</td>
+                  </tr>
+                  {% if data.sheet1.copt %}
+                  <tr>
+                    <th scope="row">Enable Hours COPT (Hours)</th>
+                    <td class="text-center">{{data.sheet1.copt.enableHours}}</td>
+                  </tr>
+                  {% endif %}
+                  <tr>
+                    <th scope="row">Period Hours</th>
+                    <td class="text-center">{{data.sheet1.periodHour}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Durasi Pengurang Period Hours</th>
+                    <td class="text-center">{{data.sheet1.reductionHour}}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>a. Gangguan Unit</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">a.1. Perbaikan equipment terkait BOpt (Status Waiting Unit
+                              Shutdown/Sistem BOpt outservice)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">a.2. Maintenance Modul BOpt yang membutuhkan Modul disable
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>b. {{data['loadStr']}}</td>
+                          </tr>
+                          <tr>
+                            <td>c. Pelaksanaan Uji Performance Test Unit</td>
+                          </tr>
+                          <tr>
+                            <td>d. Durasi Coal Flow max.</td>
+                          </tr>
+                          <tr>
+                            <td>e. Safeguard Violation.</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td>
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td class="text-center">-</td>
+                          </tr>
+                          <tr>
+                            <td class="text-center">{{data.sheet1.reductionDetail.a1}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-center">{{data.sheet1.reductionDetail.a2}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-center">{{data.sheet1.reductionDetail.b}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-center">{{data.sheet1.reductionDetail.c}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-center">{{data.sheet1.reductionDetail.d}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-center">{{data.sheet1.reductionDetail.e}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Available Hours</th>
+                    <td class="text-center">{{data.sheet1.availableHour}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              $$Efektivitas Modul BAT = {Enable Hours BOpt \over Available Hours} * 100 \% $$
+              $$ = { {{data.sheet1.enableHour}} \over {{data.sheet1.availableHour}} } * 100 \% $$
+              $$ = {{data.sheet1.effectiveness}} \% $$
+            </td>
+          </tr>
+          <tr>
+            <td>
+              $$Efektivitas Modul SOPT = {Enable Hours SOPT \over Available Hours} * 100 \% $$
+              $$ = { {{data.sheet1.sopt.enableHours}} \over {{data.sheet1.availableHour}} } * 100 \% $$
+              $$ = {{data.sheet1.sopt.enablePercentage}} \% $$
+            </td>
+            <td>
+              $$Efektivitas Modul COPT = {Enable Hours COPT \over Available Hours} * 100 \% $$
+              $$ = { {{data.sheet1.copt.enableHours}} \over {{data.sheet1.availableHour}} } * 100 \% $$
+              $$ = {{data.sheet1.copt.enablePercentage}} \% $$
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sheet 2 -->
+    <div class="text-center" style="display: none; margin-bottom: 10vh;" id="sheet2-content">
+      <h3 class="mb-4">Form Input OFF Boiler Optimization PLTU Tanjung Awar-Awar 1</h3>
+      <table class="table table-bordered text-start">
+        <tbody>
+          <tr>
+            <th scope="row">Date</th>
+            <td><b>{{data.sheet1.startDate}}</b> - <b>{{data.sheet1.endDate}}</b></td>
+          </tr>
+          <tr>
+            <th scope="row">Unit</th>
+            <td>{{data.sheet1.unitName}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Data</th>
+            <td>Completeness {{data.sheet1.dataCompleteness}} %</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="overflow-auto">
+              <table class="table mb-0 text-start">
+                <thead>
+                  <tr class="text-center">
+                    <th scope="row">No.</th>
+                    <th>Date start</th>
+                    <th>Date end</th>
+                    <th>Kondisi Gangguan</th>
+                    <th>Periode Jam</th>
+                    <th>Keterangan</th>
+                    <th>Remarks by</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  {% set i = 0 %}
+                  {% for row in data.sheet2.unitProblems %}
+                  {% set i = i+1 %}
+                  <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ row.startTime }}</td>
+                    <td>{{ row.endTime }}</td>
+                    <td>{{ row.categoryName }}</td>
+                    <td>{{ row.period }}</td>
+                    <td>{{ row.notes }}</td>
+                    <td>{{ row.reportedBy }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sheet 3 -->
+    <div class="text-center" style="display: none; margin-bottom: 10vh;" id="sheet3-content">
+      <h3 class="mb-4">Report Monitoring Boiler Auto Tuning</h3>
+      <table class="table table-bordered text-start">
+        <tbody>
+          <tr>
+            <th>Unit Pembangkit</th>
+            <td>{{data.sheet1.unitName}}</td>
+          </tr>
+          <tr>
+            <th>Lokasi</th>
+            <td>{{data.sheet1.unitName}}</td>
+          </tr>
+          <tr>
+            <th>Tipe Pembangkit</th>
+            <td>Pembangkit Listrik Tenaga Uap</td>
+          </tr>
+          <tr>
+            <th>Kapasitas</th>
+            <td>{{data.sheet1.capacity}}</td>
+          </tr>
+          <tr>
+            <th>Area</th>
+            <td>{{data.sheet1.area}}</td>
+          </tr>
+          <tr>
+            <th>Sub Area</th>
+            <td>Boiler</td>
+          </tr>
+          <tr>
+            <th>Tanggal</th>
+            <td><b>{{data.sheet1.startDate}}</b> sampai <b>{{data.sheet1.endDate}}</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <table class="table">
+                <thead class="text-center">
+                  <th>NO.</th>
+                  <th class="text-start">ITEM TO CHECK</th>
+                  <th></th>
+                  <th>ENABLE</th>
+                  <th>DISABLE</th>
+                  <th>REMARKS</th>
+                </thead>
+                <tbody>
+                  {% for res in data.sheet3.result %}
+                  <tr>
+                    <th scope="row" class="text-end"></th>
+                    <th>{{ res.modulName }}</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>  
+                    {% for row in res.submodul %}
+                    <tr>
+                      <th scope="row" class="text-end">{{ row.sequence + 1 }}.</th>
+                      <td>{{ row.paramName }}</td>
+                      <td class="text-center">Min</td>
+                      <td class="text-center">{{ row.enable }}</td>
+                      <td class="text-center">{{ row.disable }}</td>
+                      <td></td>
+                    </tr>
+                    {% endfor %}
+                  {% endfor %}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sheet Plot -->
+    <div class="text-center" style="display: none; margin-bottom: 10vh;" id="sheet_plot-content">
+      {% if data.sheet_plot %}
+      <h3 class="mb-4">Trend Line</h3>
+      <div class="card">
+        <div class="card-body">
+          <p>{{ data.sheet_plot.figure | safe }}</p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    
+  </main>
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top fixed-bottom bg-light">
+    <div class="container">
+      <nav aria-label="Page navigation example">
+        <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group" role="group" aria-label="Basic radio toggle button group" onchange="sheet_change()">
+            <input type="radio" class="btn-check" name="sheet" id="sheet1" autocomplete="off" checked>
+            <label class="btn btn-light" for="sheet1">Summary</label>
+          
+            <input type="radio" class="btn-check" name="sheet" id="sheet2" autocomplete="off">
+            <label class="btn btn-light" for="sheet2">Detail Unit</label>
+          
+            <input type="radio" class="btn-check" name="sheet" id="sheet3" autocomplete="off">
+            <label class="btn btn-light " for="sheet3">Monitoring Report</label>
+
+            {% if data.sheet_plot|length > 1 %}
+            <input type="radio" class="btn-check" name="sheet" id="sheet_plot" autocomplete="off" >
+            <label class="btn btn-light " for="sheet_plot">Trend Line</label>
+            {% endif %}
+          </div>
+        </div>
+
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/static/js/bs.js"></script>
+  <script id="MathJax-script" async src="/static/js/tex-mml-chtml.js"></script>
+  <script src="static/js/scripts.js"></script>
+
+</body>
+
+</html>

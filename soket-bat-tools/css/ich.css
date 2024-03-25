@@ -1,0 +1,32 @@
+.btn-form {
+    border-color: rgba(0,0,0,.2);
+}
+
+.btn-form:focus,.btn-form:active {
+    border-color: #85b6fd;
+    box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25) !important
+}
+
+.btn-form:hover,.form-select:hover,.form-control:hover {
+    border-color: #85b6fd;
+}
+
+.form-select.btn-outline-secondary {
+    background-color: red;
+}
+
+.btn-clear {
+    border-color: rgba(0,0,0,0);
+}
+.btn-clear:hover {
+    border-color: rgba(13, 110, 253, .2);
+    background-color: rgba(13, 110, 253, .2);
+}
+.tab-pane {
+    border: 1px solid #dee2e6;
+    border-top: none;
+    margin-top: 0; 
+    margin-bottom: 10vh;
+    min-height: 20vh;
+    border-radius: 0;
+}

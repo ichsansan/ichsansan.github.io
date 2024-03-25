@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laporan Kemanfaatan BAT - Home</title>
+  <link href="/static/css/bs.css" rel="stylesheet">
+  <link href="/static/css/ich.css" rel="stylesheet">
+  <link href="/static/css/components/fa.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist" style="margin-top: 20vh">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="effectivity-tab" data-bs-toggle="tab" data-bs-target="#effectivity-tab-pane"
+          type="button" role="tab" aria-controls="effectivity-tab-pane" aria-selected="true">Effectivity</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="trends-tab" data-bs-toggle="tab" data-bs-target="#trends-tab-pane" type="button"
+          role="tab" aria-controls="trends-tab-pane" aria-selected="false">Trends BAT</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="sootblow-tab" data-bs-toggle="tab" data-bs-target="#sootblow-tab-pane"
+          type="button" role="tab" aria-controls="sootblow-tab-pane" aria-selected="false">Sootblow Rules</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="combustion-tab" data-bs-toggle="tab" data-bs-target="#combustion-tab-pane"
+          type="button" role="tab" aria-controls="combustion-tab-pane" aria-selected="false">Combustion Status</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <!-- Effectivity tab -->
+      <div class="tab-pane fade" id="effectivity-tab-pane" role="tabpanel" aria-labelledby="effectivity-tab"
+        tabindex="0">
+        <div class="card text-center align-middle" style="border: none;">
+          <div class="card-body">
+            <h3 class="pt-4 mb-1">Masukkan pilihan untuk penampilan Efektivitas BAT</h3>
+            <p class="mt-0 mb-3">{% if hostname %}Anda saat ini berada di server [{{hostname}}]{% endif %}</p>
+            <form class="mt-2 mb-4" action="/display" method="post">
+              <div class="mb-3 row" hidden>
+                <label for="effectivityInputMode" class="col-md-2 col-form-label">Mode</label>
+                <div class="col-md-10">
+                  <input type="text" class="form-control-plaintext" name="mode" value="effectivity" readonly>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="effectivityInputUnit" class="col-md-2 col-form-label">Unit</label>
+                <div class="col-md-10">
+                  <select class="form-select" aria-label="Default select example" id="effectivityInputUnit" name="unit"
+                    required>
+                    <option value="">Pilih unit yang ingin anda tampilkan</option>
+                    {% for unit in content['unit-list'] %}
+                    <option value="{{unit}}">{{unit}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="effectivityInputDatestart" class="col-md-2 col-form-label">Jangka waktu</label>
+                <div class="col-md-4">
+                  <input type="datetime-local" class="form-control" id="effectivityInputDatestart" name="datestart"
+                    required>
+                </div>
+                <div class="col-md-2">sampai</div>
+                <div class="col-md-4">
+                  <input type="datetime-local" class="form-control" id="effectivityInputDateend" name="dateend"
+                    required>
+                </div>
+              </div>
+
+              <div class="mb-3 row" id="formPlot">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                  <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" value="1" id="inputPlot" name="plot" checked>
+                    <label class="form-check-label" for="inputPlot">
+                      Plot gambar
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="effectivitySubmitBtn"><span class="mx-4">Submit</span></button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trends tab -->
+      <div class="tab-pane fade" id="trends-tab-pane" role="tabpanel" aria-labelledby="trends-tab" tabindex="0">
+        <div class="card text-center align-middle" style="border: none;">
+          <div class="card-body">
+            <h3 class="pt-4 mb-1">Masukkan pilihan untuk penampilan Trend Sensor BAT</h3>
+            <p class="mt-0 mb-3">{% if hostname %}Anda saat ini berada di server [{{hostname}}]{% endif %}</p>
+            <form class="mt-2 mb-4" action="/display" method="post">
+              <div class="mb-3 row" hidden>
+                <label for="trendsInputMode" class="col-md-2 col-form-label">Mode</label>
+                <div class="col-md-10">
+                  <input type="text" class="form-control-plaintext" name="mode" value="trends" readonly>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="trendInputUnit" class="col-md-2 mb-4 col-form-label">Unit</label>
+                <div class="col-md-10">
+                  <select class="form-select" aria-label="Default select example" id="trendInputUnit" name="unit"
+                    onchange="get_tags()" required>
+                    <option value="">Pilih unit yang ingin anda tampilkan</option>
+                    {% for unit in content['unit-list'] %}
+                    <option value="{{unit}}">{{unit}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <!-- Tag List -->
+              <div class="mb-3 row" id="formTags">
+                <label for="trendSelectedTags" class="col-md-2 col-form-label">
+                  Tags
+                  <span id="lengthTags" class="badge text-bg-secondary">( 0 )</span></label>
+                <div class="col-md-10">
+                  <div class="text-start my-2">
+                    <input type="text" class="form-control-plaintext" id="trendSelectedTags" name="selectedTags"
+                      value="" readonly hidden placeholder="Pilih unit terlebih dahulu">
+                  </div>
+                  <select class="form-select" multiple id="tagLists"
+                    style="min-height: 80px; max-height:500px; height: fit-content;" onclick="selected_tags_handler()">
+                  </select>
+                  <figcaption class="blockquote-footer text-start mt-1">
+                    Tekan tombol <kbd><kbd>ctrl</kbd> + <kbd>klik</kbd></kbd> untuk memilih tags satu per satu, dan
+                    tombol <kbd><kbd>shift</kbd> + <kbd>klik</kbd></kbd> untuk mengambil satu deret.
+                  </figcaption>
+                </div>
+                
+                <label for="manualAddTags" class="col-md-2 col-form-label">Tambah tag manual</label>
+                <div class="col-md-10">
+                  <div class="input-group mb-4">
+                    <input type="text" id="manualAddTags" class="form-control" placeholder="Add tags" aria-label="Add tags" aria-describedby="button-add-tag">
+                    <button class="btn btn-outline-success" type="button" id="button-add-tag" onclick="manual_add_tag()">
+                      <i class="fas fa-plus"></i> Tambah tag
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="inputDatestart" class="col-md-2 col-form-label">Jangka waktu</label>
+                <div class="col-md-4">
+                  <input type="datetime-local" class="form-control" id="inputDatestart" name="datestart" required>
+                </div>
+                <div class="col-md-2">sampai</div>
+                <div class="col-md-4">
+                  <input type="datetime-local" class="form-control" id="inputDateend" name="dateend" required>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-outline-success me-2" id="trendDownloadBtn" name="type" value="download">
+                <span class="mx-4">
+                  <i class="fas fa-file-csv"></i>
+                  Download
+                </span></button>
+              <button type="submit" class="btn btn-primary" id="trendSubmitBtn" name="type" value="plot">
+                <span class="mx-4">
+                  <i class="fas fa-share"></i>
+                  Submit
+                </span></button>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOPT -->
+      <div class="tab-pane fade" id="sootblow-tab-pane" role="tabpanel" aria-labelledby="sootblow-tab" tabindex="0">
+        <div class="card text-center align-middle" style="border: none;">
+          <div class="card-body">
+            <h3 class="pt-4 mb-1">Masukkan pilihan untuk penampilan Trend dari Rule Sootblow Opt.</h3>
+            <p class="mt-0 mb-3">{% if hostname %}Anda saat ini berada di server [{{hostname}}]{% endif %}</p>
+            <form class="mt-2 mb-4" action="/display" method="post">
+              <div class="mb-3 row" hidden>
+                <label for="soptInputMode" class="col-md-2 col-form-label">Mode</label>
+                <div class="col-md-10">
+                  <input type="text" class="form-control-plaintext" name="mode" value="sopt" readonly>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="soptInputUnit" class="col-md-2 col-form-label">Unit</label>
+                <div class="col-md-10">
+                  <select class="form-select" aria-label="Default select example" id="soptInputUnit" name="unit"
+                    onchange="get_rule()" required>
+                    <option value="">Pilih unit yang ingin anda tampilkan</option>
+                    {% for unit in content['unit-list'] %}
+                    <option value="{{unit}}">{{unit}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="soptRuleList" class="col-md-2 col-form-label">Rule</label>
+                <div class="col-md-10">
+                  <select class="form-select disabled" id="soptRuleList" name="rule" required>
+                    <option value="">Pilih unit terlebih dahulu</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="soptDatestart" class="col-md-2 col-form-label">Jangka waktu</label>
+                <div class="col-md-4">
+                  <input type="datetime-local" class="form-control" id="soptDatestart" name="datestart" required>
+                </div>
+                <label for="soptDateend" class="col-md-2 col-form-label">sampai</label>
+                <div class="col-md-4">
+                  <input type="datetime-local" class="form-control" id="soptDateend" name="dateend" required>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="soptSubmitBtn"><span class="mx-4">Submit</span></button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combustion Status tab -->
+      <div class="tab-pane fade show active" id="combustion-tab-pane" role="tabpanel" aria-labelledby="combustion-tab" tabindex="0">
+        <div class="card text-center align-middle" style="border: none;">
+          <div class="card-body">
+            <h3 class="pt-4 mb-1">Cek Status Koneksi dan Service Combustion</h3>
+            <p class="mt-0 mb-3">{% if hostname %}Anda saat ini berada di server [{{hostname}}]{% endif %}</p>
+            <form class="mt-2 mb-4" action="/display" method="post">
+              <div class="mb-3 row" hidden>
+                <label for="combustionInputMode" class="col-md-2 col-form-label">Mode</label>
+                <div class="col-md-10">
+                  <input type="text" class="form-control-plaintext" name="mode" value="combustion" readonly>
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="combustionInputUnit" class="col-md-2 col-form-label">Unit</label>
+                <div class="col-md-10" style="display:flex;">
+                  <select class="form-select me-2" aria-label="Default select example" id="combustionInputUnit" name="unit"
+                    onchange="combustion_unit_change()">
+                    <option value="">Pilih unit yang ingin anda tampilkan</option>
+                    {% for unit in content['unit-list'] %}
+                    <option value="{{unit}}">{{unit}}</option>
+                    {% endfor %}
+                  </select>
+                  <button type="button" class="btn btn-light ms-2" id="refreshCombustionBtn" onclick="combustion_unit_change()">
+                    <i class="fas fa-rotate"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="mb-3 row text-start overflow-hidden" id="combustionContent">
+                <div class="col-12 text-center text-secondary">
+                  Pilih unit terlebih dahulu
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/static/js/bs.js"></script>
+<script src="/static/js/homepage.js"></script>
+<script src="/static/js/components/fa.js"></script>

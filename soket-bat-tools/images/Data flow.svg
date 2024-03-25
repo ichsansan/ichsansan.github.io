@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1100">
+  <style>
+    .object.white{
+      fill: #fff;
+    }
+    .object.blue{
+      fill: #acf;
+    }
+    .object.broken {
+      fill: rgba(221,68,30,0.25);
+    }
+
+    .stroke {
+      stroke-width: 24px;
+      fill: transparent;
+    }
+    .stroke.blue {
+      stroke: #ACF;
+    }
+    .stroke.line {
+      stroke: rgba(158,172,194,0.25);
+    }
+    .stroke.broken {
+      stroke: rgba(221,68,30,0.25);
+    }
+
+    text {
+      fill: #012970;
+      font: bold 42px sans-serif;
+    }
+    text.smaller{
+      font-size: 32px;
+      font-weight: normal;
+    }
+  </style>
+
+  <!-- <rect style="fill: #0001" x="0" y="0" width="2000" height="1400" /> -->
+
+  <g id="strokes">
+    <path class="stroke line" d="M340 520 h250 v-320 h200" stroke-linejoin="round" />
+    <path class="stroke line" d="M340 550 h450" stroke-linejoin="round" />
+    <path class="stroke line" d="M340 580 h250 v320 h200" stroke-linejoin="round" />
+    <path class="stroke line" d="M938 200 h450" stroke-linejoin="round" />
+  </g>
+
+  <g id="OPC-servers">
+    <path class="stroke-blue object blue" d="M200 500 h120 
+                                         c5 0 10 5 10 10 v20 
+                                         c0 5 -5 10 -10 10 h-120
+                                         c-5 0 -10 -5 -10 -10 v-20
+                                         c0 -5 5 -10 10 -10z" />
+    <circle class="object white" cx="310" cy="520" r="8" />
+    <path class="stroke-blue object blue" d="M200 560 h120 
+                                         c5 0 10 5 10 10 v20 
+                                         c0 5 -5 10 -10 10 h-120
+                                         c-5 0 -10 -5 -10 -10 v-20
+                                         c0 -5 5 -10 10 -10z" />
+    <circle class="object white" cx="310" cy="580" r="8" />
+    <text x="260" y="650" text-anchor="middle">OPC Server</text>
+  </g>
+  <g id="BAT-servers">
+    <path class="object blue"
+      d="M 800 150 c 0 20 130 20 130 0 c 0 -20 -130 -20 -130 0 z m 0 10 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z"/>
+    <text x="865" y="300" text-anchor="middle">Gateway</text>
+    <text x="865" y="340" class="smaller" text-anchor="middle">192.168.1.10</text>
+    <path class="object blue"
+      d="M 800 500 c 0 20 130 20 130 0 c 0 -20 -130 -20 -130 0 z m 0 10 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z" />
+    <text x="865" y="650" text-anchor="middle">BAT 1</text>
+    <text x="865" y="690" class="smaller" text-anchor="middle">192.168.1.11</text>
+    <path class="object blue"
+      d="M 800 850 c 0 20 130 20 130 0 c 0 -20 -130 -20 -130 0 z m 0 10 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z" />
+    <text x="865" y="1000" text-anchor="middle">BAT 2</text>
+    <text x="865" y="1040" class="smaller" text-anchor="middle">192.168.1.12</text>
+  </g>
+
+  <g id="Base">
+    <path class="object blue"
+      d="M 1400 150 c 0 20 130 20 130 0 c 0 -20 -130 -20 -130 0 z m 0 10 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z" />
+    <text x="1465" y="300" text-anchor="middle">SOKET</text>
+    <text x="1465" y="340" class="smaller" text-anchor="middle">10.7.1.116</text>
+  </g>
+</svg>

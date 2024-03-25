@@ -1,0 +1,199 @@
+/**
+* Template Name: Base additional
+* Author: Ichsan
+* License: Open license
+*/
+
+:root{
+    --primary-100: #D9DEFE;
+    --primary-200: #B3BEFD;
+    --primary-300: #8C9BFA;
+    --primary-400: #6F7FF6;
+    --primary-500: #4154f1;
+    --primary-600: #2F3ECF;
+    --primary-700: #202CAD;
+    --primary-800: #141D8B;
+    --primary-900: #0C1273;
+    --secondary-100: #DDEAF6;
+    --secondary-200: #BED5EE;
+    --secondary-300: #8FAACC;
+    --secondary-400: #607799;
+    --secondary-500: #2B3B56;
+    --secondary-600: #1F2D49;
+    --secondary-700: #15213D;
+    --secondary-800: #0D1731;
+    --secondary-900: #080F29;
+    --success-100: #EDFDD8;
+    --success-200: #D8FBB1;
+    --success-300: #BAF489;
+    --success-400: #9CE969;
+    --success-500: #70DB3B;
+    --success-600: #51BC2B;
+    --success-700: #379D1D;
+    --success-800: #217F12;
+    --success-900: #12690B;
+    --info-100: #D8FFFA;
+    --info-200: #B2FFFC;
+    --info-300: #8BFAFF;
+    --info-400: #6FEEFF;
+    --info-500: #3FDBFF;
+    --info-600: #2EADDB;
+    --info-700: #1F84B7;
+    --info-800: #145F93;
+    --info-900: #0C447A;
+    --warning-100: #FFF4DA;
+    --warning-200: #FFE6B6;
+    --warning-300: #FFD491;
+    --warning-400: #FFC376;
+    --warning-500: #FFA749;
+    --warning-600: #DB8335;
+    --warning-700: #B76224;
+    --warning-800: #934517;
+    --warning-900: #7A300E;
+    --danger-100: #FEE5D7;
+    --danger-200: #FEC4B0;
+    --danger-300: #FE9D88;
+    --danger-400: #FD776B;
+    --danger-500: #FC3A3A;
+    --danger-600: #D82A39;
+    --danger-700: #B51D37;
+    --danger-800: #921233;
+    --danger-900: #780B31;
+    --bg-dark-color: #121215;
+    --bg-100: rgba(255,255,255,.05);
+    --bg-200: rgba(255,255,255,.07);
+    --bg-300: rgba(255,255,255,.08);
+    --bg-400: rgba(255,255,255,.09);
+    --bg-500: rgba(255,255,255,.11);
+    --bg-600: rgba(255,255,255,.12);
+    --bg-700: rgba(255,255,255,.14);
+    --bg-800: rgba(255,255,255,.15);
+    --bg-900: rgba(255,255,255,.16);
+    --light-100: #ffffff;
+    --light-200: #f8f9fa;
+    --light-300: #f6f9ff;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #e1e1e740;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #92a2b480;
+    transition: .2s;
+    border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #92a2b4;
+}
+
+.sidebar-nav .nav-content .nav-active a {
+    color: var(--primary-500);
+}
+
+
+.highlight {
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    width: fit-content;
+    z-index: 0;
+    white-space: nowrap;
+}
+
+.highlight:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 105%;
+    height: 61%;
+    bottom: 4px;
+    left: 50%;
+    top: calc(39% - 4px);
+    transform: translateX(-50%);
+    background: url("/static/images/brush.svg") no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background: var(--bs-tertiary-bg);
+    color: var(--bs-tertiary-color);
+}
+
+.header {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
+.header .logo span,
+.header .toggle-sidebar-btn {
+    color: var(--bs-body-color);
+}
+
+.sidebar {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
+.sidebar-nav .nav-link {
+    color: var(--bs-primary);
+    background-color: rgba(var(--bs-primary-rgb), .2);
+}
+.sidebar-nav .nav-link.collapsed{
+    color: var(--bs-primary);
+    background-color: transparent;
+}
+.sidebar-nav .nav-link:hover {
+    color: var(--bs-primary);
+    background-color: rgba(var(--bs-primary-rgb), .2);
+}
+
+.sidebar-nav .nav-content a{
+    color: var(--bs-primary);
+}
+.sidebar-nav .nav-content a:hover,
+.sidebar-nav .nav-content .nav-active a{
+    color: var(--bs-blue);
+}
+.sidebar-nav .nav-content .nav-active a{
+    color: var(--bs-blue);
+}
+.btn-settings {
+    color: var(--bs-primary);
+}
+.btn-settings.active {
+    background-color: var(--bs-primary);
+    color: var(--bs-gray-100);
+}
+.btn-settings:hover, .btn-settings.active:hover {
+    background-color: var(--bs-gray-400);
+    color: var(--bs-dark);
+}
+
+.pagetitle h1,
+.dashboard .info-card h6{
+    color: var(--bs-primary);
+}
+
+.form-select, .form-control {
+    background-color: var(--bs-body-bg);
+    border-radius: var(--bs-border-radius-xl);
+    border-color: rgba(var(--bs-secondary-rgb), .2);
+}
+
+.dashboard .activity .activity-item .activity-badge{
+    border: 3px solid var(--bs-body-bg);
+}
+.dashboard .activity .activity-item .activite-label::before {
+    background-color: var(--bs-secondary);
+}

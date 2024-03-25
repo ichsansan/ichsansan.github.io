@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+<style>
+    .bg-gray {
+        fill: #ccc;
+    }
+    .bg-white {
+        fill: #FFF;
+    }
+    .stroke-blue {
+        stroke: #ACF;
+        stroke-width: 10px;
+    }
+    .stroke-white {
+        stroke: #FFF;
+        stroke-width: 10px;
+    }
+</style>
+    <circle class="bg-gray" cx="150" cy="150" r="150" />
+    <circle class="bg-white" cx="150" cy="100" r="30" />
+    <path class="stroke-white bg-white" d="M150 156 h20 c 8 0 13 4 16 12 l12 48
+                                           h-96 l12 -48 c 3 -8 8 -12 16 -12z" />
+</svg>
