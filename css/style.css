@@ -498,3 +498,14 @@
     background-color: var(--bs-popover-header-bg);
     color: var(--bs-popover-header-color);
 }
+
+.showcase-hidden {
+    display: inline-flex;
+    overflow-x: hidden;
+    max-width: 0;
+    transition: max-width .2s ease-out;
+}
+
+a:hover .showcase-hidden{
+    max-width: 100px;
+}
