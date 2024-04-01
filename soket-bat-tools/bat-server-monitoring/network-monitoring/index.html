@@ -220,101 +220,179 @@
     </ul>
   </aside>
   <main id="main" class="main">
-    <div class="pagetitle position-sticky top-0" style="z-index: 100;">
+    <style>
+      .btn-tags .close-btn {
+        color: #fff0;
+        transition: .2s;
+      }
+    
+      .btn-tags:hover .close-btn {
+        color: #ffff;
+      }
+    
+      .restart-btn {
+        min-width: 80px;
+        margin: 4px;
+      }
+    
+      .logs-btn {
+        min-width: 80px;
+        margin: 4px;
+      }
+    </style>
+    
+    <div class="pagetitle" style="z-index: 100;">
       <div class="float-end">
         <a class="btn btn-warning">Showcase only</a>
       </div>
-      <h1>Dashboard</h1>
+      <h1>BAT Data Flow</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item"><a href="#">BAT Server Monitoring</a></li>
+          <li class="breadcrumb-item active">Data Flow</li>
         </ol>
       </nav>
-      <div class="row">
-        <div class="mb-3">
-          <label for="unitselect" class="form-label">Unit Selected</label>
-          <div class="d-flex ">
-            <select class="form-select me-2 shadow shadow-sm" name="unitselect" id="unitselect" onchange="refreshHome()">
-              {% for unitcode in base.unitLists %}
-              <option value="TJA1">PLTU Tanjung Awar-Awar Unit 1</option>
-              <option value="TJA2">PLTU Tanjung Awar-Awar Unit 2</option>
-              <option value="RBG1">PLTU Rembang Unit 1</option>
-              <option value="RBG2">PLTU Rembang Unit 2</option>
-              {% endfor %}
-            </select>
-            <button class="btn btn-primary ms-2 shadow shadow-sm" id="btn-unitselect" onclick="refreshHome()">
-              <i class="fas fa-rotate"></i>
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
     <section class="section dashboard">
-      <div class="row">
-        <div class="col-lg-8">
-          <div class="row" id="informations">
-            <div class="text-center h-100" style="transform: translateY(30%); min-height: 120px;">
-              <i class="fas fa-3x fa-spin-pulse fa-spinner"></i>
-            </div>
-          </div>
+      <div class="text-center">
+        <!-- <img src="/static//images/Data flow.svg" style="max-height: 750px;"> -->
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1100" style="max-height: 850px;">
+          <style>
+            .object.white {
+              fill: #fff;
+            }
     
-          <div class="row" id="bat-status">
-            <div class="col-12">
-              <div class="card reports">
-                <div class="filter"> <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                      class="fas fa-ellipsis-vertical"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li><a class="dropdown-item" href="#" onclick="refreshInformation();">Refresh</a></li>
-                  </ul>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title" id="BATModuleStatus-title">
-                    BAT Module Status <span> | -</span>
-                  </h5>
-                  <div id="BATModuleStatus" class="overflow-auto" style="height: 365px;">
-                    <div class="text-center h-100" style="transform: translateY(40%);">
-                      <i class="fas fa-3x fa-spinner fa-spin-pulse"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            .object.blue {
+              fill: #acf;
+            }
     
+            .broken .object {
+              fill: rgba(221, 68, 30, 0.45);
+            }
     
-        <div class="col-lg-4" id="alarm-history">
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-vertical"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li><a class="dropdown-item" href="#" onclick="refreshAlarmHistory();">Refresh</a></li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Latest Alarm History <span>| Today</span></h5>
-              <div class="row mb-3">
-                <div class="col small">
-                  <i class="fas fa-circle text-warning me-2"></i>
-                  <span> Sootblow Optimization</span>
-                </div>
-                <div class="col small">
-                  <i class="fas fa-circle text-info me-2"></i>
-                  <span> Combustion Optimization</span>
-                </div>
-              </div>
-              
-              <div id="alarmHistory" class="activity overflow-auto" style="min-height: 520px; max-height:1024px;">
-                <div class="text-center h-100" style="transform: translateY(40%);">
-                  <i class="fas fa-3x fa-spinner fa-spin-pulse"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            .stroke {
+              stroke-width: 24px;
+              fill: transparent;
+            }
+    
+            .stroke.blue {
+              stroke: #ACF;
+            }
+    
+            .stroke.line {
+              stroke: rgba(158, 172, 194, 0.25);
+              stroke: rgb(223, 229, 238);
+            }
+            .stroke.ok {
+              stroke: rgba(17, 180, 53, 0.25);
+            }
+    
+            .stroke.broken {
+              stroke: rgba(221, 68, 30, 0.25);
+            }
+    
+            text {
+              fill: #485f86;
+              font: bold 42px sans-serif;
+            }
+    
+            text.smaller {
+              font-size: 32px;
+              font-weight: normal;
+            }
+          </style>
+    
+          <!-- <rect style="fill: #0001" x="0" y="0" width="2000" height="1400" /> -->
+    
+          <g id="strokes">
+            
+              <path class="stroke line" d="M240 250 h250 V150 H680" stroke-linejoin="round"></path>
+            
+              <path class="stroke line" d="M240 250 h250 V450 H680" stroke-linejoin="round"></path>
+            
+              <path class="stroke line" d="M240 650 h250 V150 H680" stroke-linejoin="round"></path>
+            
+              <path class="stroke line" d="M240 650 h250 V750 H680" stroke-linejoin="round"></path>
+            
+          </g>
+    
+          <g id="OPC-servers" class="">
+            
+            <g class="good">
+              <path class="stroke-blue object blue" d="M100 200 h120 c5 0 10 5 10 10 v20 
+                                                  c0 5 -5 10 -10 10 h-120 c-5 0 -10 -5 -10 -10 v-20 c0 -5 5 -10 10 -10z"></path>
+              <circle class="object white" cx="210" cy="220" r="8"></circle>
+              <path class="stroke-blue object blue" d="M100 260 h120 c5 0 10 5 10 10 v20 
+                                                  c0 5 -5 10 -10 10 h-120 c-5 0 -10 -5 -10 -10 v-20 c0 -5 5 -10 10 -10z"></path>
+              <circle class="object white" cx="210" "="" cy="280" r="8"></circle>
+              <text x="160" "="" y="350" text-anchor="middle">Source 1</text>
+              <text x="160" y="390" class="smaller" text-anchor="middle">192.168.1.101</text>
+            </g>
+            
+            <g class="good">
+              <path class="stroke-blue object blue" d="M100 600 h120 c5 0 10 5 10 10 v20 
+                                                  c0 5 -5 10 -10 10 h-120 c-5 0 -10 -5 -10 -10 v-20 c0 -5 5 -10 10 -10z"></path>
+              <circle class="object white" cx="210" cy="620" r="8"></circle>
+              <path class="stroke-blue object blue" d="M100 660 h120 c5 0 10 5 10 10 v20 
+                                                  c0 5 -5 10 -10 10 h-120 c-5 0 -10 -5 -10 -10 v-20 c0 -5 5 -10 10 -10z"></path>
+              <circle class="object white" cx="210" "="" cy="680" r="8"></circle>
+              <text x="160" "="" y="750" text-anchor="middle">Source 2</text>
+              <text x="160" y="790" class="smaller" text-anchor="middle">192.168.1.100</text>
+            </g>
+            
+          </g>
+    
+          <g id="BAT-servers">
+            
+            <g class="good">
+              <path class="object blue" d="M 700 100 c 0 20 130 20 130 0 c 0 -20 -130 -20 -130 0 z m 0 10 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z"></path>
+              <text x="765" y="250" text-anchor="middle">Gateway</text>
+              <text x="765" y="290" class="smaller" text-anchor="middle">192.168.1.12</text>
+            </g>
+            
+            <g class="good">
+              <path class="object blue" d="M 700 400 c 0 20 130 20 130 0 c 0 -20 -130 -20 -130 0 z m 0 10 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z"></path>
+              <text x="765" y="550" text-anchor="middle">Server 1</text>
+              <text x="765" y="590" class="smaller" text-anchor="middle">192.168.1.10</text>
+            </g>
+            
+            <g class="good">
+              <path class="object blue" d="M 700 700 c 0 20 130 20 130 0 c 0 -20 -130 -20 -130 0 z m 0 10 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z m 0 30 c 0 20 130 20 130 0 v 20 c 0 20 -130 20 -130 0 z"></path>
+              <text x="765" y="850" text-anchor="middle">Server 2</text>
+              <text x="765" y="890" class="smaller" text-anchor="middle">192.168.1.11</text>
+            </g>
+            
+          </g>
+    
+          <g id="SOKET-server">
+            
+            <path class="stroke line" d="M850 150 h330" stroke-linejoin="round"></path> 
+            <g class="good">
+              <path class="stroke-blue object blue" d="M1200 100 h120 c5 0 10 5 10 10 v20 
+                                                  c0 5 -5 10 -10 10 h-120 c-5 0 -10 -5 -10 -10 v-20 c0 -5 5 -10 10 -10z"></path>
+              <circle class="object white" cx="1310" cy="120" r="8"></circle>
+              <path class="stroke-blue object blue" d="M1200 160 h120 c5 0 10 5 10 10 v20 
+                                                  c0 5 -5 10 -10 10 h-120 c-5 0 -10 -5 -10 -10 v-20 c0 -5 5 -10 10 -10z"></path>
+              <circle class="object white" cx="1310" "="" cy="180" r="8"></circle>
+              <text x="1260" "="" y="250" text-anchor="middle">Center</text>
+              <text x="1260" y="290" class="smaller" text-anchor="middle">10.7.1.116</text>
+            </g>
+            
+          </g>
+    
+          <g id="Legend">
+            <g class="good">
+              <path class="object blue" d="M1300 800 h40 v40 h-40 z"></path>
+              <text x="1350" y="830" class="smaller">: Good</text>
+            </g>
+            <g class="broken">
+              <path class="object blue" d="M1300 850 h40 v40 h-40 z"></path>
+              <text x="1350" y="880" class="smaller">: Broken</text>
+            </g>
+          </g>
+        </svg>
       </div>
-      
     </section>
   </main>
 
@@ -522,7 +600,6 @@
       }
     }
   </script>
-  <script src="js/Dashboard.js"></script>
 </body>
 
 </html>

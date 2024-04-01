@@ -1,0 +1,47 @@
+.hour {
+    margin-top: 0;
+    font-size: max(6vw, 60pt);
+    font-weight: 500;
+}
+.second {
+    font-size: 20pt;
+    font-weight: 500;
+}
+.countdown {
+    font-size: max(4vw, 40pt);
+    font-weight: 500;
+}
+
+.date-ar, .date-la, .message-1, .location-head {
+    font-size: 16pt;
+    text-transform: uppercase;
+}
+
+.shalat-block {
+    background-color: #3C3633;
+    color: #EEEDEB;
+}
+.shalat-block .shalat-time {
+    font-size: min(40pt, 5vw);
+}
+.shalat-block .shalat-name {
+    font-size: min(16pt, 3.2vw);
+    font-weight: 500;
+}
+.shalat-block .iqamah-time {
+    font-size: min(16pt, 3.2vw);
+}
+.shalat-block.active {
+    background-color: #EEEDEB;
+    color: #3C3633;
+}
+
+.text-padet {
+    line-height: 0.9;
+}
+
+.carousel-item img {
+    max-height: 600px;
+    max-width: 90vw;
+    margin: auto;
+}

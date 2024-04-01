@@ -220,101 +220,62 @@
     </ul>
   </aside>
   <main id="main" class="main">
-    <div class="pagetitle position-sticky top-0" style="z-index: 100;">
+    <div class="pagetitle" style="z-index: 100;">
       <div class="float-end">
         <a class="btn btn-warning">Showcase only</a>
       </div>
-      <h1>Dashboard</h1>
+      <h1>BAT Data Flow</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item"><a href="#">BAT Server Monitoring</a></li>
+          <li class="breadcrumb-item active">Data Flow</li>
         </ol>
       </nav>
-      <div class="row">
-        <div class="mb-3">
-          <label for="unitselect" class="form-label">Unit Selected</label>
-          <div class="d-flex ">
-            <select class="form-select me-2 shadow shadow-sm" name="unitselect" id="unitselect" onchange="refreshHome()">
-              {% for unitcode in base.unitLists %}
-              <option value="TJA1">PLTU Tanjung Awar-Awar Unit 1</option>
-              <option value="TJA2">PLTU Tanjung Awar-Awar Unit 2</option>
-              <option value="RBG1">PLTU Rembang Unit 1</option>
-              <option value="RBG2">PLTU Rembang Unit 2</option>
-              {% endfor %}
-            </select>
-            <button class="btn btn-primary ms-2 shadow shadow-sm" id="btn-unitselect" onclick="refreshHome()">
-              <i class="fas fa-rotate"></i>
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
     <section class="section dashboard">
-      <div class="row">
-        <div class="col-lg-8">
-          <div class="row" id="informations">
-            <div class="text-center h-100" style="transform: translateY(30%); min-height: 120px;">
-              <i class="fas fa-3x fa-spin-pulse fa-spinner"></i>
+      <div class="card">
+        <form class="card-body" method="get">
+          <h5 class="card-title">Selection menu</h5>
+          <div class="row align-items-center">
+            <label for="unit" class="form-label col-md-2 mb-2">Server Selected</label>
+            <div class="col-md-10 mb-3">
+              <select class="form-select" name="server" id="server" fdprocessedid="pc0xcq">
+                <option value="Gateway">Gateway</option>
+                <option value="Server 1">Server 1</option>
+                <option value="Server 2">Server 2</option>
+              </select>
             </div>
           </div>
-    
-          <div class="row" id="bat-status">
-            <div class="col-12">
-              <div class="card reports">
-                <div class="filter"> <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                      class="fas fa-ellipsis-vertical"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li><a class="dropdown-item" href="#" onclick="refreshInformation();">Refresh</a></li>
-                  </ul>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title" id="BATModuleStatus-title">
-                    BAT Module Status <span> | -</span>
-                  </h5>
-                  <div id="BATModuleStatus" class="overflow-auto" style="height: 365px;">
-                    <div class="text-center h-100" style="transform: translateY(40%);">
-                      <i class="fas fa-3x fa-spinner fa-spin-pulse"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <input class="form-control visually-hidden" type="text" name="hostname" id="hostname" value="{{ data.sent.hostname }}">
+        </form>
+      </div>
+      <div class="card">
+        <div class="filter">
+          <a class="icon" href="#" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-vertical"></i></a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow update-rate">
+            <li class="dropdown-header text-start">
+              <span>Update every</span>
+            </li>
+            <li><a class="dropdown-item" href="#" onclick="change_update_rate(this, '10000')">10 second</a></li>
+            <li><a class="dropdown-item active" href="#" onclick="change_update_rate(this, '30000')">30 second</a></li>
+            <li><a class="dropdown-item" href="#" onclick="change_update_rate(this, '60000')">1 minute</a></li>
+          </ul>
         </div>
-    
-    
-        <div class="col-lg-4" id="alarm-history">
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-vertical"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li><a class="dropdown-item" href="#" onclick="refreshAlarmHistory();">Refresh</a></li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Latest Alarm History <span>| Today</span></h5>
-              <div class="row mb-3">
-                <div class="col small">
-                  <i class="fas fa-circle text-warning me-2"></i>
-                  <span> Sootblow Optimization</span>
-                </div>
-                <div class="col small">
-                  <i class="fas fa-circle text-info me-2"></i>
-                  <span> Combustion Optimization</span>
-                </div>
-              </div>
-              
-              <div id="alarmHistory" class="activity overflow-auto" style="min-height: 520px; max-height:1024px;">
-                <div class="text-center h-100" style="transform: translateY(40%);">
-                  <i class="fas fa-3x fa-spinner fa-spin-pulse"></i>
-                </div>
-              </div>
-            </div>
+        <div class="card-body">
+          <div class="card-title" id="card-title">Server Details</div>
+          <div class="table-responsive" id="table-server-details">
+            <table class="table table-hover table-borderless">
+              <thead>
+                <tr><th>Instruction</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Please select server and click `Show Details` button</td></tr>
+              </tbody>
+            </table>
           </div>
+          
         </div>
       </div>
-      
     </section>
   </main>
 
@@ -522,7 +483,9 @@
       }
     }
   </script>
-  <script src="js/Dashboard.js"></script>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/server-monitoring.js"></script>
 </body>
 
 </html>

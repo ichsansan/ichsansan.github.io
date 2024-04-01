@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prayer Time</title>
+
+  <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="css/vendor/fa_all.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+  <style>
+    .shalat-block {
+      background-image: url("image/1124807_8576.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+
+<body class="bg-blue-light">
+  <div class="container-fluid">
+
+    <div class="row justify-content-evenly mx-2 mt-4 mb-2">
+      <div class="col-6 col-sm 2">
+        <h3>Prayer Times</h3>
+      </div>
+
+      <div class="col-6 col-sm-2 d-grid">
+        <button class="btn btn-light rounded-5">
+          <i class="fas fa-location-crosshairs"></i>
+          <span class="ms-2">Tembagapura, ID</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="card rounded-5 border-0 mx-4 shalat-block">
+      <!-- <div class="gradient"></div> -->
+      <div class="card-body d-flex flex-column" style="min-height: 800px;">
+        <div class="row h-100">
+          <div class="col-auto me-auto text-start">
+            <div class="mt-2 text-light">
+              <p class="fs-2 mb-0">
+                <span class="me-2 mb-0">Tanggal</span>
+                <i class="fas fa-calendar-alt"></i>
+              </p>
+              
+              <p class="date-la fs-5 mb-0"></p>
+            </div>
+          </div>
+          <div class="col text-end">
+            <div class="mt-2 text-light text-end">
+              <p class="fs-1 mb-0">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="ms-2 mb-0 font-arabic">اليوم</span>
+              </p>
+              
+              <p class="date-ar font-arabic fs-4 mb-0"></p>
+            </div>
+          </div>
+        </div>
+        <div class="row shalat-row mt-auto">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <div class="text-center text-success font-arabic">الصلاةالتالية</div>
+                <div class="row card-title">
+                  <h5 class="col">Subuh</h5>
+                  <h4 class="col text-end font-arabic">صبح</h4>
+                </div>
+                <div class="shalat-time shalat-fajr">00:00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <div class="row card-title">
+                  <h5 class="col">Dhuhr</h5>
+                  <h4 class="col text-end font-arabic">الظهر</h4>
+                </div>
+                <div class="shalat-time shalat-dhuhr">00:00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <div class="row card-title">
+                  <h5 class="col">Ashar</h5>
+                  <h4 class="col text-end font-arabic">عصر</h4>
+                </div>
+                <div class="shalat-time shalat-asr">00:00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <div class="row card-title">
+                  <h5 class="col">Maghrib</h5>
+                  <h4 class="col text-end font-arabic">المغرب</h4>
+                </div>
+                <div class="shalat-time shalat-maghrib">00:00</div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <div class="row card-title">
+                  <h5 class="col">Isya</h5>
+                  <h4 class="col text-end font-arabic">العشاء</h4>
+                </div>
+                <div class="shalat-time shalat-isha">00:00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="js/vendor/jquery.min.js"></script>
+<script src="js/vendor/fa_all.js"></script>
+<script src="js/vendor/PrayTimes.js"></script>
+<script src="js/main.js"></script>
+
+</html>
