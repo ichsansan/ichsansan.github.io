@@ -29,3 +29,14 @@ body {
     line-height: 0.9;
     border: none;
 }
+
+.shalat-row .card.active {
+    scale: 120%;
+    border: 2px solid #018d2a;
+    z-index: 2;
+    box-shadow: 0px 0px 40px #0004;
+}
+
+.text-blue {
+    color: #ACF;
+}

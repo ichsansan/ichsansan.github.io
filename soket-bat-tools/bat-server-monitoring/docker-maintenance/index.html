@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+
+  <style>
+    .select-arrow {
+      color: #223;
+      text-align: center;
+      font-size: 16px;
+      position: absolute;
+      top: 7px;
+      right: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h1>Multiselect</h1>
+
+    <h3>Normal Select</h3>
+    <div class="mb-3">
+      <label for="normal-select" class="form-label">City</label>
+      <select class="form-select form-select-lg" name="normal-select" id="normal-select">
+        <option selected>Select one</option>
+        <option value="">New Delhi</option>
+        <option value="">Istanbul</option>
+        <option value="">Jakarta</option>
+      </select>
+    </div>
+
+    <h3>Normal Multiselect</h3>
+    <div class="mb-3">
+      <label for="normal-multiselect" class="form-label">City</label>
+      <select multiple class="form-select form-select-lg" name="normal-multiselect" id="normal-multiselect">
+        <option selected>Select one</option>
+        <option value="">New Delhi</option>
+        <option value="">Istanbul</option>
+        <option value="">Jakarta</option>
+      </select>
+    </div>
+
+    <h3>Custom Multiselect</h3>
+    <div class="mb-3">
+      <label for="custom-multiselect" class="form-label">City</label>
+      <div class="custom-multiselect">
+        <input class="form-control select-input" role="button" type="text">
+        <span class="select-arrow"></span>
+        <div class="item-select position-relative d-none">
+          <div class="position-absolute top-100">
+            <ul class="list-group list-unstyled">
+              <li class="list-group-item">
+                <input type="text" class="form-control form-control-sm" placeholder="search">
+              </li>
+              <li class="list-group-item">List 1</li>
+              <li class="list-group-item">List 2</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <p>Isian bawahnya</p>
+    </div>
+  </div>
+</body>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/logging.js"></script>
+<script>
+  $('.custom-multiselect').on('click', function () {
+    console.log(this);
+    $(this).find('.item-select').toggleClass('d-none');
+  })
+</script>
+
+</html>

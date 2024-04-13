@@ -72,23 +72,23 @@
   </header>
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
-      <li class="nav-item"> <a class="nav-link"
+      <li class="nav-item"> <a class="nav-link collapsed"
           href="/soket-bat-tools"> <i class="fas fa-tv me-2"></i> <span>Dashboard</span>
         </a></li>
       <li class="nav-heading">Pages</li>
-      <li class="nav-item"> <a class="nav-link collapsed"
+      <li class="nav-item"> <a class="nav-link"
           data-bs-target="#components-nav" data-bs-toggle="collapse" href="#"
-          aria-expanded="false"> <i
+          aria-expanded="true"> <i
             class="fas fa-server me-3"></i><span>BAT Server Monitoring</span><i class="fas fa-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav"
-          class="nav-content collapse"
+          class="nav-content collapse show"
           data-bs-parent="#sidebar-nav">
           <li>
             <a href="/soket-bat-tools/bat-server-monitoring/network-monitoring" class="collapsed"> <i class="fas fa-network-wired me-2"
                 style="width: 25px;"></i><span>Network Monitoring</span> </a>
           </li>
-          <li>
+          <li class="nav-active">
             <a href="/soket-bat-tools/bat-server-monitoring/server-monitoring" class="collapsed"> <i
                 class="fas fa-arrow-right-arrow-left me-2" style="width: 25px;"></i><span>Server Monitoring</span> </a>
           </li>
@@ -486,6 +486,7 @@
 
   <script src="js/jquery.min.js"></script>
   <script src="js/server-monitoring.js"></script>
+  <script src="js/logging.js"></script>
 </body>
 
 </html>

@@ -19,11 +19,17 @@ function perSecond() {
         calendar: 'islamic-civil' // Gunakan kalender Hijriyah
     });
     // let hijri_date = hijri_formatter.format(now);
+    let hijri_day, hijri_month, hijri_year;
     let hijri_date = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', { dateStyle: 'long' }).format(now);
+    [hijri_day, hijri_month, hijri_year,_] = hijri_date.split(' ');
+    
 
     $('.hour').html(`${time2str(now.getHours())}:${time2str(now.getMinutes())}`);
     $('.second').html(`${time2str(now.getSeconds())}`);
-    $('.date-ar').html(`${hijri_date}`);
+    // $('.date-ar').html(`${hijri_date}`);
+    $('.year-ar').html(`${hijri_year}`);
+    $('.month-ar').html(`${hijri_month}`);
+    $('.mday-ar').html(`${hijri_day}`);
     $('.date-la').html(`${latin_date}`);
 }
 
