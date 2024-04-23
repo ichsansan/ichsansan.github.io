@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Holy Grail</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            height: 100%;
+            margin: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-rows: 6rem 5rem auto 5rem;
+            grid-template-columns: 20% auto 20%;
+            font-size: 1.5rem;
+            height: 100%;
+        }
+
+        @media (max-width: 729px) {
+            .grid {
+                grid-template-rows: 6rem 6rem 6rem auto 6rem 6rem;
+                grid-template-columns: 1fr;
+            }
+            
+            aside, main {
+                grid-column: 1 / 4;
+            }
+        }
+
+        nav, header, footer {
+            background: #f6c356;
+            grid-column: 1 / 4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav {
+            background: #aaec8a;
+        }
+
+        aside, main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        aside{
+            background: #99c2fe;
+        }
+
+        main {
+            background: #b881ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <header>&lt;header&gt;</header>
+        <nav>&lt;nav&gt;</nav>
+        <aside class="sidebar-left">&lt;aside&gt;</aside>
+        <main>&lt;main&gt;</main>
+        <aside class="sidebar-left">&lt;aside&gt;</aside>
+        <footer>&lt;footer&gt;</footer>
+    </div>
+</body>
+</html>
