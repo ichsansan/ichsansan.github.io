@@ -3,7 +3,7 @@ body {
 }
 
 .bg-blue-light {
-    background-color: #f2f9ff;
+    background-color: #f3f9fe;
 }
 
 .gradient {
@@ -21,7 +21,28 @@ body {
 }
 
 .shalat-time {
-    font-size: 40px;
+    font-size: 2rem;
+}
+
+.shalat-block {
+    border: 0px;
+    background-color: #f5f5f8;
+    transition: .2s;
+}
+.shalat-block .shalat-time{
+    color: #c3c6d4;
+}
+.shalat-block.active, .shalat-block:hover {
+    transform: scale(1.07);
+    border: 2px solid #018d2a;
+    z-index: 1001;
+}
+.shalat-block.active:hover {
+    transform: scale(1.11);
+    border: 2px solid #085d21;
+}
+.shalat-block.active .shalat-time, .shalat-block:hover .shalat-time {
+    color: #018d2a;
 }
   
 .shalat-row .card {
@@ -39,4 +60,27 @@ body {
 
 .text-blue {
     color: #ACF;
+}
+.text-dark {
+    color: #555A68 !important;
+}
+
+.form-control-light {
+    border: white;
+}
+
+#masjid-frame {
+    background-image: url("../image/1124807_8576.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.table-transparent tr, .table-transparent td, .table-transparent th {
+    background-color: #0000 !important;
+    color: white;
+}
+
+.table-transparent tr :nth-child(2){
+    min-width: 130px;
+    text-align: center;
 }
