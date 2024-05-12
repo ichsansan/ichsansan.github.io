@@ -3,7 +3,7 @@ body {
 }
 
 .bg-blue-light {
-    background-color: #f3f9fe;
+    background-color: #eff5ff;
 }
 
 .gradient {
@@ -20,29 +20,44 @@ body {
     font-style: normal;
 }
 
-.shalat-time {
-    font-size: 2rem;
+.shalat-name {
+    font-family: "Reem Kufi", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #555A68;
 }
 
-.shalat-block {
-    border: 0px;
-    background-color: #f5f5f8;
-    transition: .2s;
-}
-.shalat-block .shalat-time{
+.shalat-time {
+    font-size: 2rem;
     color: #c3c6d4;
+    font-weight: 500;
 }
-.shalat-block.active, .shalat-block:hover {
-    transform: scale(1.07);
-    border: 2px solid #018d2a;
-    z-index: 1001;
+
+.shalat-slick {
+    border: 0px;
+    background-color: #a4a3af0a;
+    margin-top: 0.25rem;
 }
-.shalat-block.active:hover {
-    transform: scale(1.11);
-    border: 2px solid #085d21;
+.shalat-card {
+    transition: .2s;
+    transform: scale(0.8);
 }
-.shalat-block.active .shalat-time, .shalat-block:hover .shalat-time {
+.shalat-card.slick-current {
+    transform: scale(1.0);
+}
+.shalat-card.slick-current .shalat-time{
     color: #018d2a;
+}
+.next-shalat {
+    display: none;
+}
+.slick-current .next-shalat {
+    display: block;
+}
+.shalat-time-left {
+    font-size: 12px;
 }
   
 .shalat-row .card {
@@ -83,4 +98,8 @@ body {
 .table-transparent tr :nth-child(2){
     min-width: 130px;
     text-align: center;
+}
+
+.slick-next {
+    color: red !important;
 }

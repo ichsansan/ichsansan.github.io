@@ -8,12 +8,15 @@
 
   <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
   <link href="css/vendor/fa_all.css" rel="stylesheet">
+  <link href="css/vendor/slick.css" rel="stylesheet">
+  <link href="css/vendor/slick-theme.css" rel="stylesheet">
   <link href="css/main.css" rel="stylesheet">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+  
   <style>
     .input-group-prepend .input-group-text::before {
       content: "\f002"; /* kode ikon Font Awesome */
@@ -28,7 +31,7 @@
 </head>
 
 <body class="bg-blue-light d-flex vh-100">
-  <div class="container-fluid bg-primary-subtle h-100 px-4 py-3 d-flex">
+  <div class="container-fluid bg-primasry-subtle h-100 px-4 py-3 d-flex">
     <div class="d-block" style="width: 100%; height: 100%;">
       <div class="row justify-content-between">
         <div class="col-auto">
@@ -78,7 +81,7 @@
                   <div class="m-0">
                     <table class="table table-transparent table-sm table-borderless table-hover" style="background-color: #0000;">
                       <tbody class="text-white">
-                        <tr class="font-arabic">
+                        <tr class="font-arabic fs-5">
                           <th class="ar-ar-year"></th>
                           <th class="ar-ar-month"></th>
                           <th class="ar-ar-date"></th>
@@ -100,7 +103,7 @@
               <div class="text-secondary">Waktu shalat di <span class="location">--</span></div>
             </div>
 
-            <div class="row">
+            <div class="d-none row">
               <div class="col-12 col-md">
                 <div class="card shalat-block">
                   <div class="card-body d-flex justify-content-between d-md-block text-center">
@@ -142,6 +145,45 @@
                 </div>
               </div>
             </div>
+
+            <div class="d-block ">
+              <h5>Mobile</h5>
+
+              <div class="shalat-slick text-center">
+                <div class="shalat-card shalat-fajr">
+                  <div class="next-shalat">الصلاةالتالية</div>
+                  <div class="shalat-name"></div>
+                  <div class="shalat-time-left"></div>
+                  <div class="shalat-time">--</div>
+                  <div class="shalat-name-en"></div>
+                </div>
+                <div class="shalat-card shalat-dhuhr">
+                  <div class="next-shalat">الصلاةالتالية</div>
+                  <div class="shalat-name-en"></div>
+                  <div class="shalat-name"></div>
+                  <div class="shalat-time">--</div>
+                </div>
+                <div class="shalat-card shalat-asr">
+                  <div class="next-shalat">الصلاةالتالية</div>
+                  <div class="shalat-name-en"></div>
+                  <div class="shalat-name"></div>
+                  <div class="shalat-time">--</div>
+                </div>
+                <div class="shalat-card shalat-maghrib">
+                  <div class="next-shalat">الصلاةالتالية</div>
+                  <div class="shalat-name-en"></div>
+                  <div class="shalat-name"></div>
+                  <div class="shalat-time">--</div>
+                </div>
+                <div class="shalat-card shalat-isha">
+                  <div class="next-shalat">الصلاةالتالية</div>
+                  <div class="shalat-name-en"></div>
+                  <div class="shalat-name"></div>
+                  <div class="shalat-time">--</div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -154,5 +196,35 @@
 <script src="js/logging.js"></script>
 <script src="js/vendor/moment.min.js"></script>
 <script src="js/vendor/PrayTimes.js"></script>
+<script src="js/vendor/slick.min.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+  $('.shalat-slick').slick({
+    arrows: false,
+    centerMode: true,
+    centerPadding: '60px',
+    slidesToShow: 5,
+    infinite: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerPadding: '40px',
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: true,
+          centerPadding: '28%',
+          slidesToShow: 1
+        }
+      }
+    ]
+  });
+</script>
+
 </html>
