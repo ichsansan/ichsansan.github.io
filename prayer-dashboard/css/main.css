@@ -50,15 +50,15 @@ body {
 .shalat-card.slick-current .shalat-time{
     color: #018d2a;
 }
-.next-shalat {
+.next-shalat, .shalat-left {
     display: none;
 }
-.slick-current .next-shalat {
+.slick-current .next-shalat, .slick-current .shalat-left {
     display: block;
 }
-.shalat-time-left {
+/* .shalat-time-left {
     font-size: 12px;
-}
+} */
   
 .shalat-row .card {
     background-color: #e7ecf0;
