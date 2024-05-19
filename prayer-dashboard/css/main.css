@@ -43,9 +43,11 @@ body {
 .shalat-card {
     transition: .2s;
     transform: scale(0.8);
+    margin-top: 1.25rem;
 }
 .shalat-card.slick-current {
     transform: scale(1.0);
+    margin-top: 0;
 }
 .shalat-card.slick-current .shalat-time{
     color: #018d2a;
@@ -102,4 +104,42 @@ body {
 
 .slick-next {
     color: red !important;
+}
+
+.fullscreen {
+    display: none;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0000;
+    backdrop-filter: blur(2px);
+    color: white;
+    z-index: 2000;
+    transition: .82s;
+}
+.fullscreen.transition {
+    display: block;
+    backdrop-filter: blur(0);
+    background-color: #0000;
+}
+.fullscreen.active {
+    display: block; 
+    backdrop-filter: blur(2px);
+    background-color: #000a;
+}
+.center {
+    height: 100%;
+    position: relative;
+}
+.center div{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-weight: 700;
+    transform: translate(-50%, -50%);
 }

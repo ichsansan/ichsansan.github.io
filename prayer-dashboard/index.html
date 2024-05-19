@@ -157,6 +157,14 @@
                     <span class="shalat-name-en"></span>
                   </div>
                 </div>
+                <div class="shalat-card shalat-sunrise">
+                  <div class="shalat-name"></div>
+                  <div class="shalat-time">--</div>
+                  <div class="text-secondary shalat-left" style="font-size: 12px">
+                    <span class="shalat-time-left"></span> to 
+                    <span class="shalat-name-en"></span>
+                  </div>
+                </div>
                 <div class="shalat-card shalat-dhuhr">
                   <div class="next-shalat">الصلاةالتالية</div>
                   <div class="shalat-name"></div>
@@ -193,12 +201,33 @@
                     <span class="shalat-name-en"></span>
                   </div>
                 </div>
+                <div class="shalat-card shalat-midnight">
+                  <div class="shalat-name"></div>
+                  <div class="shalat-time">--</div>
+                  <div class="text-secondary shalat-left" style="font-size: 12px">
+                    <span class="shalat-time-left"></span> to 
+                    <span class="shalat-name-en"></span>
+                  </div>
+                </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- <div class="modal fullscreen active"> -->
+  <div class="modal fullscreen" id="iqamah-board">
+    <div class="position-absolute end-0 m-3">
+      <button class="btn btn-close"></button>
+    </div>
+    
+    <div class="center">
+      <div class="display-3 w-100 text-center">
+        <p>Waktu shalat <span class="shalat-current"></span> telah tiba</p>
+        <p><span class="iqamah-time-left">00:00</span> menuju iqamah</p>
+      </h1>
     </div>
   </div>
 </body>
@@ -209,6 +238,7 @@
 <script src="js/vendor/moment.min.js"></script>
 <script src="js/vendor/PrayTimes.js"></script>
 <script src="js/vendor/slick.min.js"></script>
+<script src="js/shalat.js"></script>
 <script src="js/main.js"></script>
 
 <script>

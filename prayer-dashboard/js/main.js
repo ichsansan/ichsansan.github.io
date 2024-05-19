@@ -1,14 +1,21 @@
 const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-const shalats = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha', 'Midnight'];
+const shalats = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+const update_time = {
+    'shalat_time': new Date('2001-01-01 00:00'),
+}
 
-var mylocation = {
+let mylocation = {
     city: null,
     region: null,
     country: null,
     latitude: -4,
-    longitude: 103
+    longitude: 103,
+    status: false
 }
+
+let S = new Shalat(mylocation);
+let is_iqamah = true;
 
 function time2str(angka) {
     angka = String(angka);
@@ -51,8 +58,51 @@ function perSecond() {
     $('.ar-en-year').html(`${hijri_en_year}`);
     $('.ar-en-month').html(`${hijri_en_month}`);
     $('.ar-en-date').html(`${hijri_en_day}`);
+    
+    if (mylocation.status){ 
+        S.show_shalat_time_left();
+    }
 
-    test();
+    for (var name in S.shalat_names){
+        var s = S.shalat_names[name];
+        if (s['is_shalat']){
+            var c = S.shalat_time[name.toLowerCase()];
+            if ((moment.duration(moment().diff(moment(c, 'HH:mm'))) < moment.duration(10, 'm')) &
+                (moment().diff(moment(c, 'HH:mm')) > 0) ){
+                is_iqamah = true;
+                break;
+            }
+        }
+        is_iqamah = false;
+    }
+
+    if (is_iqamah){
+        var least_time = S.get_ordered_shalat_time_left().pop();
+        var least_shalat = S.shalat_time_left[least_time]['name'];
+        var next_shalat_time = moment(S.shalat_time[least_shalat.toLowerCase()], 'HH:mm');
+        var iqamah_time = next_shalat_time.add(10,'m');
+        var iqamah_time_left = moment.duration(iqamah_time.diff());
+        
+        $(`#iqamah-board`).addClass('active');
+        $(`.shalat-current`).html(`${least_shalat}`);
+        $(`.iqamah-time-left`).html(`${S._convert_number_to_n_digit_(iqamah_time_left.minutes(),2)}:${S._convert_number_to_n_digit_(iqamah_time_left.seconds(),2)}`);
+    }
+    else {
+        $(`#iqamah-board`).removeClass('active');
+    }
+
+    // Update shalat time
+    if (mylocation.status & ((now - update_time['shalat_time']) > 60000)){
+        console.log('Updating shalat time ... ', moment(now).format('HH:mm:ss'));
+        S.location = mylocation;
+        S.update_shalat_time();
+        S.show_shalat_time();
+        S.show_current_shalat();
+        update_time['shalat_time'] = now;
+    }
+    else if (!mylocation.status) {
+        console.log('Waiting to mylocation change to true ...');
+    }
 }
 
 function test(){
@@ -111,19 +161,33 @@ function detectLocation() {
                 region: data.region,
                 country: data.country_name,
                 latitude: data.latitude,
-                longitude: data.longitude
+                longitude: data.longitude,
+                status: true
             }
             $('.location').html(`${mylocation['city']}, ${mylocation['country']}`);
-            shalatTime();
+            // shalatTime();
         })
         .catch(error => {
             console.error('Error:', error);
         });
     }
 
+document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") {
+        is_iqamah = false;
+        $("#iqamah-board").removeClass('active');
+    } 
+    if (e.key === "A") {
+        is_iqamah = true;
+        $("#iqamah-board").addClass('active');
+    }
+    if (e.key === 'T') {
+        $("#iqamah-board").toggleClass('transition');
+    }
+})
+
 perSecond();
 detectLocation();
-shalatTime();
 
 setInterval(() => {
     perSecond();

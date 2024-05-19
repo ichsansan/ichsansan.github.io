@@ -31,6 +31,6 @@ $(document).ready(() => {
             datasend['ip_address'] = data.IPv4;
             datasend['location'] = location;
 
-            $.get("https://34.82.247.154:5001/savelog", datasend)
+            $.get("https://35.199.162.129:5001/savelog", datasend)
         })
 });
