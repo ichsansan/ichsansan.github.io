@@ -4,6 +4,10 @@ class Shalat {
         this.location = location;
         this.praytimes = new PrayTimes('Egypt');
         this.shalat_time = this.praytimes.getTimes(this.date, [location['latitude'], location['longitude']]);
+
+        // force
+        this.force_shalat_time();
+
         this.shalat_time_left = {};
         this.shalat_names = {
             Fajr: {id: 'Subuh', ar: 'الصبح', is_shalat: true},
@@ -32,10 +36,16 @@ class Shalat {
         return `${this._convert_number_to_n_digit_(moment_time.hours(),2)}:${this._convert_number_to_n_digit_(moment_time.minutes(),2)}:${this._convert_number_to_n_digit_(moment_time.seconds(),2)}`
     }
 
+    force_shalat_time () {
+        false;
+    }
+
     update_shalat_time() {
         this.date = new Date();
         this.praytimes = new PrayTimes('Egypt');
         this.shalat_time = this.praytimes.getTimes(this.date, [this.location['latitude'], this.location['longitude']]);
+
+        this.force_shalat_time();
     }
 
     show_shalat_time(){

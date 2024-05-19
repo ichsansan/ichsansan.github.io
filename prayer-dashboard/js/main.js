@@ -83,12 +83,21 @@ function perSecond() {
         var iqamah_time = next_shalat_time.add(10,'m');
         var iqamah_time_left = moment.duration(iqamah_time.diff());
         
-        $(`#iqamah-board`).addClass('active');
+        if (!$(`#iqamah-board`).hasClass('active')){
+            $(`#iqamah-board`).addClass('transition');
+        }
+        window.setTimeout(function(){
+            $(`#iqamah-board`).addClass('active');
+            $(`#iqamah-board`).removeClass('transition');
+        }, 200);
         $(`.shalat-current`).html(`${least_shalat}`);
         $(`.iqamah-time-left`).html(`${S._convert_number_to_n_digit_(iqamah_time_left.minutes(),2)}:${S._convert_number_to_n_digit_(iqamah_time_left.seconds(),2)}`);
     }
     else {
+        $(`#iqamah-board`).removeClass('transition');
         $(`#iqamah-board`).removeClass('active');
+        
+        console.log('remove transition & active ...');
     }
 
     // Update shalat time
@@ -175,11 +184,16 @@ function detectLocation() {
 document.addEventListener('keydown', function(e) {
     if (e.key === "Escape") {
         is_iqamah = false;
-        $("#iqamah-board").removeClass('active');
     } 
     if (e.key === "A") {
-        is_iqamah = true;
-        $("#iqamah-board").addClass('active');
+        if (is_iqamah){
+            console.log('Turn off iqamah mode ...');
+            is_iqamah = false;
+        }
+        else {
+            console.log('Turn on iqamah mode ...');
+            is_iqamah = true;
+        }
     }
     if (e.key === 'T') {
         $("#iqamah-board").toggleClass('transition');
