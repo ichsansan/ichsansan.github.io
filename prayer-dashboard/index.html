@@ -4,24 +4,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="icon" type="image/x-icon" href="image/favicon.ico"> -->
+  <link rel="icon" href="image/favicon.ico" type="image/x-icon"/>
   <title>Prayer Time</title>
 
-  <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
-  <link href="css/vendor/fa_all.css" rel="stylesheet">
-  <link href="css/vendor/slick.css" rel="stylesheet">
-  <link href="css/vendor/slick-theme.css" rel="stylesheet">
-  <link href="css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/vendor/fa_all.css">
+  <link rel="stylesheet" href="css/vendor/slick.css">
+  <link rel="stylesheet" href="css/vendor/slick-theme.css">
+  <link rel="stylesheet" href="css/main.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/vendor/fonts/google.fonts.reem-kufi.css">
+  <link rel="stylesheet" href="css/vendor/fonts/google.fonts.roboto.css">
   
+
   <style>
     .input-group-prepend .input-group-text::before {
-      content: "\f002"; /* kode ikon Font Awesome */
+      content: "\f002";
+      /* kode ikon Font Awesome */
     }
-    
+
     .search::before {
       /* font: var(--fa-font-solid); */
       font-family: "Font Awesome 6 Free";
@@ -30,7 +34,7 @@
   </style>
 </head>
 
-<body class="bg-blue-light d-flex vh-100">
+<body class="bg-blue-light">
   <div class="container-fluid bg-primasry-subtle h-100 px-4 py-3 d-flex">
     <div class="d-block" style="width: 100%; height: 100%;">
       <div class="row justify-content-between">
@@ -39,17 +43,19 @@
             <i class="fas fa-bars"></i>
           </button>
         </div>
-        <div class="col-auto">
-          <div class="input-group">
-            <input type="text" class="form-control form-control-light rounded-start-5" placeholder="Search">
-            <button class="btn btn-light rounded-end-5">
-              <i class="fas fa-location-crosshairs text-success"></i>
-            </button>
+        <div class="col-auto d-flex">
+          <div class="me-2 small text-secondary my-auto">
+            <i class="fas fa-location-arrow"></i>
+            <span class="location"></span>
           </div>
+          <button class="btn btn-light rounded-5 me-2" title="Location" data-bs-toggle="modal"
+            data-bs-target="#settingsModal">
+            <i class="fas fa-gear"></i>
+          </button>
         </div>
-        
+
       </div>
-      
+
       <div id="masjid-frame" class="card mt-3 border-0 rounded-4" style="min-height: 80vh;">
         <div class="card-body d-flex flex-column">
           <div class="d-flex flex-column justify-content-between flex-grow-1">
@@ -58,7 +64,8 @@
                 <div class="text-white d-block">
                   <div class="h2 my-2 text-start">Date <i class="fas fa-calendar-alt ms-3"></i></div>
                   <div class="m-0">
-                    <table class="table table-transparent table-sm table-borderless table-hover" style="background-color: #0000;">
+                    <table class="table table-transparent table-sm table-borderless table-hover"
+                      style="background-color: #0000;">
                       <tbody class="text-white">
                         <tr>
                           <td class="en-en-date">20</td>
@@ -77,9 +84,11 @@
               </div>
               <div class="col col-md-auto">
                 <div class="text-white text-end d-block">
-                  <div class="display-4 text-white m-0 font-arabic" ><i class="fas fa-calendar-alt h2 me-3"></i> اليوم</div>
+                  <div class="display-4 text-white m-0 font-arabic"><i class="fas fa-calendar-alt h2 me-3"></i> اليوم
+                  </div>
                   <div class="m-0">
-                    <table class="table table-transparent table-sm table-borderless table-hover" style="background-color: #0000;">
+                    <table class="table table-transparent table-sm table-borderless table-hover"
+                      style="background-color: #0000;">
                       <tbody class="text-white">
                         <tr class="font-arabic fs-5">
                           <th class="ar-ar-year"></th>
@@ -96,6 +105,11 @@
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div class="d-block d-md-none text-center text-dark mb-auto mt-2">
+              <span class="hour display-1 fw-bold ms-3"></span>
+              <span class="second"></span>
             </div>
 
             <div class="text-center mb-4">
@@ -153,7 +167,7 @@
                   <div class="shalat-name"></div>
                   <div class="shalat-time">--</div>
                   <div class="text-secondary shalat-left" style="font-size: 12px">
-                    <span class="shalat-time-left"></span> to 
+                    <span class="shalat-time-left"></span> to
                     <span class="shalat-name-en"></span>
                   </div>
                 </div>
@@ -161,7 +175,7 @@
                   <div class="shalat-name"></div>
                   <div class="shalat-time">--</div>
                   <div class="text-secondary shalat-left" style="font-size: 12px">
-                    <span class="shalat-time-left"></span> to 
+                    <span class="shalat-time-left"></span> to
                     <span class="shalat-name-en"></span>
                   </div>
                 </div>
@@ -170,7 +184,7 @@
                   <div class="shalat-name"></div>
                   <div class="shalat-time">--</div>
                   <div class="text-secondary shalat-left" style="font-size: 12px">
-                    <span class="shalat-time-left"></span> to 
+                    <span class="shalat-time-left"></span> to
                     <span class="shalat-name-en"></span>
                   </div>
                 </div>
@@ -179,7 +193,7 @@
                   <div class="shalat-name"></div>
                   <div class="shalat-time">--</div>
                   <div class="text-secondary shalat-left" style="font-size: 12px">
-                    <span class="shalat-time-left"></span> to 
+                    <span class="shalat-time-left"></span> to
                     <span class="shalat-name-en"></span>
                   </div>
                 </div>
@@ -188,7 +202,7 @@
                   <div class="shalat-name"></div>
                   <div class="shalat-time">--</div>
                   <div class="text-secondary shalat-left" style="font-size: 12px">
-                    <span class="shalat-time-left"></span> to 
+                    <span class="shalat-time-left"></span> to
                     <span class="shalat-name-en"></span>
                   </div>
                 </div>
@@ -197,7 +211,7 @@
                   <div class="shalat-name"></div>
                   <div class="shalat-time">--</div>
                   <div class="text-secondary shalat-left" style="font-size: 12px">
-                    <span class="shalat-time-left"></span> to 
+                    <span class="shalat-time-left"></span> to
                     <span class="shalat-name-en"></span>
                   </div>
                 </div>
@@ -205,7 +219,7 @@
                   <div class="shalat-name"></div>
                   <div class="shalat-time">--</div>
                   <div class="text-secondary shalat-left" style="font-size: 12px">
-                    <span class="shalat-time-left"></span> to 
+                    <span class="shalat-time-left"></span> to
                     <span class="shalat-name-en"></span>
                   </div>
                 </div>
@@ -217,18 +231,12 @@
     </div>
   </div>
 
-  <!-- <div class="modal fullscreen active"> -->
-  <div class="modal fullscreen" id="iqamah-board">
+  <!-- Fullscreen notification -->
+  <div class="shalat-fullscreen" id="iqamah-board">
     <div class="position-absolute end-0 m-3">
       <button class="btn btn-close"></button>
     </div>
-    
-    <!-- <div class="center">
-      <div class="shalat-text display-3 w-100 text-center">
-        <p>Waktu shalat <span class="shalat-current"></span> telah tiba</p>
-        <p><span class="iqamah-time-left">00:00</span> menuju iqamah</p>
-      </h1>
-    </div> -->
+
     <div class="center">
       <div class="shalat-text display-3 w-100 text-center">
         <div class="row d-flex h-100">
@@ -240,17 +248,131 @@
             <div style="font-size: 1.2rem;">Sesaat menuju iqamah</div>
           </div>
         </div>
-      </h1>
+      </div>
+    </div>
+    <div class="fixed-bottom text-center">
+      <div class="mb-3">
+        <i class="fas fa-3x fa-head-side-cough-slash m-3"></i>
+        <i class="fas fa-3x fa-comment-slash m-3"></i>
+        <i class="fas fa-3x fa-phone-ban m-3"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="Settings" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content bg-blue-light">
+        <div class="modal-body">
+          <h2 class="border-bottom pb-0">Settings</h2>
+          <h4 class="title">Shalat time</h4>
+          <div class="row mb-2">
+            <div class="col-lg-6">
+        
+              <div class="mb-2">
+                <label for="latitude" class="form-label text-secondary">Position</label>
+                <div class="input-group mb-3">
+                  <span class="input-group-text rounded-start-4">Lat</span>
+                  <input type="text" class="form-control latitude" id="latitude" placeholder="Latitude" aria-label="Latitude">
+                  <span class="input-group-text">Lon</span>
+                  <input type="text" class="form-control rounded-end-4 longitude" id="longitude" placeholder="Longitude"
+                    aria-label="Longitude">
+                </div>
+              </div>
+        
+              <div class="mb-2">
+                <label for="shalat-time-method">Calculation method</label>
+                <select class="form-select rounded-4" id="shalat-time-method">
+                  <option value="MWL">Muslim World League</option>
+                  <option value="ISNA">Islamic Society of North America (ISNA)</option>
+                  <option value="Egypt">Egyptian General Authority of Survey</option>
+                  <option value="Makkah">Umm Al-Qura University, Makkah</option>
+                  <option value="Karachi">University of Islamic Sciences, Karachi</option>
+                  <option value="Tehran">Institute of Geophysics, University of Tehran</option>
+                  <option value="Jafari">Shia Ithna-Ashari, Leva Institute, Qum</option>
+                </select>
+              </div>
+              <h4>Iqamah time</h4>
+              <div class="mb-2 text-dark">
+                <div class="row g-3 align-items-center mb-2">
+                  <div class="col"><label class="form-label small" for="interval-iqamah-fajr">Fajr</label></div>
+                  <div class="col input-group input-group-sm"><input class="form-control rounded-start-4" type="number"
+                      id="interval-iqamah-fajr" value="12">
+                    <span class="input-group-text rounded-end-4">min</span>
+                  </div>
+                </div>
+                <div class="row g-3 align-items-center mb-2">
+                  <div class="col"><label class="form-label small" for="interval-iqamah-dhuhr">Dhuhr</label></div>
+                  <div class="col input-group input-group-sm"><input class="form-control rounded-start-4" type="number"
+                      id="interval-iqamah-dhuhr" value="10">
+                    <span class="input-group-text rounded-end-4">min</span>
+                  </div>
+                </div>
+                <div class="row g-3 align-items-center mb-2">
+                  <div class="col"><label class="form-label small" for="interval-iqamah-asr">Asr</label></div>
+                  <div class="col input-group input-group-sm"><input class="form-control rounded-start-4" type="number"
+                      id="interval-iqamah-asr" value="10">
+                    <span class="input-group-text rounded-end-4">min</span>
+                  </div>
+                </div>
+                <div class="row g-3 align-items-center mb-2">
+                  <div class="col"><label class="form-label small" for="interval-iqamah-maghrib">Maghrib</label></div>
+                  <div class="col input-group input-group-sm"><input class="form-control rounded-start-4" type="number"
+                      id="interval-iqamah-maghrib" value="12">
+                    <span class="input-group-text rounded-end-4">min</span>
+                  </div>
+                </div>
+                <div class="row g-3 align-items-center mb-2">
+                  <div class="col"><label class="form-label small" for="interval-iqamah-isha">Isha</label></div>
+                  <div class="col input-group input-group-sm"><input class="form-control rounded-start-4" type="number"
+                      id="interval-iqamah-isha" value="10">
+                    <span class="input-group-text rounded-end-4">min</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mb-2 mt-4 d-grid">
+                <button class="btn btn-success rounded-4" id="update-settings">Update</button>
+              </div>
+            </div>
+        
+        
+            <div class="col-lg-6">
+              <div class="mapouter">
+                <div id="map" class="rounded-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+      <div id="toastAlert" class="toast align-items-center text-white bg-blue border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="1500">
+        <div class="d-flex">
+          <div class="toast-body" id="toast-message">
+            
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
     </div>
   </div>
 </body>
 
+<script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+  ({key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg", v: "weekly"});</script>
 <script src="js/vendor/jquery.min.js"></script>
 <script src="js/vendor/fa_all.js"></script>
 <script src="js/logging.js"></script>
 <script src="js/vendor/moment.min.js"></script>
+<script src="js/vendor/bootstrap.bundle.min.js"></script>
 <script src="js/vendor/PrayTimes.js"></script>
 <script src="js/vendor/slick.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&libraries=marker"></script>
+<script src="js/location.js"></script>
 <script src="js/shalat.js"></script>
 <script src="js/main.js"></script>
 

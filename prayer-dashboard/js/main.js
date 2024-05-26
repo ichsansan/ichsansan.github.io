@@ -1,21 +1,24 @@
+const debug_mode = false;
 const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 const shalats = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+const settingsModal = new bootstrap.Modal('#settingsModal');
+const toastSuccess = new bootstrap.Toast('#toastAlert');
 const update_time = {
-    'shalat_time': new Date('2001-01-01 00:00'),
-}
-
-let mylocation = {
-    city: null,
-    region: null,
-    country: null,
-    latitude: -4,
-    longitude: 103,
-    status: false
+    'shalat_time': {
+        last_update: new Date('2001-01-01 00:00'),
+        interval: 600000
+    }
 }
 
 let S = new Shalat(mylocation);
-let is_iqamah = true;
+let is_iqamah = false;
+let is_beeping = false;
+
+function toastAlert(text){
+    $('#toast-message').html(text);
+    toastSuccess.show();
+}
 
 function time2str(angka) {
     angka = String(angka);
@@ -23,6 +26,36 @@ function time2str(angka) {
         angka = `0${angka}`;
     }
     return angka
+}
+
+function beep1x(duration=500) {
+    let audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+    let oscillator = audioCtx.createOscillator();
+    let gainNode = audioCtx.createGain();
+  
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+  
+    gainNode.gain.value = 0.5;
+    oscillator.frequency.value = 1200;
+    oscillator.type = 'sine';
+  
+    oscillator.start();
+  
+    setTimeout(
+        function() {
+            oscillator.stop();
+        },
+        duration
+    );
+};
+
+function beep3x() {
+    beep1x();
+    setTimeout(function() {beep1x();},1000);
+    setTimeout(function() {beep1x();},2000);
+    setTimeout(function() {beep1x();},3000);
+    setTimeout(function() {beep1x(1400);},4000);
 }
 
 function perSecond() {
@@ -63,145 +96,108 @@ function perSecond() {
         S.show_shalat_time_left();
     }
 
-    for (var name in S.shalat_names){
-        var s = S.shalat_names[name];
-        if (s['is_shalat']){
-            var c = S.shalat_time[name.toLowerCase()];
-            if ((moment.duration(moment().diff(moment(c, 'HH:mm'))) < moment.duration(10, 'm')) &
-                (moment().diff(moment(c, 'HH:mm')) > 0) ){
-                is_iqamah = true;
-                break;
+    if (!debug_mode){
+        for (var name in S.shalat_names){
+            var s = S.shalat_names[name];
+            if (s['is_shalat']){
+                var c = S.shalat_time[name.toLowerCase()];
+                var iq = parseFloat($(`#interval-iqamah-${name.toLowerCase()}`).val())
+                if ((moment.duration(moment().diff(moment(c, 'HH:mm'))) < moment.duration(iq, 'm')) &
+                    (moment().diff(moment(c, 'HH:mm')) > 0) ){
+                    is_iqamah = true;
+                    break;
+                }
             }
+            is_iqamah = false;
         }
-        is_iqamah = false;
     }
 
     if (is_iqamah){
         var least_time = S.get_ordered_shalat_time_left().pop();
         var least_shalat = S.shalat_time_left[least_time]['name'];
         var next_shalat_time = moment(S.shalat_time[least_shalat.toLowerCase()], 'HH:mm');
-        var iqamah_time = next_shalat_time.add(10,'m');
+        // var iqamah_time = next_shalat_time.add(10,'m');
+        var iqamah_time = next_shalat_time.add(parseFloat($(`#interval-iqamah-${least_shalat.toLowerCase()}`).val()), 'm');
         var iqamah_time_left = moment.duration(iqamah_time.diff());
         
         if (!$(`#iqamah-board`).hasClass('active')){
             $(`#iqamah-board`).addClass('transition');
+
+            window.setTimeout(function(){
+                $(`#iqamah-board`).addClass('active');
+                $(`#iqamah-board`).removeClass('transition');
+            }, 200);
         }
-        window.setTimeout(function(){
-            $(`#iqamah-board`).addClass('active');
-            $(`#iqamah-board`).removeClass('transition');
-        }, 200);
         $(`.shalat-current`).html(`${least_shalat}`);
         $(`.iqamah-time-left`).html(`${S._convert_number_to_n_digit_(iqamah_time_left.minutes(),2)}:${S._convert_number_to_n_digit_(iqamah_time_left.seconds(),2)}`);
+
+        if ((iqamah_time_left.asSeconds() < 6) & (!is_beeping)){
+            is_beeping = true;
+            beep3x();
+        }
     }
     else {
         $(`#iqamah-board`).removeClass('transition');
         $(`#iqamah-board`).removeClass('active');
-        
-        console.log('remove transition & active ...');
+        is_beeping = false;
     }
 
     // Update shalat time
-    if (mylocation.status & ((now - update_time['shalat_time']) > 60000)){
+    if (mylocation.status & ((now - update_time['shalat_time']['last_update']) > update_time['shalat_time']['interval'])){
         console.log('Updating shalat time ... ', moment(now).format('HH:mm:ss'));
         S.location = mylocation;
         S.update_shalat_time();
         S.show_shalat_time();
         S.show_current_shalat();
-        update_time['shalat_time'] = now;
+        update_time['shalat_time']['last_update'] = now;
     }
     else if (!mylocation.status) {
         console.log('Waiting to mylocation change to true ...');
     }
 }
 
-function test(){
-    now = moment();
-
-    for (let i = 0; i < shalats.length; i++) {
-        let shalat, shalat_time, duration;
-        shalat = shalats[i];
-        shalat_time = $(`.shalat-${shalat.toLowerCase()} .shalat-time`).html();
-        shalat_time = moment(shalat_time, "HH:mm");
-
-        if ((shalat_time != undefined) & (shalat != undefined)){
-            while (now.isAfter(shalat_time)){
-                shalat_time = shalat_time.add(1,'d');
-            }
-            duration = moment.duration(shalat_time.diff(now));
-            
-            $(`.shalat-${shalat.toLowerCase()} .shalat-time-left`).html(`- ${duration.hours()}:${duration.minutes()}:${duration.seconds()}`);
-        }
-    }
-}
-
-function shalatTime() {
-    var date = new Date(); // today
-    var PT = new PrayTimes('Egypt');
-	var times = PT.getTimes(date, [mylocation['latitude'], mylocation['longitude']]);
-	
-    let shalat_name = {
-        Fajr: {id: 'Subuh', ar: 'الصبح'},
-        Sunrise: {id: 'Syuruq', ar: 'شروق'},
-        Dhuhr: {id: 'Dhuhur', ar: 'الظهر'},
-        Asr: {id: 'Ashar', ar: 'عصر'},
-        Maghrib: {id: 'Maghrib', ar: 'المغرب'},
-        Isha: {id: 'Isya', ar: 'العشاء'},
-        Midnight: {id: 'Tengah Malam', ar: 'منتصف الليل'},
-    }
-
-    console.log(times);
-	for(var i in shalats)	{
-        $(`.shalat-${shalats[i].toLowerCase()} .shalat-name`).html(shalat_name[shalats[i]]['ar']);
-        $(`.shalat-${shalats[i].toLowerCase()} .shalat-name-en`).html(shalats[i]);
-        $(`.shalat-${shalats[i].toLowerCase()} .shalat-time`).html(times[shalats[i].toLowerCase()]);
-	}
-}
-
-function detectLocation() {
-    // URL endpoint GeoIP API
-    var apiUrl = 'https://api.ipbase.com/v1/json/';
-
-    // Mengirimkan permintaan HTTP GET ke API
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            mylocation = {
-                city: data.city,
-                region: data.region,
-                country: data.country_name,
-                latitude: data.latitude,
-                longitude: data.longitude,
-                status: true
-            }
-            $('.location').html(`${mylocation['city']}, ${mylocation['country']}`);
-            // shalatTime();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-
-document.addEventListener('keydown', function(e) {
-    if (e.key === "Escape") {
-        is_iqamah = false;
-    } 
-    if (e.key === "A") {
-        if (is_iqamah){
-            console.log('Turn off iqamah mode ...');
+if (debug_mode){
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") {
             is_iqamah = false;
+        } 
+        if (e.key === "I") {
+            if (is_iqamah){
+                console.log('Turn off iqamah mode ...');
+                is_iqamah = false;
+            }
+            else {
+                console.log('Turn on iqamah mode ...');
+                is_iqamah = true;
+            }
         }
-        else {
-            console.log('Turn on iqamah mode ...');
-            is_iqamah = true;
+        if (e.key === 'T') {
+            $("#iqamah-board").toggleClass('transition');
         }
-    }
-    if (e.key === 'T') {
-        $("#iqamah-board").toggleClass('transition');
-    }
+    })
+}
+
+$('#update-settings').click( function() {
+    var position = {
+        coords: {
+            latitude: parseFloat($('#latitude').val()),
+            longitude: parseFloat($('#longitude').val())
+        }
+    };
+    savePreciseLocation(position);
+    S.location = mylocation;
+    S.method = $('#shalat-time-method').val();
+    S.update_shalat_time();
+    S.show_shalat_time();
+
+    settingsModal.hide();
+    window.setTimeout(function(){
+        toastAlert('Settings has been saved!');
+    }, 200);
 })
 
 perSecond();
-detectLocation();
+detectPreciseLocation();
 
 setInterval(() => {
     perSecond();

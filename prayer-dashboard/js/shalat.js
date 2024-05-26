@@ -1,8 +1,9 @@
 class Shalat {
-    constructor(location){
+    constructor(location, method="Egypt"){
         this.date = new Date();
         this.location = location;
-        this.praytimes = new PrayTimes('Egypt');
+        this.method = method;
+        this.praytimes = new PrayTimes(this.method);
         this.shalat_time = this.praytimes.getTimes(this.date, [location['latitude'], location['longitude']]);
 
         // force
@@ -37,12 +38,13 @@ class Shalat {
     }
 
     force_shalat_time () {
-        false;
+        // this.shalat_time['asr'] = '16:56';
+        return null;
     }
 
     update_shalat_time() {
         this.date = new Date();
-        this.praytimes = new PrayTimes('Egypt');
+        this.praytimes = new PrayTimes(this.method);
         this.shalat_time = this.praytimes.getTimes(this.date, [this.location['latitude'], this.location['longitude']]);
 
         this.force_shalat_time();

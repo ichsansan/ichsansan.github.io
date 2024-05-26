@@ -7933,6 +7933,9 @@ readers do not read off random characters that represent icons */
 .fa-pix:before {
   content: "\e43a"; }
 
+.fa-phone-ban:before {
+  content: "\f900"; }
+  
 .fa-steam-symbol:before {
   content: "\f3f6"; }
 :root, :host {

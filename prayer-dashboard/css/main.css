@@ -6,6 +6,10 @@ body {
     background-color: #eff5ff;
 }
 
+.bg-blue {
+    background-color: #81a9d6;
+}
+
 .gradient {
     position: absolute;
     background-image: linear-gradient(0deg, #fff, transparent);
@@ -106,7 +110,7 @@ body {
     color: red !important;
 }
 
-.fullscreen {
+.shalat-fullscreen {
     display: none;
     position: fixed;
     top: 0;
@@ -119,13 +123,13 @@ body {
     z-index: 2000;
     transition: .82s;
 }
-.fullscreen.transition {
+.shalat-fullscreen.transition {
     display: block;
     color: #0000;
     backdrop-filter: blur(0);
     background-color: #0000;
 }
-.fullscreen.active {
+.shalat-fullscreen.active {
     display: block; 
     backdrop-filter: blur(2px);
     background-color: #000a;
@@ -146,4 +150,22 @@ body {
 .iqamah-time-left {
     font-weight: 300;
     font-size: 7rem;
+}
+
+.location-fullscreen {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0004;
+    backdrop-filter: blur(2px);
+    color: white;
+    z-index: 2000;
+    transition: .82s;
+}
+
+#map {
+    min-height: 500px;
 }
