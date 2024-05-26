@@ -68,9 +68,9 @@
                       style="background-color: #0000;">
                       <tbody class="text-white">
                         <tr>
-                          <td class="en-en-date">20</td>
-                          <td class="en-en-month">December</td>
-                          <td class="en-en-year">2023</td>
+                          <td class="en-en-date"></td>
+                          <td class="en-en-month"></td>
+                          <td class="en-en-year"></td>
                         </tr>
                         <tr>
                           <td><i class="fas fa-clock"></i></td>
@@ -95,10 +95,15 @@
                           <th class="ar-ar-month"></th>
                           <th class="ar-ar-date"></th>
                         </tr>
-                        <tr>
+                        <tr class="d-none d-md-table-row">
                           <td class="ar-en-year">1445H</td>
                           <td class="ar-en-month">Syawwal</td>
                           <td class="ar-en-date">20</td>
+                        </tr>
+                        <tr class="d-table-row d-md-none">
+                          <td class="en-en-year"></td>
+                          <td class="en-en-month"></td>
+                          <td class="en-en-date"></td>
                         </tr>
                       </tbody>
                     </table>
@@ -277,10 +282,11 @@
                 <label for="latitude" class="form-label text-secondary">Position</label>
                 <div class="input-group mb-3">
                   <span class="input-group-text rounded-start-4">Lat</span>
-                  <input type="text" class="form-control latitude" id="latitude" placeholder="Latitude" aria-label="Latitude">
+                  <input type="text" class="form-control latitude" id="latitude" placeholder="Latitude" aria-label="Latitude" 
+                    onchange="updatePositionFromInput()">
                   <span class="input-group-text">Lon</span>
                   <input type="text" class="form-control rounded-end-4 longitude" id="longitude" placeholder="Longitude"
-                    aria-label="Longitude">
+                    aria-label="Longitude" onchange="updatePositionFromInput()">
                 </div>
               </div>
         

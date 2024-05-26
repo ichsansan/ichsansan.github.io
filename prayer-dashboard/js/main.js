@@ -91,6 +91,10 @@ function perSecond() {
     $('.ar-en-year').html(`${hijri_en_year}`);
     $('.ar-en-month').html(`${hijri_en_month}`);
     $('.ar-en-date').html(`${hijri_en_day}`);
+
+    $('.en-en-year').html(`${now.getFullYear()}`);
+    $('.en-en-month').html(`${months[now.getMonth()]}`);
+    $('.en-en-date').html(`${now.getDate()}`);
     
     if (mylocation.status){ 
         S.show_shalat_time_left();
@@ -178,13 +182,7 @@ if (debug_mode){
 }
 
 $('#update-settings').click( function() {
-    var position = {
-        coords: {
-            latitude: parseFloat($('#latitude').val()),
-            longitude: parseFloat($('#longitude').val())
-        }
-    };
-    savePreciseLocation(position);
+    updatePositionFromInput();
     S.location = mylocation;
     S.method = $('#shalat-time-method').val();
     S.update_shalat_time();

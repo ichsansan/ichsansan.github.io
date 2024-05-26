@@ -106,6 +106,16 @@ async function initMap() {
     });
 }
 
+function updatePositionFromInput(){
+    var position = {
+        coords: {
+            latitude: parseFloat($('#latitude').val()),
+            longitude: parseFloat($('#longitude').val())
+        }
+    };
+    savePreciseLocation(position);
+}
+
 function moveMarker() {
     if (pin){
         let position = {
