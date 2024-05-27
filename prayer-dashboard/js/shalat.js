@@ -38,7 +38,7 @@ class Shalat {
     }
 
     force_shalat_time () {
-        this.shalat_time['isha'] = '20:01';
+        // this.shalat_time['isha'] = '20:19';
         return null;
     }
 

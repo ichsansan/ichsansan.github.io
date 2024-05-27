@@ -169,3 +169,24 @@ body {
 #map {
     min-height: 500px;
 }
+
+.sidebar {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100%;
+}
+.sidebar .sidebar-card {
+    text-align: center;
+    height: 100%;
+    border-radius: 0.5rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #eff5ff94;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 15px #0001;
+}
