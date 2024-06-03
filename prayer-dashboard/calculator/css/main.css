@@ -215,7 +215,7 @@ body {
 .btn-blue, .btn-blue:active:hover, .btn-blue:focus-visible {
     background-color: #7fa4d2;
     color: white;
-    border-radius: .75rem;
+    border-radius: .5rem;
 }
 .btn-blue:hover {
     background-color: #9bb8db;
@@ -238,4 +238,24 @@ body {
 }
 .sidebar.show .btn-sidebar-hide svg {
     transform: rotate(180deg);
+}
+
+
+.table {
+    --bs-table-bg: #fff0 !important;
+}
+
+.form-transparent {
+    text-align: end;
+    background-color: #0000;
+    border: none;
+    transition: .2s;
+}
+.form-transparent:hover {
+    background-color: #0001;
+}
+.form-transparent:active, .form-transparent:focus {
+    outline: 0;
+    background-color: #0001;
+    box-shadow: 0px 0px 5px #0001;
 }

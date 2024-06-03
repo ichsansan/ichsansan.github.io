@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="icon" type="image/x-icon" href="image/favicon.ico"> -->
+  <link rel="icon" href="image/favicon.ico" type="image/x-icon"/>
+  <title>Prayer Time Calculator</title>
+
+  <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/vendor/fa_all.css">
+  <link rel="stylesheet" href="css/vendor/slick.css">
+  <link rel="stylesheet" href="css/vendor/slick-theme.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/vendor/fonts/google.fonts.reem-kufi.css">
+  <link rel="stylesheet" href="css/vendor/fonts/google.fonts.roboto.css">
+  
+
+  <style>
+    .input-group-prepend .input-group-text::before {
+      content: "\f002";
+      /* kode ikon Font Awesome */
+    }
+
+    .search::before {
+      /* font: var(--fa-font-solid); */
+      font-family: "Font Awesome 6 Free";
+      content: "\f002";
+    }
+    
+    svg path {
+      transition: d 0.4s;
+      -webkit-transition: d 0.4s;
+    }
+    .btn svg #l1 {
+      fill: none;
+      d: path("M64 64 l384 0 m-384 192 l384 0 m-384 192 l384 0");
+    }
+    .btn:hover svg #l1 {
+      d: path("M192 64 l192 192 m-1 0 l1 0 m-192 192 l192 -192");
+    }
+  </style>
+</head>
+
+<body class="bg-blue-light text-dark">
+  <div class="container-fluid bg-primasry-subtle h-100 px-4 py-3">
+    <h1 class="mt-5 w-100 border-bottom border-2">Prayer Times Calculator</h1>
+    <div class="mt-3">
+      <form action="#">
+        <div class="row">
+          <div class="col-md-4">
+            <label for="dateinput" class="form-label">Input tanggal</label>
+            <input type="date" class="form-control" id="dateinput">
+          </div>
+          <div class="col-md-5">
+            <label for="locationinput" class="form-label">Location <span class="fas fa-location-arrow"></span></label>
+            <div class="input-group">
+              <input class="form-control location" type="text" id="locationinput" placeholder="Please input your location ..." disabled>
+              <button class="btn btn-blue" type="button" onclick="detectPreciseLocation();">
+                <i class="fas fa-map-location-dot"></i>
+                <span class="ms-2">Update</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-3 d-grid">
+            <label class="form-label" style="color: #fff0;">&nbsp;</label>
+            <button type="button" class="btn btn-primary" onclick="showShalatTime();">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="mt-3 row">
+      <div class="col-md-3">
+        <table class="table table-sm table-hover" style="background-color: #fff0;">
+          <tbody>
+            <tr>
+              <th scope="row">Location</th>
+              <td class="location"></td>
+            </tr>
+            <tr>
+              <th scope="row">City</th>
+              <td class="d-grid"><input class="city form-control-sm form-transparent"></td>
+            </tr>
+            <tr>
+              <th scope="row">Region</th>
+              <td class="d-grid"><input class="region form-control-sm form-transparent"></td>
+            </tr>
+            <tr>
+              <th scope="row">Country</th>
+              <td class="d-grid"><input class="country form-control-sm form-transparent"></td>
+            </tr>
+            <tr>
+              <th scope="row">Latitude</th>
+              <td class="d-grid"><input class="latitude form-control-sm form-transparent"></td>
+            </tr>
+            <tr>
+              <th scope="row">Longitude</th>
+              <td class="d-grid"><input class="longitude form-control-sm form-transparent"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-9">
+        <svg xmlns="http://www.w3.org/2000/svg" id="sunrise-set-image" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" 
+          viewBox="0 0 1000 300" style="width: 100%; min-height: 300px; max-height: 400px;" xmlns:svgjs="http://svgjs.dev/svgjs">
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar p-3">
+    <div class="sidebar-card">
+      <div class="ms-2 mb-5 mt-2 d-flex align-content-center text-dark">
+        <img src="image/favicon.ico" height="48px" width="48px">
+        <div class="d-block">
+          <div class="float-end">
+            <button class="btn btn-blue btn-sidebar-hide">
+              <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas"
+              data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+              <path id="l1" stroke="currentColor" d="M64 64 h384 m-384 192 h384 m-384 192 h384" stroke-width="64px" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+            </button>
+          </div>
+          <span class="ms-3 h5 mt-auto mb-auto">Prayer Dashboard</span>
+          <br>
+          <span class="font-arabic text-end">لوحة الصلاة</span>
+        </div>
+      </div>
+
+      <ul class="nav nav-pills flex-column mb-auto text-start">
+        <li class="nav-item">
+          <a href="#" class="nav-link" aria-current="page">
+            <i class="fas fa-tv me-2" style="width: 16px; height: 16px;"></i>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="calculator/index.html" class="nav-link link-body-emphasis active">
+            <i class="fas fa-calendar-days me-2" style="width: 16px; height: 16px;"></i>
+            Prayer Times Calculator
+          </a>
+        </li>
+      </ul>
+    </div>  
+  </div>
+
+  <div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+      <div id="toastAlert" class="toast align-items-center text-white bg-blue border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="1500">
+        <div class="d-flex">
+          <div class="toast-body" id="toast-message">
+            
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+  ({key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg", v: "weekly"});</script> -->
+<script src="js/vendor/jquery.min.js"></script>
+<script src="js/vendor/fa_all.js"></script>
+<script src="js/vendor/moment.min.js"></script>
+<script src="js/vendor/bootstrap.bundle.min.js"></script>
+<script src="js/vendor/PrayTimes.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&libraries=marker&loading=async"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfKoYGMlbgLbPUHgvvXeXGhZDY-ZLcfos&libraries=marker"></script> -->
+<script src="js/location.js"></script>
+<script src="js/shalat.js"></script>
+<script src="js/sunsvg.js"></script>
+<script src="js/vendor/svg.min.js"></script>
+<script src="js/main.js"></script>
+
+</html>

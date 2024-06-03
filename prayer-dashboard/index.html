@@ -31,6 +31,18 @@
       font-family: "Font Awesome 6 Free";
       content: "\f002";
     }
+    
+    svg path {
+      transition: d 0.4s;
+      -webkit-transition: d 0.4s;
+    }
+    .btn svg #l1 {
+      fill: none;
+      d: path("M64 64 l384 0 m-384 192 l384 0 m-384 192 l384 0");
+    }
+    .btn:hover svg #l1 {
+      d: path("M192 64 l192 192 m-1 0 l1 0 m-192 192 l192 -192");
+    }
   </style>
 </head>
 
@@ -39,16 +51,13 @@
     <div class="d-block" style="width: 100%; height: 100%;">
       <div class="row justify-content-between">
         <div class="col-auto">
-          <button class="btn btn-light">
-            <i class="fas fa-bars"></i>
-          </button>
         </div>
         <div class="col-auto d-flex">
           <div class="me-2 small text-secondary my-auto">
             <i class="fas fa-location-arrow"></i>
             <span class="location"></span>
           </div>
-          <button class="btn btn-light rounded-5 me-2" title="Location" data-bs-toggle="modal"
+          <button class="btn btn-blue me-2" title="Location" data-bs-toggle="modal"
             data-bs-target="#settingsModal">
             <i class="fas fa-gear"></i>
           </button>
@@ -118,7 +127,7 @@
             </div>
 
             <div class="text-center mb-4">
-              <h2 class="font-arabic text-dark">اوقات الصلاة في اندونسي</h2>
+              <h2 class="font-arabic text-dark">اوقات الصلاة في مسجد دار السعادة</h2>
               <div class="text-secondary">Waktu shalat di <span class="location">--</span></div>
             </div>
 
@@ -237,12 +246,40 @@
   </div>
 
   <!-- Sidebar -->
-  <div class="sidebar p-2">
+  <div class="sidebar p-3">
     <div class="sidebar-card">
-      <div class="text-primary">
-        <img src="image/favicon.ico" height="100%" width="100%">
+      <div class="ms-2 mb-5 mt-2 d-flex align-content-center text-dark">
+        <img src="image/favicon.ico" height="48px" width="48px">
+        <div class="d-block">
+          <div class="float-end">
+            <button class="btn btn-blue btn-sidebar-hide">
+              <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas"
+                data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                <path id="l1" stroke="currentColor" d="M64 64 h384 m-384 192 h384 m-384 192 h384" stroke-width="64px" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </div>
+          <span class="ms-3 h5 mt-auto mb-auto">Prayer Dashboard</span>
+          <br>
+          <span class="font-arabic text-end">لوحة الصلاة</span>
+        </div>
       </div>
-    </div>
+
+      <ul class="nav nav-pills flex-column mb-auto text-start">
+        <li class="nav-item">
+          <a href="#" class="nav-link active" aria-current="page">
+            <i class="fas fa-tv me-2" style="width: 16px; height: 16px;"></i>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="calculator/index.html" class="nav-link link-body-emphasis">
+            <i class="fas fa-calendar-days me-2" style="width: 16px; height: 16px;"></i>
+            Prayer Times Calculator
+          </a>
+        </li>
+      </ul>
+    </div>  
   </div>
 
   <!-- Fullscreen notification -->

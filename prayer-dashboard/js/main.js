@@ -1,4 +1,4 @@
-const debug_mode = false;
+const debug_mode = true;
 const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 const shalats = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
@@ -160,6 +160,7 @@ function perSecond() {
     }
 }
 
+
 if (debug_mode){
     document.addEventListener('keydown', function(e) {
         if (e.key === "Escape") {
@@ -180,6 +181,11 @@ if (debug_mode){
         }
     })
 }
+document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") {
+        $('.sidebar').removeClass('show');
+    }
+})
 
 $('#update-settings').click( function() {
     updatePositionFromInput();
@@ -192,6 +198,10 @@ $('#update-settings').click( function() {
     window.setTimeout(function(){
         toastAlert('Settings has been saved!');
     }, 200);
+})
+
+$('.btn-sidebar-hide').click( function () {
+    $('.sidebar').toggleClass('show');
 })
 
 perSecond();
