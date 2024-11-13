@@ -6,6 +6,7 @@ class SunImage {
         this.h = 300; //this.viewbox['h'];
         this.shift = -300;
         this.horizon_line = 125;
+        this.praytimes = new PrayTimes();
 
         this.now = moment();
         this.pos = (3600 * this.now.hours() + 60 * this.now.minutes() + this.now.seconds()) / 86.4;
