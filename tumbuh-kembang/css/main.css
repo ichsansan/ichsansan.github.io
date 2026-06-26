@@ -1,0 +1,27 @@
+/* Pelengkap Bootstrap — hanya yang tidak ditangani Bootstrap */
+
+body { font-family: "Nunito", system-ui, sans-serif; }
+
+/* Kartu status gizi (warna zona Kemenkes/WHO) */
+.status-card { border-radius: .5rem; padding: .6rem .75rem; border: 1px solid transparent; height: 100%; }
+.status-card .ind { font-size: .78rem; opacity: .85; display: block; }
+.status-card .val { font-weight: 800; }
+.status-card .z { display: block; font-size: .72rem; opacity: .75; margin-top: 2px; }
+.status-card.green  { background: #d1e7dd; color: #0f5132; }
+.status-card.yellow { background: #fff3cd; color: #664d03; }
+.status-card.orange { background: #ffe2cc; color: #8a4b1a; }
+.status-card.red    { background: #f8d7da; color: #842029; }
+
+/* Grafik */
+.chart-body { height: 320px; }
+.chart-body canvas { width: 100% !important; height: 100% !important; }
+
+/* Mode layar penuh (pseudo-fullscreen, lintas-browser; tanpa rotasi) */
+body.fs-open { overflow: hidden; }
+.chart-card.fs-active {
+  position: fixed; inset: 0; z-index: 1050; margin: 0;
+  border-radius: 0; max-width: none; height: 100vh;
+  display: flex; flex-direction: column;
+}
+.chart-card.fs-active .chart-body { flex: 1 1 auto; height: auto; min-height: 0; }
+.fs-btn { line-height: 1; }
