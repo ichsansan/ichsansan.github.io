@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBT Premedical 1 | Bank Soal Interaktif</title>
+<style>
+:root{
+  --bg:#0f172a;
+  --panel:#0b1220;
+  --card:#ffffff;
+  --card-alt:#f8fafc;
+  --border:#e2e8f0;
+  --ink:#0f172a;
+  --ink-soft:#475569;
+  --brand:#0d6e6e;
+  --brand-dark:#0a5757;
+  --brand-light:#e6f5f4;
+  --accent:#2563eb;
+  --good:#15803d;
+  --good-bg:#dcfce7;
+  --bad:#b91c1c;
+  --bad-bg:#fee2e2;
+  --warn:#b45309;
+  --warn-bg:#fef3c7;
+  --radius:12px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#eef2f6;
+  color:var(--ink);
+  min-height:100vh;
+}
+button{font-family:inherit;cursor:pointer;}
+.hidden{display:none !important;}
+
+/* ---------- START SCREEN ---------- */
+#start-screen{
+  max-width:760px;margin:0 auto;padding:48px 20px 80px;
+}
+.start-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:36px 32px;box-shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(15,23,42,.06);
+}
+.brand-row{display:flex;align-items:center;gap:12px;margin-bottom:4px;}
+.brand-dot{width:12px;height:12px;border-radius:50%;background:var(--brand);}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);font-weight:700;}
+h1{font-size:26px;margin:6px 0 8px;letter-spacing:-.01em;}
+.subtitle{color:var(--ink-soft);font-size:15px;line-height:1.6;margin-bottom:28px;}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px;}
+.stat-box{background:var(--card-alt);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.stat-box .num{font-size:22px;font-weight:700;color:var(--brand-dark);}
+.stat-box .lbl{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+.option-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;border:1px solid var(--border);border-radius:10px;margin-bottom:12px;
+  background:var(--card-alt);
+}
+.option-row .txt strong{display:block;font-size:14px;}
+.option-row .txt span{font-size:12.5px;color:var(--ink-soft);}
+.switch{position:relative;display:inline-block;width:44px;height:24px;flex:none;}
+.switch input{opacity:0;width:0;height:0;}
+.slider{position:absolute;cursor:pointer;inset:0;background:#cbd5e1;border-radius:24px;transition:.15s;}
+.slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:white;border-radius:50%;transition:.15s;}
+input:checked + .slider{background:var(--brand);}
+input:checked + .slider:before{transform:translateX(20px);}
+.btn-primary{
+  width:100%;padding:15px;border:none;border-radius:10px;background:var(--brand);color:white;
+  font-size:15.5px;font-weight:700;margin-top:8px;transition:.12s;
+}
+.btn-primary:hover{background:var(--brand-dark);}
+.btn-secondary{
+  width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;background:white;color:var(--ink);
+  font-size:14.5px;font-weight:600;margin-top:10px;
+}
+.btn-secondary:hover{background:var(--card-alt);}
+.cat-breakdown{margin-top:24px;font-size:13px;color:var(--ink-soft);}
+.cat-breakdown summary{cursor:pointer;font-weight:600;color:var(--brand-dark);margin-bottom:8px;}
+.cat-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.cat-pill{background:var(--brand-light);color:var(--brand-dark);font-size:12px;padding:4px 10px;border-radius:20px;font-weight:600;}
+.resume-banner{
+  background:var(--warn-bg);border:1px solid #fde68a;color:var(--warn);border-radius:10px;
+  padding:12px 14px;font-size:13.5px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+
+/* ---------- EXAM SCREEN ---------- */
+#exam-screen{display:flex;min-height:100vh;}
+#nav-panel{
+  width:280px;flex:none;background:var(--panel);color:#e2e8f0;padding:18px 16px 24px;
+  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;
+}
+#nav-panel .panel-title{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:12px;font-weight:700;}
+#timer-box{
+  background:#111c31;border:1px solid #1e2b45;border-radius:10px;padding:14px;text-align:center;margin-bottom:16px;
+}
+#timer-box .t-label{font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;}
+#timer-box .t-value{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:2px;color:#f1f5f9;}
+#timer-box.low .t-value{color:#f87171;}
+.legend{display:flex;flex-wrap:wrap;gap:8px;font-size:11px;color:#94a3b8;margin-bottom:14px;}
+.legend span{display:flex;align-items:center;gap:5px;}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;}
+#nav-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:16px;flex:1;align-content:start;
+}
+.nav-btn{
+  aspect-ratio:1;border-radius:7px;border:1px solid #263449;background:#141f36;color:#cbd5e1;
+  font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;position:relative;
+}
+.nav-btn.answered{background:#0d6e6e;border-color:#0d6e6e;color:white;}
+.nav-btn.flagged:after{
+  content:"";position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:#f59e0b;
+}
+.nav-btn.current{outline:2px solid #60a5fa;outline-offset:1px;}
+.side-btn{
+  padding:11px;border-radius:9px;border:1px solid #263449;background:#141f36;color:#e2e8f0;font-size:13px;font-weight:600;margin-top:6px;
+}
+.side-btn:hover{background:#1b2942;}
+.side-btn.finish{background:#7f1d1d;border-color:#7f1d1d;}
+.side-btn.finish:hover{background:#991b1b;}
+
+#question-area{flex:1;padding:32px 40px 80px;max-width:900px;}
+.q-toprow{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+.q-count{font-size:13px;color:var(--ink-soft);font-weight:600;}
+.q-cat-pill{background:var(--brand-light);color:var(--brand-dark);font-size:11.5px;padding:4px 10px;border-radius:20px;font-weight:700;}
+.flag-btn{
+  display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);
+  background:white;font-size:13px;font-weight:600;color:var(--ink-soft);
+}
+.flag-btn.active{background:var(--warn-bg);border-color:#fde68a;color:var(--warn);}
+.q-card{
+  background:var(--card);border-radius:var(--radius);padding:28px 28px 8px;
+  box-shadow:0 1px 3px rgba(0,0,0,.06),0 6px 18px rgba(15,23,42,.05);margin-bottom:20px;
+}
+.vignette{font-size:16px;line-height:1.7;margin-bottom:22px;white-space:pre-wrap;}
+.opt{
+  display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1.5px solid var(--border);
+  border-radius:10px;margin-bottom:10px;transition:.1s;
+}
+.opt:hover{border-color:#94a3b8;background:#fafbfc;}
+.opt.selected{border-color:var(--accent);background:#eff6ff;}
+.opt.correct-reveal{border-color:var(--good);background:var(--good-bg);}
+.opt.wrong-reveal{border-color:var(--bad);background:var(--bad-bg);}
+.opt .letter{
+  flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid #cbd5e1;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:var(--ink-soft);
+}
+.opt.selected .letter{background:var(--accent);border-color:var(--accent);color:white;}
+.opt.correct-reveal .letter{background:var(--good);border-color:var(--good);color:white;}
+.opt.wrong-reveal .letter{background:var(--bad);border-color:var(--bad);color:white;}
+.opt .txt{font-size:14.5px;line-height:1.55;padding-top:3px;}
+.opt-tag{margin-left:auto;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;flex:none;}
+.opt-tag.tag-correct{background:var(--good);color:white;}
+.opt-tag.tag-wrong{background:var(--bad);color:white;}
+
+.nav-controls{display:flex;justify-content:space-between;gap:12px;margin-bottom:28px;}
+.nav-controls button{
+  padding:11px 20px;border-radius:9px;border:1px solid var(--border);background:white;font-weight:600;font-size:13.5px;
+}
+.nav-controls button:hover{background:var(--card-alt);}
+.nav-controls button:disabled{opacity:.4;cursor:default;}
+
+.pembahasan-box{
+  background:var(--card);border-radius:var(--radius);padding:24px 26px;margin-bottom:40px;
+  border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05);
+}
+.pembahasan-box h3{margin:0 0 14px;font-size:15px;color:var(--brand-dark);}
+.pb-row{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.pb-tag{font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;}
+.pb-tag.key{background:var(--good-bg);color:var(--good);}
+.pb-tag.skdi{background:var(--brand-light);color:var(--brand-dark);}
+.pb-section{margin-bottom:14px;}
+.pb-section h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);margin:0 0 6px;}
+.pb-section p, .pb-section li{font-size:14px;line-height:1.65;color:var(--ink);}
+.pb-section ul{margin:0;padding-left:18px;}
+.pb-section li{margin-bottom:6px;}
+.pb-section li b{color:var(--ink);}
+
+/* ---------- RESULT SCREEN ---------- */
+#result-screen{max-width:820px;margin:0 auto;padding:48px 20px 80px;}
+.score-card{
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:white;border-radius:16px;
+  padding:36px;text-align:center;margin-bottom:24px;
+}
+.score-card .big{font-size:48px;font-weight:800;}
+.score-card .sub{font-size:14px;opacity:.9;margin-top:4px;}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px;}
+.rstat{background:white;border-radius:10px;padding:16px;text-align:center;border:1px solid var(--border);}
+.rstat .num{font-size:22px;font-weight:800;}
+.rstat .lbl{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+.rstat.good .num{color:var(--good);}
+.rstat.bad .num{color:var(--bad);}
+.rstat.warn .num{color:var(--warn);}
+.cat-score-list{background:white;border-radius:12px;padding:20px 22px;border:1px solid var(--border);margin-bottom:28px;}
+.cat-score-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #f1f5f9;font-size:13.5px;}
+.cat-score-row:last-child{border-bottom:none;}
+.cat-score-row .name{flex:1;font-weight:600;}
+.bar-track{flex:2;height:8px;background:#e2e8f0;border-radius:6px;overflow:hidden;}
+.bar-fill{height:100%;background:var(--brand);}
+.cat-score-row .frac{flex:none;width:52px;text-align:right;color:var(--ink-soft);}
+
+@media (max-width:860px){
+  #exam-screen{flex-direction:column;}
+  #nav-panel{width:100%;height:auto;position:relative;top:auto;}
+  #question-area{padding:20px 16px 60px;max-width:100%;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== START SCREEN ==================== -->
+<div id="start-screen">
+  <div class="start-card">
+    <div class="brand-row"><span class="brand-dot"></span><span class="eyebrow">CBT Blok Ujian</span></div>
+    <h1>Premedical 1</h1>
+    <p class="subtitle">Simulasi ujian Computer-Based Test untuk mata kuliah dasar premedical. Soal diambil dari bank soal blok, lengkap dengan kunci jawaban dan pembahasan (bila tersedia dari sumber).</p>
+
+    <div id="resume-banner" class="resume-banner hidden">
+      <span>Ditemukan progres ujian sebelumnya yang belum selesai.</span>
+      <div style="display:flex;gap:8px;flex:none;">
+        <button class="side-btn" id="btn-resume" style="margin:0;background:#78350f;">Lanjutkan</button>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box"><div class="num" id="pool-total">0</div><div class="lbl">total soal tersedia</div></div>
+      <div class="stat-box"><div class="num">110</div><div class="lbl">soal per sesi ujian</div></div>
+      <div class="stat-box"><div class="num">90</div><div class="lbl">menit waktu ujian</div></div>
+    </div>
+
+    <div class="option-row">
+      <div class="txt"><strong>Acak urutan soal</strong><span>Urutan 110 soal diacak tiap sesi (seperti ujian blok sungguhan)</span></div>
+      <label class="switch"><input type="checkbox" id="toggle-shuffle-q" checked><span class="slider"></span></label>
+    </div>
+
+    <button class="btn-primary" id="btn-start">Mulai Ujian Baru</button>
+    <button class="btn-secondary" id="btn-clear" style="display:none;">Hapus progres tersimpan</button>
+
+    <details class="cat-breakdown">
+      <summary>Sebaran kategori soal dalam pool</summary>
+      <div class="cat-list" id="cat-list"></div>
+    </details>
+  </div>
+</div>
+
+<!-- ==================== EXAM SCREEN ==================== -->
+<div id="exam-screen" class="hidden">
+  <div id="nav-panel">
+    <div id="timer-box">
+      <div class="t-label">Sisa Waktu</div>
+      <div class="t-value" id="timer-display">03:00:00</div>
+    </div>
+    <div class="panel-title">Navigasi Soal</div>
+    <div class="legend">
+      <span><i style="background:#141f36;border:1px solid #263449;"></i>Belum dijawab</span>
+      <span><i style="background:#0d6e6e;"></i>Sudah dijawab</span>
+      <span><i style="background:#f59e0b;"></i>Ragu-ragu</span>
+    </div>
+    <div id="nav-grid"></div>
+    <button class="side-btn" id="btn-finish-exam">Selesai &amp; Kumpulkan</button>
+  </div>
+
+  <div id="question-area">
+    <div class="q-toprow">
+      <div>
+        <div class="q-count" id="q-count">Soal 1 dari 200</div>
+      </div>
+      <span class="q-cat-pill" id="q-cat-pill">Kategori</span>
+      <button class="flag-btn" id="btn-flag">&#9873; Tandai ragu-ragu</button>
+    </div>
+
+    <div class="q-card">
+      <div class="vignette" id="q-vignette"></div>
+      <div id="q-options"></div>
+    </div>
+
+    <div class="nav-controls">
+      <button id="btn-prev">&larr; Sebelumnya</button>
+      <button id="btn-next">Selanjutnya &rarr;</button>
+    </div>
+
+    <div id="pembahasan-wrap"></div>
+  </div>
+</div>
+
+<!-- ==================== RESULT SCREEN ==================== -->
+<div id="result-screen" class="hidden">
+  <div class="score-card">
+    <div class="big" id="score-percent">0%</div>
+    <div class="sub">Skor Akhir Ujian Premedical 1</div>
+  </div>
+  <div class="result-stats">
+    <div class="rstat good"><div class="num" id="stat-correct">0</div><div class="lbl">Jawaban benar</div></div>
+    <div class="rstat bad"><div class="num" id="stat-wrong">0</div><div class="lbl">Jawaban salah</div></div>
+    <div class="rstat warn"><div class="num" id="stat-empty">0</div><div class="lbl">Tidak dijawab</div></div>
+  </div>
+  <div class="cat-score-list" id="cat-score-list"></div>
+  <button class="btn-primary" id="btn-review">Buka Semua Pembahasan</button>
+  <button class="btn-secondary" id="btn-restart">Mulai Ujian Baru Lagi</button>
+  <div id="review-area"></div>
+</div>
+
+<script id="question-data" type="application/json">[{"id": 49, "kategori": "Anatomi", "vignette": "Terminologi pergerakan tersebut adalah?", "options": {"A": "Pronasi-Supinasi", "B": "Fleksi-Ekstensi", "C": "Adduksi-Abduksi", "D": "Rotasi-Sirkumduksi", "E": "Lateral fleksi-Medial ekstensi"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Gambar memperlihatkan gerakan jari tangan menjauhi (Abduksi) dan mendekati (Adduksi) garis tengah/aksis jari tengah. Kontributor mencatat menjawab pilihan C (Adduksi-Abduksi)."}, "skip": false, "skip_reason": ""}, {"id": 57, "kategori": "Fisiologi", "vignette": "Pada orang berpuasa, biasanya menjelang siang hari akan mulai merasa haus. Apakah yang mempengaruhi timbulnya rasa haus tersebut?", "options": {"A": "Aktivasi baroreseptor di hypothalamus", "B": "Aktivasi osmoreseptor di hypothalamus", "C": "Peningkatan volume darah", "D": "Peningkatan tekanan darah", "E": "Penurunan osmolaritas darah"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Rasa haus saat puasa dipicu oleh peningkatan osmolaritas darah yang mengaktifkan osmoreseptor di hipotalamus. Opsi a merupakan catatan bahwa aktivasi baroreseptor berkaitan dengan fase setelah rasa haus (kenyamanan), sedangkan opsi c, d, e pada dasarnya adalah pernyataan terbalik (seharusnya PENURUNAN volume/tekanan darah dan PENINGKATAN osmolaritas, bukan sebaliknya)."}, "skip": false, "skip_reason": ""}, {"id": 92, "kategori": "Fisiologi", "vignette": "Jika 1L cairan tubuh setara dengan 1 kg massa tubuh, maka berapakah perkiraan volume plasma darah pada laki-laki dengan berat badan 60 kg?", "options": {"A": "1,8 L", "B": "2,6 L", "C": "2,2 L", "D": "2,4 L", "E": "2,0 L"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Total body fluid: 60 L. 60 x 60% = 36 (cairan tubuh total). 36 x 1/3 = 12 (cairan ekstrasel). 12 x 20% = 2,4 L (volume plasma darah)."}, "skip": false, "skip_reason": ""}, {"id": 98, "kategori": "Anatomi", "vignette": "Anterior mesencephalon yang mengandung tractus ascendens dan descendens?", "options": {"A": "Corpus mammillaris", "B": "Pedunculus cerebri", "C": "Nucleus ruber", "D": "Putamen", "E": "Tectum"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Mesencephalon terdiri dari dua bagian lateral yang disebut pedunculus cerebri. Setiap pedunculus cerebri terdiri dari bagian anterior disebut crus cerebri dan bagian posterior disebut tegmentum yang dipisahkan oleh substansia nigra (PPT Systema Nervosum Centrale dr Dodik)."}, "skip": false, "skip_reason": ""}, {"id": 104, "kategori": "Fisiologi", "vignette": "Apakah yang memicu terjadinya depolarisasi pada potensial aksi?", "options": {"A": "Permeabilitas natrium menurun", "B": "Permeabilitas kalium menurun", "C": "Permeabilitas natrium meningkat", "D": "Permeabilitas kalium meningkat", "E": "Peningkatan konduktansi kalium"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Permeabilitas natrium meningkat: jelas naik karena kanal Na buka, dan kanal K juga cepat buka, tetapi yang paling berpengaruh adalah permeabilitas kanal Na."}, "skip": false, "skip_reason": ""}, {"id": 107, "kategori": "Biokimia", "vignette": "Seorang laki-laki umur 35 tahun baru saja dibawa ke UGD dalam keadaan lemas dan tidak tertolong. Dari keterangan pengantar, pasien bekerja sebagai pembuat sumur dan baru saja memperdalam sumur di rumah tetangganya. Diduga pasien menghirup gas beracun dari dalam sumur tersebut (gas CO). Bagaimana kerja gas beracun tersebut?", "options": {"A": "Pemutus rangkaian (uncoupler)", "B": "Inhibitor kompleks 2 rantai respirasi", "C": "Inhibitor transport elektron dari FeS ke Q", "D": "Inhibitor sitokrom oksidase", "E": "Inhibitor transport elektron dari sitokrom b dan c"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ada di PPT dr Retno: gas CO jelas dihambat/menghambat sitokrom oksidase (inhibitor sitokrom oksidase)."}, "skip": false, "skip_reason": ""}, {"id": 112, "kategori": "Ilmu Perilaku/Etika Kedokteran", "vignette": "Ujian pada keluarga yang berdampak besar dalam dinamika keluarga, ketika keluarga tersebut dihadapkan pada peristiwa mayor. Manakah diantara opsi berikut yang merupakan peristiwa mayor tersebut?", "options": {"A": "Memasuki sekolah baru", "B": "Perpindahan rumah", "C": "Anak memasuki dunia kerja", "D": "Orangtua mengalami sakit serius", "E": "Ibu bekerja di luar kota"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Referensi: PPT dr Yusuf."}, "skip": false, "skip_reason": ""}, {"id": 113, "kategori": "Fisiologi", "vignette": "Manakah mekanisme kerja potensial aksi pada membran pre sinap?", "options": {"A": "Membuka kanal klorida → vesikel fusi membrane → neurotransmitter eksositosis", "B": "Vesikel fusi membrane → membuka kanal klorida → neurotransmitter eksositosis", "C": "neurotransmitter eksositosis → membuka kanal natrium → vesikel fusi membrane", "D": "Vesikel fusi membrane → membuka kanal calcium → neurotransmitter eksositosis", "E": "Membuka kanal calcium → vesikel fusi membrane → neurotransmitter eksositosis"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Presinap adalah tempat datangnya sinyal, sehingga terlebih dahulu terjadi pembukaan kanal Ca. Ca yang masuk akan mendorong vesikel-vesikel menuju tepi membran, kemudian terjadi fusi/penggabungan membran vesikel dengan membran presinap, dan karena isi vesikel adalah neurotransmitter maka terjadi eksositosis neurotransmitter."}, "skip": false, "skip_reason": ""}, {"id": 119, "kategori": "Fisiologi", "vignette": "Pada kondisi resting, dalam bentuk apakah water output yang paling dominan?", "options": {"A": "Feces", "B": "Kulit", "C": "Keringat", "D": "Urin", "E": "Respirasi"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Berdasarkan tabel water output (Resting vs Prolonged exercise): pada kondisi resting, urin merupakan sumber water output terbesar (58 ml/h, 60% dari total), lebih tinggi dibanding respirasi, kulit, keringat, maupun feses."}, "skip": false, "skip_reason": ""}, {"id": 120, "kategori": "Anatomi", "vignette": "Ossa carpalia dibagi menjadi 2 baris tulang, os apakah yang berada pada baris distal dari tulang-tulang berikut ini?", "options": {"A": "Os. Pisiforme", "B": "Os. Trapezoideum", "C": "Os. Scaphoideum", "D": "Os. Piramideum", "E": "Os. Lunatum"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Mnemonic: PROXIMAL: Scaphoideum, Lunatum, Triquetrum, Pisiforme (SLTP); DISTAL: Trapezium, Trapezoideum, Capitatum, Hamatum (TTCH). Os. Trapezoideum termasuk baris distal."}, "skip": false, "skip_reason": ""}, {"id": 130, "kategori": "Biokimia", "vignette": "Manakah enzim di bawah ini bekerja pada reaksi yang reversible dan memudahkan terjadinya proses oksidasi suatu substrat, dalam keadaan tanpa oksigen (anaerob)?", "options": {"A": "Hidroperoksidase", "B": "α-ketoglutarat dehydrogenase", "C": "sitokrom a3", "D": "xanthin oksidase", "E": "superoksida dismutase"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ada di PPT Biokimia dr Retno: intinya pada keadaan anaerob, enzim yang berperan adalah golongan dehydrogenase."}, "skip": false, "skip_reason": ""}, {"id": 139, "kategori": "Fisiologi", "vignette": "Anto secara tiba-tiba menarik tangannya ketika memegang kompor yang panas, mekanisme apakah yang mendasari tindakan Anto tersebut?", "options": {"A": "Arcus Reflex", "B": "Spinothalamic junction", "C": "Emerging though", "D": "Reflex pathologist", "E": "Cerebro impuls"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Arcus reflex (arcus = lengkung): penarikan tangan secara tiba-tiba akibat rangsang panas merupakan contoh reflex arc."}, "skip": false, "skip_reason": ""}, {"id": 152, "kategori": "Histologi", "vignette": "Pada organ manakah distribusi jaringan pengikat elastis?", "options": {"A": "Tunika media arteri besar", "B": "Ligament", "C": "Tendon", "D": "Stroma jaringan limfoid", "E": "Aponeurosis"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Distribusi: tunika media arteri besar, lig. Flavum, lig. Nukhae, tulang rawan elastis."}, "skip": false, "skip_reason": ""}, {"id": 153, "kategori": "Biokimia", "vignette": "Manakah tahapan reaksi dalam siklus krebs yang merupakan satu-satunya penghasil ATP secara langsung (tingkat substrat) tanpa melewati rantai respirasi?", "options": {"A": "Isositrat menjadi oksalo suksinat", "B": "Suksinil-KoA menjadi suksinat", "C": "Oksaloasetat menjadi sitrat", "D": "Fumarate menjadi malat", "E": "Suksinat menjadi fumarat"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Reaksi Suksinil-KoA menjadi Suksinat adalah satu-satunya reaksi pada siklus Krebs yang menghasilkan ATP secara langsung (fosforilasi tingkat substrat)."}, "skip": false, "skip_reason": ""}, {"id": 165, "kategori": "Anatomi", "vignette": "Disaat kita melihat struktur tubuh manusia terdapat bidang-bidang imajiner yang membagi tubuh manusia. Bidang anatomi berupa bidang vertikal yang melalui tubuh, letaknya tegak lurus terhadap bidang median atau sagital, membagi tubuh menjadi bagian depan (frontal) dan belakang (dorsal), apakah penamaan untuk bidang tersebut?", "options": {"A": "Bidang sagittal", "B": "Bidang coronal", "C": "Bidang median", "D": "Bidang horizontal", "E": "Bidang sub median"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Bidang median: bidang yang terbagi tepat tubuh menjadi bagian kanan dan kiri. Bidang sagital: bidang yang membagi tubuh menjadi dua bagian dari titik tertentu. Bidang horizontal: bidang yang terletak melintang melalui tubuh (bidang X-Y). Bidang koronal: bidang vertikal yang melalui tubuh, letaknya tegak lurus terhadap bidang median atau sagital."}, "skip": false, "skip_reason": ""}, {"id": 166, "kategori": "Anatomi", "vignette": "Pasien laki-laki usia 20 tahun datang ke dokter dengan keluhan sulit menggerakkan tangan kirinya setelah cedera olahraga. Dari hasil pemeriksaan didapatkan pasien tidak bisa melakukan gerak abduksi sendi grenohumeralis karena cedera otot yang didalamnya sehingga harus dibantu oleh tangan sebelahnya. Otot manakah yang terkena cedera dari kasus tersebut?", "options": {"A": "M. deltoid", "B": "M. serratus anterior", "C": "M. infraspinatus", "D": "M. supraspinatus", "E": "M. trapezius"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Sifatnya M. Deltoid adalah abduksi."}, "skip": false, "skip_reason": ""}, {"id": 167, "kategori": "Biokimia", "vignette": "Enzim apakah yang menguraikan hidrogen peroksida menjadi air dan oksigen? (teks soal asli tidak lengkap pada sumber, direkonstruksi dari pembahasan)", "options": {"A": "Xantin oksidase", "B": "Katalase", "C": "Oksigenase", "D": "Hidroperoksida", "E": "Dehydrogenase"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Enzim katalase menguraikan hidrogen peroksida menjadi air dan oksigen."}, "skip": false, "skip_reason": ""}, {"id": 172, "kategori": "Histologi", "vignette": "Sel jaringan pengikat mempunyai ciri-ciri histologis, sitoplasmanya berwarna biru kemerahan, intinya eksentris, kromatin inti tersusun seperti roda pedati. Sel apakah itu?", "options": {"A": "Basophil", "B": "Sel mast", "C": "Limfosit", "D": "Netrofil", "E": "Plasmasit"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Sumber: kuliah jaringan pengikat, dr. Erika."}, "skip": false, "skip_reason": ""}, {"id": 176, "kategori": "Histologi", "vignette": "Apakah sel glia yang berperan menghasilkan myelin di sistem saraf pusat?", "options": {"A": "Sel schwan", "B": "Sel ependim", "C": "Sel satelit", "D": "Astrosit", "E": "Oligodendrosit"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "SST (Sistem Saraf Tepi): sel satelit dan sel Schwann (menghasilkan mielin). SSP (Sistem Saraf Pusat): sel ependimal, oligodendrosit (menyelubungi axon/mielin di saraf pusat), astrosit (mengontrol kadar ion, nutrisi, gas), dan mikroglia."}, "skip": false, "skip_reason": ""}, {"id": 178, "kategori": "Biokimia", "vignette": "Tugas utama eritrosit adalah mengangkut oksigen yang terikat pada molekul hemoglobin untuk dilepaskan di sel/jaringan yang membutuhkan. Eritrosit mengandalkan glikolisis untuk mendapatkan energy bagi proses biokimiawi didalam selnya. Ada salah satu step reaksi pada glikolisis dalam eritrosit yang menghasilkan midproduk yang berperan memudahkan pelepasan oksigen ke sel/jaringan. Midproduk apakah yang dimaksud?", "options": {"A": "Gliseraldehid 3-fosfat", "B": "3-fosfogliserat", "C": "Fosfoenol piruvat", "D": "2,3-bifosfogliserat", "E": "Dihidroksi aseton fosfat"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Eritrosit adalah cakram bikonkaf yang fleksibel dengan kemampuan menghasilkan energi sebagai ATP melalui jalur glikolisis anaerob (Embden Meyerhof). 2,3-DPG yang dihasilkan pada pintas Luebering-Rapoport membentuk kompleks 1:1 dengan hemoglobin dan penting dalam regulasi afinitas hemoglobin terhadap oksigen (Hoffbrand et al, 2005)."}, "skip": false, "skip_reason": ""}, {"id": 182, "kategori": "Biologi Sel", "vignette": "Apakah fungsi protein yang disintesis oleh ribosom bebas?", "options": {"A": "Diinsersikan ke membrane organel", "B": "Sebagai enzim untuk mengkatalisis reaksi kimia di sitosol", "C": "Digunakan oleh organel spesifik", "D": "Dikeluarkan dari sel agar bisa digunakan sel yang lain", "E": "Diinsersikan ke membrane plasma"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Protein yang diproduksi pada ribosom bebas adalah enzim yang berfungsi di sitosol."}, "skip": false, "skip_reason": ""}, {"id": 196, "kategori": "Fisiologi", "vignette": "Mahasiswa semester satu pembukaan PPA dilapangan sampai tengah hari. Terik matahari begitu menyengat. Kondisi apa yang paling merangsang untuk mempertahankan homeostasis?", "options": {"A": "Suhu", "B": "Kadar sisa Metabolisme", "C": "Tekanan darah", "D": "Nutrisi", "E": "Cairan tubuh / Hemoconsentrated"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Pada suhu panas terjadi hemokonsentrasi (hiperkonsentrasi cairan tubuh)."}, "skip": false, "skip_reason": ""}, {"id": 205, "kategori": "Biokimia", "vignette": "Apakah mineral yang berperan membantu mempertahankan keseimbangan asam basa tubuh, membantu menyerap glukosa, dan diperlukan untuk aktivitas saraf yang normal?", "options": {"A": "Fosfor", "B": "Kalium", "C": "Magnesium", "D": "Kalsium", "E": "Natrium"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Fungsinya untuk keseimbangan asam dan basa."}, "skip": false, "skip_reason": ""}, {"id": 208, "kategori": "Biokimia", "vignette": "Seorang laki-laki berusia 40 tahun bekerja sebagai manajer sebuah perusahaan dengan kebiasaan merokok sudah 15 tahun. Saat reuni SMA bulan lalu, dokter menanyakan secara pribadi apakah ia menderita sakit tertentu, karena performanya terlihat lebih tua dibanding teman yang lain. Temannya menyarankan agar ia berhenti merokok dan mengkonsumsi suplemen. Manakah yang termasuk antioksidan non enzimatik?", "options": {"A": "Sitokrom oksidase", "B": "Peroksidase", "C": "Katalase", "D": "SOD", "E": "Glutathione"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Termasuk antioksidan non-enzimatik adalah alfa tokoferol (Vit. E), glutation, dan ubiquinon."}, "skip": false, "skip_reason": ""}, {"id": 228, "kategori": "Anatomi", "vignette": "Pada Erb-Duchene Palsy dimana terdapat cedera pleksus brachialis yang mempersyarafi ekstremitas superior. Pada kelainan tersebut terjadi palsy pada musculus apakah?", "options": {"A": "m. Teres mayor", "B": "m. Supraspinatus", "C": "m. Teres minor", "D": "m. Triceps brachii", "E": "m. Trapezius"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Otot yang jadi korban: subclavius, supraspinatus, infraspinatus, deltoid, brachialis, biceps brachii."}, "skip": false, "skip_reason": ""}, {"id": 229, "kategori": "Histologi", "vignette": "Berdasarkan jumlah cabangnya, termasuk jenis apakah neuron motorik?", "options": {"A": "Neuron unpolar", "B": "Neuron bipolar", "C": "Neuron multipolar", "D": "Neuron unipolar", "E": "Neuron pseudounipolar"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Sumber: BPP Histologi. Neuron multipolar: sel motorik, sel piramidal, dan sel purkinje. Neuron bipolar: pada retina, mukosa olfaktorius, ganglion cochlearis, dan vestibularis. Neuron pseudounipolar: neuron sensorik. Neuron unipolar: fotoreseptor pada mata (conus dan basillus)."}, "skip": false, "skip_reason": ""}, {"id": 233, "kategori": "Histologi", "vignette": "Manakah pernyataan ini yang tepat?", "options": {"A": "Vitamin D berpengaruh pada metabolisme kalsium di tulang dan usus halus saja", "B": "Pada osifikasi endokondral, kondrosit berubah menjadi kondroblast", "C": "Osteoblast berfungsi dalam demineralisasi tulang", "D": "Pertumbuhan tulang hanya memanjang saja", "E": "Pertukaran lambat kalsium, paling penting dalam mempertahankan konsentrasi kalsium plasma"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Catatan koreksi pada opsi lain: (a) Vitamin D juga berpengaruh pada gigi; (b) seharusnya kondroblast berubah menjadi kondrosit; (c) seharusnya osteoklas yang berfungsi demineralisasi tulang; (d) pertumbuhan tulang memanjang dan melebar."}, "skip": false, "skip_reason": ""}, {"id": 253, "kategori": "Biologi Sel", "vignette": "Sel tersusun dari organela yang memiliki fungsi yang berbeda-beda sesuai jenis sel yang disusun. Apakah organela yang berfungsi mensintesis protein?", "options": {"A": "Ribosom", "B": "Aparatus golgi", "C": "Lisosom", "D": "Vesikel", "E": "Mitokondria"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 398, "kategori": "Anatomi/Neuroanatomi", "vignette": "Nervus yang melewati foramen ovale?", "options": {"A": "N. trigeminus", "B": "N. facialis", "C": "N. oculomotorius", "D": "N. hypoglosus", "E": "N. vagus"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Kontributor menuliskan jawabannya A, dengan catatan permintaan maaf jika salah."}, "skip": false, "skip_reason": ""}, {"id": 476, "kategori": "Fisiologi", "vignette": "Kelelahan dan ketiduran. Saat tertidur mengalami REM (rapid eye movement), yang ditandai dengan", "options": {"A": "Inspirasi reguler", "B": "denyut jantung reguler", "C": "sedang bermimpi (REM terindikasi tidur nyenyak/pulas)", "D": "otot tidak banyak gerakan", "E": "Mata"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Fase REM ditandai dengan mimpi aktif, gerakan mata cepat, dan respirasi/denyut jantung yang tidak teratur."}, "skip": false, "skip_reason": ""}, {"id": 478, "kategori": "Anatomi", "vignette": "Dimanakah sistem saraf yang merupakan bagian pertama badan sel yang merasakan sensasi nyeri pada daerah lengan?", "options": {"A": "Cornu anterior medulla spinalis", "B": "Cornu posterior medulla spinalis", "C": "Ganglion terminale", "D": "Ganglion radix posterior", "E": "Ganglion"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ganglion radix posterior berisi badan sel neuron sensorik orde pertama (pseudounipolar) yang menerima sensasi nyeri."}, "skip": false, "skip_reason": ""}, {"id": 489, "kategori": "Histologi", "vignette": "Ganglion yang bentuk badan selnya kecil-kecil, neuronnya eksentrik, aksonnya tidak bermyelin, dan neuronnya multipolar adalah…", "options": {"A": "Ganglion unipolar = ganglion spinalis", "B": "Ganglion bipolar", "C": "Ganglion multipolar", "D": "Ganglion sympaticum = multipolar (motorik, banyak di ssp)", "E": "Ganglion spinalis = pseudounipolar, unipolar (sensorik, banyak di syaraf kranial dan syaraf spinalis)"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 490, "kategori": "Fisiologi", "vignette": "Ada 7 unsur yang dipertahankan homeostasis. Manakah unsur yang mempunyai rentang normal yang paling sempit?", "options": {"A": "Suhu", "B": "Power of Hydrogen (7,3-7,4)", "C": "Konsentrasi O2", "D": "Konsentrasi garam", "E": "Volume"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "pH darah memiliki rentang normal paling sempit (7,3-7,4)."}, "skip": false, "skip_reason": ""}, {"id": 494, "kategori": "Anatomi", "vignette": "Dimanakah dari sistem saraf di bawah ini yang merupakan badan sel pertama yang membawa rasa nyeri di lengan?", "options": {"A": "Cornu anterior medulla spinalis", "B": "Cornu posterior medulla spinalis", "C": "Ganglion terminale", "D": "Ganglion radix posterior: badan sel sensorik di bagian dorsal sebagai orde 1", "E": "Ganglion coeliacum"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr Budi fisiologi reseptor (premed 2)."}, "skip": false, "skip_reason": ""}, {"id": 495, "kategori": "Biokimia", "vignette": "Pada komplek 3, manakah urutan sitokrom berdasar potensial redoks yang meningkat?", "options": {"A": "b-c1-c-a3", "B": "b-c-c1-a3", "C": "a3-c1-c-b", "D": "b-a3-c1-c", "E": "a3-b-c1-c"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr retno oksidasi biologi. Urutan sitokrom pada rantai respirasi (potensial redoks meningkat): b, c1, c, a, a3."}, "skip": false, "skip_reason": ""}, {"id": 496, "kategori": "Histologi", "vignette": "Jaringan epitel memiliki berbagai fungsi di antaranya adalah untuk menutupi dan melindungi jaringan di bawahnya. Manakah jaringan berikut yang sesuai?", "options": {"A": "Epitel sensori", "B": "Mioepitel", "C": "Permukaan usus", "D": "Epidermis", "E": "Parenkim kelenjar"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr Erika jaringan epithel."}, "skip": false, "skip_reason": ""}, {"id": 498, "kategori": "Fisiologi", "vignette": "Seorang ibu memberikan anaknya yang berumur 5 tahun sirup minyak ikan untuk meningkatkan kesehatan. Transpor membran yang terjadi antara minyak ikan dengan villi", "options": {"A": "transfer aktif primer", "B": "transfer aktif sekunder", "C": "difusi terfasilitasi", "D": "difusi sederhana = contohnya difusi O2 dan CO2 di paru senyawa non polar, asam lemak, dan vitamin ADEK", "E": "Osmosis"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "PPT Fisiologi Sel dr. Sai."}, "skip": false, "skip_reason": ""}, {"id": 499, "kategori": "Fisiologi", "vignette": "Ada pekerja bangunan sedang membangun. Pekerja A kuat mengangkat batu, sedangkan pekerja B hanya batu lebih sedikit. Mengapa hal tersebut bisa terjadi?", "options": {"A": "Frekuensi rangsangan pekerja A lebih kecil", "B": "Motor unit pekerja A lebih besar dan terjadi recruitment", "C": "Terjadi kontraksi tunggal pada pekerja A", "D": "Pekerja A melakukan pemanasan terlebih dahulu", "E": "Motor unit pekerja B lebih besar, namun ATP minimal"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr swb penyediaan atp dan kekuatan kontraksi otot."}, "skip": false, "skip_reason": ""}, {"id": 500, "kategori": "Histologi", "vignette": "Makrofag merupakan sel yang memiliki karakteristik fagositosis dan berada pada jaringan ikat termasuk kulit, sel yang dimaksud adalah...", "options": {"A": "Sel kupffer = di Liver, bukan kulit", "B": "Osteoblast = salah, harusnya osteoclast, dan adanya di tulang", "C": "Sel langerhans = epidermis di kulit", "D": "Sel neutrofil = di darah", "E": "Sel monosit = di darah"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr erika connective tissue."}, "skip": false, "skip_reason": ""}, {"id": 501, "kategori": "Biokimia", "vignette": "Manakah mineral yang sangat penting bagi pembelahan sel yang berperan dalam sintesis asam nukleat?", "options": {"A": "Magnesium", "B": "Cuprum = absorbsi Fe", "C": "Fosfat", "D": "Kalium = mempertahankan keseimbangan (asam basa cairan intrasel, osmotik, air)", "E": "Ferrum = peran pada proses pernafasan dan hemoglobin"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr retno biokimia air dan mineral. Magnesium berperan sebagai kofaktor enzim dalam sintesis DNA dan RNA."}, "skip": false, "skip_reason": ""}, {"id": 502, "kategori": "Histologi", "vignette": "Disebut apakah astrocyte yang terutama ditemukan pada gray matter otak?", "options": {"A": "fibrous astrocytes = salah karena harusnya white matter", "B": "kolagenous astrocytes", "C": "areolaris astrocytes", "D": "endoplasmic astrocytes", "E": "protoplasmic astrocytes"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr nur mahmudah histologi saraf. Protoplasmic astrocytes banyak ditemukan di gray matter, sedangkan fibrous astrocytes di white matter."}, "skip": false, "skip_reason": ""}, {"id": 503, "kategori": "Anatomi", "vignette": "Gerakan telapak tangan menuju ke bawah", "options": {"A": "Pronasi", "B": "Supinasi = telapak tangan menuju atas (sup)", "C": "Ekstensi = gerakan meluruskan dan memperbesar sudut", "D": "Flexi = gerakan menekuk dan memperkecil sudut", "E": "Abduksi = gerakan menjauhi sumbu tubuh"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 504, "kategori": "Biokimia", "vignette": "Mineral apakah di bawah ini yang merupakan elemen esensial pada sintesis asam nukleat?", "options": {"A": "Magnesium", "B": "Cuprum = absorbsi Fe", "C": "Fosfat", "D": "Kalium = mempertahankan keseimbangan (asam basa, osmotik, air)", "E": "Ferrum = peran pada proses pernafasan dan hemoglobin"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 505, "kategori": "Histologi", "vignette": "Sel otot dapat mengalami regenerasi jika terjadi kerusakan bergantung kepada jenis sel ototnya. Bagaimanakah daya regenerasi dari sel otot polos?", "options": {"A": "memiliki daya regenerasi yang paling rendah", "B": "diperankan ol", "C": "sel satelit yang jumlahnya sangat banyak", "D": "membentuk jaringan ikat ketika terjadi kerusakan jaringan otot", "E": "diperankan oleh sel otot polos yang masih viabel"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr erika histologi jaringan otot. Sel otot polos memiliki respon regenerasi paling aktif, diperankan oleh sel otot polos yang masih viabel melalui mitosis."}, "skip": false, "skip_reason": ""}, {"id": 506, "kategori": "Fisiologi", "vignette": "Bagaimana mekanisme kerja otot sinaps?", "options": {"A": "membuka kanal kalsium - fusi vesikel - eksositosis", "B": "Membuka kanal klorida - fusi vesikel - eksositosis", "C": "Fusi vesikel - membuka kanal kalsium - eksositosis", "D": "eksositosis - membuka kanal klorida - fusi vesikel", "E": "membuka kanal kalsium - eksositosis - fusi vesikel"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Jawaban A (Ppt dr swb karakteristik dan kontraksi otot)."}, "skip": false, "skip_reason": ""}, {"id": 507, "kategori": "Anatomi", "vignette": "Pada systema nervosum centrale bangunan apakah yang memisahkan kedua hemispherium cerebelli?", "options": {"A": "Fissura longitudinalis cerebri = salah, karena cerebri", "B": "Sulcus centralis = memisahkan lobus parietal dan frontal", "C": "Vermis", "D": "Insula", "E": "Pons"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 508, "kategori": "Anatomi", "vignette": "Pada systema nervosum centrale, jaras saraf apakah yang membawa impuls motorik dari otak ke medulla spinalis?", "options": {"A": "Traktus corticospinalis = motorik", "B": "Traktus corticobulbaris = cortex cerebri menuju nervi craniales, sensorik", "C": "Substantia Alba", "D": "Substantia Grisea", "E": "Tractus spinothalmicus = keseimbangan"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Median jilid 1 (hijau) hal 75-76."}, "skip": false, "skip_reason": ""}, {"id": 509, "kategori": "Fisiologi", "vignette": "Dari gambar berikut, mana yang menyebabkan membran intraseluler depolarisasi?", "options": {"A": "inhibisi n+, k+, dan atpase", "B": "masuknya k+", "C": "keluarnya k+ = intraseluler", "D": "masuknya Na+ = ekstraseluler", "E": "keluarnya Na+"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Soal disertai gambar (grafik/skema potensial membran) yang tidak dapat dipastikan padanannya dengan gambar hasil ekstraksi PDF. Depolarisasi membran terjadi akibat masuknya ion Na+ ke dalam sel."}, "skip": false, "skip_reason": ""}, {"id": 510, "kategori": "Fisiologi", "vignette": "Dalam proses mekanisme mempertahankan homeostasis, perubahan lingkungan interna yang akan merangsang apa?", "options": {"A": "pusat integrasi", "B": "kerja efektor", "C": "reseptor", "D": "syaraf eferen", "E": "syaraf aferen"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "(ppt homeostasis dr.swb)."}, "skip": false, "skip_reason": ""}, {"id": 512, "kategori": "Biokimia", "vignette": "Sitokrom yang berada di retikulum endoplasma yang berfungsi untuk metabolisme obat", "options": {"A": "sitokrom a", "B": "sitokrom b", "C": "sitokrom c1", "D": "sitokrom a3", "E": "sitokrom P450"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr retno bioenergetika."}, "skip": false, "skip_reason": ""}, {"id": 513, "kategori": "Biokimia", "vignette": "Seorang laki-laki, Fulan, berusia 50 tahun akan pulang ke kampung halamannya yang ada di desa di luar jawa, setelah puluhan tahun merantau di jakarta sebagai pedagang asongan di jalanan. Fulan memiliki saudara kembar yang masih hidup yang tinggal di desa sebagai guru. Saat keduanya bertemu, kerabat fulan heran karena wajah fulan tampak jauh lebih tua daripada saudara kembarnya. Paparan radiasi bebas mempengaruhi tampilan fulan. Non enzimatik apakah yang memiliki fungsi sebagai pemangsa radikal bebas?", "options": {"A": "Katalase = enzim", "B": "Oksigenase", "C": "Peroksidase = enzim", "D": "Glutation = non enzim", "E": "SOD = enzim"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr retno oksidasi biologi."}, "skip": false, "skip_reason": ""}, {"id": 515, "kategori": "Histologi", "vignette": "Kromatin (DNA) yang mengalami kondensasi yang ditemukan di siklus mitosis", "options": {"A": "Kromosom", "B": "kornea", "C": "kromium", "D": "keratin", "E": "krause"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 516, "kategori": "Histologi", "vignette": "Apakah tahap kedua dari ossifikasi intramembranosa (desmalis)?", "options": {"A": "Pembentukan osifikasi center = pertama", "B": "Pembentukan bone collar/periosteum = ketiga", "C": "Pembentukan sumsum merah = keempat", "D": "Pembentukan vaskuler darah", "E": "pembentukan kalsifikasi dari osteoid"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr budi fisiologi tulang dan gigi. Tahapan: (1) ossification center terbentuk, (2) osteoid disekresi dan mengalami kalsifikasi, (3) spongy bone dan periosteum terbentuk, (4) bone collar, (5) sumsum merah."}, "skip": false, "skip_reason": ""}, {"id": 517, "kategori": "Biokimia", "vignette": "Mineral manakah dibawah ini yang berperan penting pada transportasi Fe, terikat pada protein plasma, aktifitasnya melepaskan Fe dari simpanan dan mempercepat terikatnya Fe pada transferin?", "options": {"A": "Mg", "B": "Cu", "C": "Zn", "D": "Se", "E": "Cr"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "(ppt dr retno biokimia air & mineral)."}, "skip": false, "skip_reason": ""}, {"id": 519, "kategori": "Fisiologi", "vignette": "Proses yang terjadi ketika vesikel neurotransmitter otonom mengalami fusi", "options": {"A": "P", "B": "Eksositosis = dadi ach kui wes nemplok neng reseptor sinap e", "C": "Berikatan dg reseptor membran", "D": "Depolarisasi", "E": "Calsium influx ✓"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Jawaban ditandai centang pada opsi E (Calsium influx)."}, "skip": false, "skip_reason": ""}, {"id": 522, "kategori": "Biokimia", "vignette": "Manakah tahapan siklus krebs yang merupakan satu satunya penghasil atp secara langsung tanpa melalui rantai (respirasi)?", "options": {"A": "Suksinat menjadi fumarat = satu satunya penghasil fadh", "B": "Oksaloasetat menjadi sitrat", "C": "Suksinil KoA menjadi suksinat", "D": "Isositrat menjadi oksalosuksinat", "E": "Fumarate menjadi malat"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 523, "kategori": "Fisiologi", "vignette": "Seorang ibu mempunyai anak perempuan. Ibu memberikan anaknya yang berumur 5 tahun sirup/suplement minyak ikan untuk meningkatkan kesehatan. Transpor membran yang terjadi antara minyak ikan dengan villi adalah…..", "options": {"A": "transfer aktif primer", "B": "transfer aktif sekunder", "C": "difusi terfasilitasi", "D": "difusi sederhana (minyak -> non polar)", "E": "osmosis"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 524, "kategori": "Histologi", "vignette": "Jenis Kartilago apakah yang berdominasi oleh serat kolagen, sementara jumlah selnya sedikit", "options": {"A": "Fibrocartilago", "B": "Hyalin", "C": "Areolar = textus connectivus", "D": "Elastis", "E": "Retikuler = textus connectivus"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr nur mahmudah histologi kartilago."}, "skip": false, "skip_reason": ""}, {"id": 525, "kategori": "Fisiologi", "vignette": "Ada 2 tukang bangunan yang sedang membangun masjid di desa. Tukang A dapat mengangkat 10 batu bata. Sedangkan Tukang B hanya dapat mengangkat 6 batu bata. Mengapa bisa begitu?", "options": {"A": "Tukang A melakukan pemanasan", "B": "Terjadi kontraksi tunggal pada pekerja A", "C": "Motor unit pekerja B lebih besar, namun ATP minimal", "D": "Frekuensi rangsangan pekerja A lebih kecil", "E": "Motor unit tukang A lebih besar dan terjadi recruitmen"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 526, "kategori": "Anatomi", "vignette": "Di bawah ini, manakah yang termasuk otot Hypotenar", "options": {"A": "M.Adduktor pollicis", "B": "M. Abduktor pollicis brevis", "C": "M.Abduktor digiti minimi", "D": "M. Flexor pollicis brevis", "E": "M. Opponens pollicis"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 527, "kategori": "Biokimia", "vignette": "Ada tiga substrat dalam siklus Krebs yang menghasilkan NAD, sesudah masuk rantai pernafasan 1 molekul menghasilkan berapa?", "options": {"A": "8 atp", "B": "3 atp", "C": "12 atp", "D": "2 atp", "E": "38 atp"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "1 molekul NADH melalui rantai respirasi menghasilkan sekitar 3 ATP (P/O ratio klasik)."}, "skip": false, "skip_reason": ""}, {"id": 530, "kategori": "Biokimia", "vignette": "Seorang laki-laki, fulan, berusia 50 tahun pulang ke kampung halamannya setelah bertahun-tahun merantau di jakarta sebagai pedagang asongan di jalanan. Ia mempunyai saudara kembar yang tinggal di desa sebagai guru. Ketika ia pulang, kerabatnya heran karena fulan nampak jauh lebih tua dari saudara kembarnya. Paparan radikal bebas di jalanan memengaruhi penampilan fulan. Manakah antioksidan non enzimatik yang berperan sebagai pemangsa radikal bebas?", "options": {"A": "SOD = enzimatik", "B": "Katalase = enzimatik", "C": "Oksigenase", "D": "Glutation", "E": "Peroksidase"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr retno oksidasi biologi."}, "skip": false, "skip_reason": ""}, {"id": 531, "kategori": "Anatomi", "vignette": "Pada encephalon terdapat serabut jaras yang menghubungkan satu bagian dengan bagian lainnya manakah yang termasuk serabut asosiatif di encephalon?", "options": {"A": "Facciculus gracilis untuk keseimbangan", "B": "Corpus callosum = menghubungkan hemisphere kanan dan kiri (serabut komisura)", "C": "Tractus spinothalamicus", "D": "Tractus corticospinalis", "E": "Fasciculus arcuatus"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr swb sistem saraf pusat."}, "skip": false, "skip_reason": ""}, {"id": 532, "kategori": "Ilmu Perilaku/Etika Kedokteran", "vignette": "Dibawah ini yang termasuk Keintiman keluarga Elemen sosial adalah", "options": {"A": "Mendukung kegiatan sosial", "B": "Berusaha membuat senang = emosional", "C": "Menggunakan waktu luang untuk rekreasi bersama = rekreasi", "D": "Menyatakan perasaan secara terbuka = emosional", "E": "Mengutarakan semua masalah = intelektual"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr yusuf a.r homeostasis keluarga."}, "skip": false, "skip_reason": ""}, {"id": 533, "kategori": "Fisiologi", "vignette": "Apa pernyataan dibawah ini yang benar tentang homonculus motorik", "options": {"A": "Tidak ada perubahan", "B": "Representasi pada wajah lebih besar daripada kaki", "C": "Tergambar di parietal", "D": "Representasi pada tangan paling besar", "E": "Pada kepala dan kaki sama besar"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 536, "kategori": "Histologi", "vignette": "Pada tahapan ossifikasi endokondral (penulangan melalui kartilago), tahapan manakah yang terjadi beberapa saat sebelum janin lahir?", "options": {"A": "Pembentukan kalsifikasi dari kartilago", "B": "Pembentukan bone collar", "C": "Pembuluh darah menembus periosteum", "D": "Pembentukan ossifikasi center sekunder (epiphysis)", "E": "Pembentukan ossifikasi center primer (9 minggu setelah fertilisasi: diaphysis)"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 537, "kategori": "Histologi", "vignette": "Disebut apalah sitoskeleton yg berperan untuk pergerakan organela sel dan vesikel serta silia dan flagella?", "options": {"A": "mikrofilamen", "B": "aktin", "C": "filamen intermediet", "D": "Mikrofilamen", "E": "Mikrotubuli"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Kalo dari fungsi: mikrotubuli(?)"}, "skip": false, "skip_reason": ""}, {"id": 538, "kategori": "Anatomi", "vignette": "Di bawah ini, manakah yang termasuk otot Hypotenar", "options": {"A": "M.Adduktor pollicis", "B": "M. Abduktor pollicis brevis", "C": "M.Abduktor digiti minimi", "D": "M. Flexor pollicis brevis", "E": "M. Opponens pollicis"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Median vol 1 hal 41."}, "skip": false, "skip_reason": ""}, {"id": 539, "kategori": "Biokimia", "vignette": "Sumber utama High Energy Phosphates", "options": {"A": "Glikolisis", "B": "glikogenesis", "C": "Glukoneogenesis", "D": "Glucogenolisis", "E": "Homeostasis"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr Retno: bioenergetika."}, "skip": false, "skip_reason": ""}, {"id": 540, "kategori": "Histologi", "vignette": "Disebut apa sel tulang rawan yang berbentuk kuboid dengan inti bulat yang aktif memproduksi matrix organik tulang", "options": {"A": "kondroblast", "B": "Sel osteogenic", "C": "Osteoklas", "D": "Osteoblas", "E": "Osteosit"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 541, "kategori": "Anatomi", "vignette": "Pernyataan yang benar mengenai os radialis = tulang pengumpil", "options": {"A": "disebut juga tulang hasta (os ulna)", "B": "berada di lateral os ulna", "C": "ada procesus olecrani", "D": "lupa", "E": "lupa"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 542, "kategori": "Fisiologi", "vignette": "Ada 2 orang pekerja bangunan sedang membangun dinding masjid di desanya. Pekerja A kuat mengangkat 10 batu bata, sedang pekerja B hanya 6 batu bata. Mengapa hal tersebut bisa terjadi?", "options": {"A": "Frekuensi rangsangan pekerja A lebih kecil", "B": "Motor unit pekerja A lebih besar dan terjadi recruitment", "C": "Terjadi kontraksi tunggal pada pekerja A", "D": "Pekerja A melakukan pemanasan terlebih dahulu", "E": "Motor unit pekerja B lebih besar, namun ATP minimal"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 543, "kategori": "Histologi", "vignette": "Apakah bagian neuron yang berperan memperluas area penerimaan impuls dari neuron atau sel lain?", "options": {"A": "Badan sel", "B": "Akson (menyalurkan dan meneruskan menuju neuron lain)", "C": "Dendrit", "D": "Perikaryon (badan sel)", "E": "Nodus ranvier (mempercepat transport impuls)"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "PPT dr Nur Mahmudah histology saraf."}, "skip": false, "skip_reason": ""}, {"id": 544, "kategori": "Histologi", "vignette": "Zona dimana sel-sel tulang mengalami pembengkakan adalah..", "options": {"A": "Hipertropi ✔", "B": "Poliferasi (pembelahan sel)", "C": "Resting", "D": "Kalsifikasi", "E": "osifikasi"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ditandai centang pada opsi A."}, "skip": false, "skip_reason": ""}, {"id": 545, "kategori": "Fisiologi", "vignette": "Relaksasi otot terjadi karena lepasnya ion kalsium dari troponin Ca, lepasnya ion kalsium akan dimasukkan kembali ke dalam reticulum sarkoplasma, transport membrane yang terjadi adalah", "options": {"A": "transport aktif primer", "B": "Transport Pasif", "C": "Difusi sederhana", "D": "Difusi terfasilitasi", "E": "Osmosis"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Kalsium dipompa kembali ke retikulum sarkoplasma menggunakan pompa Ca2+-ATPase (transport aktif primer)."}, "skip": false, "skip_reason": ""}, {"id": 549, "kategori": "Biokimia", "vignette": "Manakah mineral dibawah ini yang berperan penting bagi sintesis asam nukleat?", "options": {"A": "Nukleat", "B": "Kalium", "C": "Fosfat", "D": "Magnesium", "E": "Zinc"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 550, "kategori": "Biokimia", "vignette": "Mineral manakah dibawah ini yang berperan penting pada transportasi Fe, terikat pada protein plasma, aktifitasnya melepaskan Fe dari simpanan dan transferin?", "options": {"A": "Mg", "B": "Cu", "C": "Se", "D": "Zn", "E": "Cr"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 551, "kategori": "Anatomi", "vignette": "Apabila terjadi lesi pada nervus olfaktorius?", "options": {"A": "Hemianopsia", "B": "Anopsia (N II)", "C": "Anosmia", "D": "Ptosis", "E": "Strabismus Konvergen"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 552, "kategori": "Biokimia", "vignette": "Perempuan 17 tahun tidak suka mengonsumsi sayur sayuran dan juga kacang kacangan. Dia mengalami defisiensi tiamin, kompleks enzim apakah yang berkaitan dengan produksi energi yang terhambat oleh kondisi tersebut.", "options": {"A": "piruvat dehidrogenase: enzim pada siklus krebs", "B": "laktat dehidrogenase", "C": "succinate dehydrogenase: enzim pada siklus krebs", "D": "heksokinase", "E": "phosphokinase"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr Retno: Siklus Krebs dan metabolisme karbohidrat. Tiamin (vitamin B1) merupakan kofaktor kompleks piruvat dehidrogenase."}, "skip": false, "skip_reason": ""}, {"id": 554, "kategori": "Histologi", "vignette": "Apakah neuroglia sistem saraf pusat yang berfungsi untuk menyokong neuron (membentuk selubung myelin) di ganglion", "options": {"A": "Mikroglia: fagosit pada SSP", "B": "Sel schwaan: membentuk mielin diluar SSP", "C": "Sel satelit: mengatur pertukaran zat antara badan sel dan cairan interstisial", "D": "Sel ependim: membantu pergerakan cairan serebrospinal dan mikrovili panjang yang berperan untuk absorpsi cairan serebrospinal", "E": "Oligodendrosit: sistem saraf pusat yang berfungsi untuk menyokong neuron (membentuk selubung myelin) paling banyak, ada di substantia alba/grisea"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Karena lokasi yang dimaksud adalah ganglion (struktur PNS), sel satelit adalah neuroglia yang menyokong badan sel neuron di ganglion."}, "skip": false, "skip_reason": ""}, {"id": 555, "kategori": "Anatomi", "vignette": "Penambahan suffix -itis pada kata-kata berikut ini manakah yang paling tepat menyatakan terminologi peradangan pada glans penis?", "options": {"A": "Balanitis", "B": "Ureteritis: infeksi uretra terjadi ketika bakteri masuk ke dalam saluran kemih dari kulit di sekitar lubang uretra atau lubang kencing", "C": "Genitalitis", "D": "Orchitis: peradangan yang terjadi pada testis akibat adanya infeksi bakteri dan virus yang dapat terjadi pada salah satu atau kedua testis sekaligus", "E": "Pyelonephritis: A kidney infection"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 556, "kategori": "Fisiologi", "vignette": "Manakah dari organ berikut yang kandungan airnya paling tinggi?", "options": {"A": "Jantung", "B": "Paru-paru karena dari paru2 juga untuk mengeluarkan uap air", "C": "Otak", "D": "Kulit", "E": "Otot"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr SF: cairan tubuh. Web RSUD Sawahlunto."}, "skip": false, "skip_reason": ""}, {"id": 557, "kategori": "Biokimia", "vignette": "Manakah mineral dibawah ini yang berperan penting bagi sintesis asam nukleat?", "options": {"A": "Nukleat", "B": "Kalium", "C": "Fosfat", "D": "Magnesium", "E": "Zinc"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 559, "kategori": "Biokimia", "vignette": "Seorang mahasiswa mengikuti seminar di FK UGM pada hari sabtu pagi sampai sore. Dia kehabisan tiket kereta, terpaksa ia naik bus. Sopir tidak membatasi penumpang sampai penuh. Keadaan metabolisme mahasiswa tersebut", "options": {"A": "Peningkatan aktivitas siklus krebs", "B": "Peningkatan aktivitas fosforilasi oksidatif dalam mitokondria", "C": "Peningkatan aktivitas glikogenesis", "D": "Peningkatan glikolisis aerob dalam sel", "E": "Peningkatan timbunan laktat dalam sel: karena anaerob"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Kondisi bus penuh sesak dengan oksigen terbatas menyebabkan metabolisme anaerob dan penimbunan laktat."}, "skip": false, "skip_reason": ""}, {"id": 561, "kategori": "Anatomi", "vignette": "Manakah pernyataan berikut ini yang menggambarkan topografi dari Os radius?", "options": {"A": "Berartikulasi dengan os. ulna dan carpal di proximal (distal)", "B": "Terletak di sebelah lateral dari os. ulna", "C": "Disebut juga tulang hasta", "D": "Berartikulasi dengan os.ulna dan os. humerus di sebelah distal", "E": "Memiliki bangunan olecranon"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 565, "kategori": "Anatomi", "vignette": "Pada makna istilah berikut ini manakah prefixes yang paling tepat terkait ukuran dan jumlah dari awalan oligo-?", "options": {"A": "Little", "B": "Few: sedikit", "C": "Small", "D": "Half", "E": "One"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 571, "kategori": "Fisiologi", "vignette": "Bagaimana mekanisme kerja otot sinaps?", "options": {"A": "Membuka kanal kalsium - fusi vesikel - eksositosis", "B": "Membuka kanal klorida - fusi vesikel - eksositosis", "C": "Fusi vesikel - membuka kanal kalsium - eksositosis", "D": "Eksositosis - membuka kanal klorida - fusi vesikel", "E": "Membuka kanal kalsium - eksositosis - fusi vesikel"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 572, "kategori": "Biokimia", "vignette": "Manakah yang benar mengenai reaksi eksergonik?", "options": {"A": "Entropi menurun", "B": "Tidak akan berjalan spontan", "C": "Terdapat kehilangan energi netto", "D": "Perlu \"coupling\" dengan reaksi endergonic", "E": "Nilai ΔG positif"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Reaksi eksergonik: entropi meningkat, berjalan spontan, terdapat kehilangan energi netto (bebas), nilai delta G negatif. Ppt dr Retno: Bioenergetika."}, "skip": false, "skip_reason": ""}, {"id": 573, "kategori": "Biokimia", "vignette": "Manakah mineral dibawah ini yang berperan penting bagi sintesis asam nukleat?", "options": {"A": "Nukleat", "B": "Kalium", "C": "Fosfat", "D": "Magnesium", "E": "Zinc"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 574, "kategori": "Fisiologi", "vignette": "Dalam melakukan suntikan melalui intravena yang menyebabkan, suatu kenaikan tekanan pada ekstra seluler dan penurunan intraseluler adalah", "options": {"A": "Larutan NACL 0,1%", "B": "Larutan NACL 0,5%", "C": "Larutan NACL 0,45%", "D": "Larutan NACL 0,9%", "E": "Larutan NACL 4%"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Larutan hipertonik (NaCl 4%) menarik cairan dari intrasel ke ekstrasel."}, "skip": false, "skip_reason": ""}, {"id": 575, "kategori": "Anatomi", "vignette": "Pada systema nervosum centrale bangunan apakah yang memisahkan kedua hemispherium cerebelli?", "options": {"A": "Fissura longitudinalis cerebri (pemisah 2 hemispher cerebri)", "B": "Sulcus centralis", "C": "Vermis", "D": "Insula", "E": "Pons"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 579, "kategori": "Histologi", "vignette": "Pada fase apakah kondrosit mengalami apoptosis (sel e mati)?", "options": {"A": "Hipertrofi", "B": "Proliferasi", "C": "Istirahat", "D": "Osifikasi", "E": "Kalsifikasi"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Ppt dr Nur mahmudah."}, "skip": false, "skip_reason": ""}, {"id": 580, "kategori": "Histologi", "vignette": "Lapisan yang melindungi serat otot bagian paling dalam adalah…", "options": {"A": "Perimisium", "B": "Endomisium", "C": "Endoneurium", "D": "Corpus", "E": "Epimisium"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 581, "kategori": "Histologi", "vignette": "Apakah neuroglia sistem saraf pusat yang berfungsi untuk menyokong neuron di ganglion", "options": {"A": "Mikroglia", "B": "Sel schwann membentuk myelin di sst", "C": "Sel satelit", "D": "Sel ependim lcs", "E": "Oligodendrosit membentuk myelin di ssp"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 583, "kategori": "Biokimia", "vignette": "Manakah tahapan reaksi dalam siklus krebs yang merupakan satu-satunya penghasil ATP secara langsung (tingkat substrat) tanpa melewati rantai respirasi?", "options": {"A": "Suksinat menjadi fumarat", "B": "Oksaloasetat menjadi sitrat", "C": "Suksinil KoA menjadi suksinat", "D": "Isositrat menjadi oksalosuksinat", "E": "Fumarate menjadi malat"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 584, "kategori": "Ilmu Perilaku/Etika Kedokteran", "vignette": "Dibawah ini yang termasuk Keintiman keluarga Elemen sosial adalah", "options": {"A": "Mendukung kegiatan sosial", "B": "Berusaha membuat senang EMOSIONAL", "C": "Menggunakan waktu luang untuk rekreasi bersama REKREASIONAL", "D": "Menyatakan perasaan secara terbuka EMOSIONAL", "E": "Mengutarakan semua masalah INTELEKTUAL"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 585, "kategori": "Anatomi", "vignette": "Berikut ini dibagian tulang tulang penyusun telapak tangan yang berada di distal", "options": {"A": "Lunatum", "B": "Schapoidum", "C": "Triquetrum", "D": "Pisiform", "E": "Trapezium"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Proximal: S-L-T-P (Scaphoid-Lunatum-Triquetrum-Pisiform); Distal: T-T-C-H (Trapezium-Trapezoid-Capitatum-Hamatum)."}, "skip": false, "skip_reason": ""}, {"id": 586, "kategori": "Biokimia", "vignette": "Mineral apa yang berperan dalam transportasi FE, terikat pada protein plasma, melepaskan Fe dari simpanan dan mempercepat terikatnya Fe pada transferin adalah?", "options": {"A": "Cl", "B": "Zn", "C": "F", "D": "Cu", "E": "F"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 587, "kategori": "Histologi", "vignette": "Jenis Kartilago apakah yang berdominasi oleh serat kolagen, sementara jumlah selnya sedikit", "options": {"A": "Fibrokartilago", "B": "Hyalin", "C": "Aerolar", "D": "Elastis", "E": "Artikuler"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 591, "kategori": "Histologi", "vignette": "Ganglion yang bentuk badan selnya kecil-kecil, neuronnya eksentrik, aksonnya tidak bermyelin, dan neuronnya multipolar adalah…", "options": {"A": "Ganglion multipolar", "B": "Ganglion spinalis", "C": "Ganglion sympaticum", "D": "Ganglion bipolar", "E": "Ganglion unipolar"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 592, "kategori": "Fisiologi", "vignette": "Apakah faktor yang mempengaruhi pembentukan membran istirahat?", "options": {"A": "pompa Na+-K+", "B": "potensial difusi kalium", "C": "potensial difusi natrium", "D": "kanal kalium gerbang voltage", "E": "kanal natrium gerbang ligan"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "PPT Biolistrik dan Potensial Membran dr. Sa'idatul. Potensial membran istirahat terutama ditentukan oleh potensial difusi kalium."}, "skip": false, "skip_reason": ""}, {"id": 593, "kategori": "Histologi", "vignette": "Apakah tahap kedua dari ossifikasi intramembranosa?", "options": {"A": "pembentukan osifikasi center", "B": "pembentukan bone collar/periosteum", "C": "pembentukan kalsifikasi dari osteoid", "D": "pembentukan sumsum merah", "E": "pembentukan vaskuler darah"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Sc: ppt dr budi."}, "skip": false, "skip_reason": ""}, {"id": 594, "kategori": "Histologi", "vignette": "Apakah tahap ossifikasi endokondral terakhir sesaat sebelum bayi lahir?", "options": {"A": "ossifikasi primer", "B": "ossifikasi sekunder", "C": "bone collar", "D": "pembuluh darah periosteum", "E": "kartilago"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Pusat ossifikasi sekunder (epifisis) terbentuk menjelang kelahiran."}, "skip": false, "skip_reason": ""}, {"id": 595, "kategori": "Biokimia", "vignette": "Pada komplek 3, urutan sitokrom berdasarkan potensial redoks yang meningkat?", "options": {"A": "b-c1-c-a3", "B": "b-c-c1-a3", "C": "a3-c1-c-b", "D": "b-a3-c1-c", "E": "a3-b-c1-c"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 597, "kategori": "Histologi", "vignette": "Suatu jaringan secara histologis ditandai dengan tidak adanya pembuluh darah, daya regenerasinya buruk, matriksnya tampak homogen.", "options": {"A": "Tulang muda", "B": "Kartilago embrional", "C": "Kartilago Hialin", "D": "Tulang dewasa", "E": "Kartilago Elastis"}, "correct": "C", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 598, "kategori": "Biokimia", "vignette": "Manakah tahapan reaksi dalam siklus krebs yang merupakan satu-satunya penghasil ATP secara langsung (tingkat substrat) tanpa melewati rantai respirasi?", "options": {"A": "Isositrat menjadi oksalo suksinat", "B": "Suksinil Ko-A menjadi suksinat", "C": "Oksaloasetat menjadi sitrat", "D": "Fumarate menjadi malat", "E": "Suksinat menjadi fumarat"}, "correct": "B", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 599, "kategori": "Biokimia", "vignette": "Seorang mahasiswa UMS baru selesai mengikuti seminar luring di FK UGM pada hari Sabtu pagi hingga sore. Karena kehabisan tiket kereta, terpaksa ia naik bis umum. Di sepanjang perjalanan Yogya hingga Solo, sopir bus menaikkan penumpang tanpa batas hingga kondisi dalam bus berjubel. Tambahan lagi kondisi hujan deras sehingga jendela dan pintu bus ditutup. Manakah pernyataan yang benar terkait status metabolisme dalam tubuh mahasiswa tersebut?", "options": {"A": "Peningkatan aktivitas siklus krebs", "B": "Peningkatan aktivitas fosforilasi oksidatif dalam mitokondria", "C": "Peningkatan aktivitas glikogenesis", "D": "Peningkatan glikolisis aerob dalam sel", "E": "Peningkatan timbunan laktat dalam sel"}, "correct": "E", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Kondisi bus penuh sesak dan tertutup rapat mengurangi ketersediaan oksigen sehingga metabolisme bergeser ke anaerob dengan penimbunan laktat."}, "skip": false, "skip_reason": ""}, {"id": 601, "kategori": "Ilmu Perilaku/Etika Kedokteran", "vignette": "Ujian pada keluarga yang berdampak besar dalam dinamika keluarga, ketika keluarga tersebut dihadapkan pada peristiwa mayor. Manakah diantara opsi berikut yang merupakan peristiwa mayor tersebut?", "options": {"A": "Memasuki sekolah baru", "B": "Perpindahan rumah", "C": "Anak memasuki dunia kerja", "D": "Orangtua mengalami sakit serius", "E": "Ibu bekerja di luar kota"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": ""}, "skip": false, "skip_reason": ""}, {"id": 604, "kategori": "Histologi", "vignette": "Musculus non striatus berfungsi dalam pergerakan involunter termasuk dalam pergerakan otot organ visceral, kontraksi otot ini dipengaruhi oleh stimulus. Apakah hubungan yang menghantarkan stimulus ini?", "options": {"A": "Gap junction", "B": "Desmosome", "C": "Tight junction", "D": "Zonula adherens", "E": "Adhering junction"}, "correct": "A", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Sel otot polos viseral (unitary) dihubungkan gap junction untuk transmisi stimulus kontraksi secara langsung antar sel."}, "skip": false, "skip_reason": ""}, {"id": 605, "kategori": "Fisiologi", "vignette": "Jika 1L cairan tubuh setara dengan 1 kg massa tubuh, maka berapakah perkiraan volume plasma darah (CES) pada laki-laki dengan berat badan 60 kg?", "options": {"A": "1,8 L", "B": "2,6 L", "C": "2,2 L", "D": "2,4 L", "E": "2,0 L"}, "correct": "D", "skdi": "—", "skdi_note": "", "pembahasan": {"correct_reason": "Total body fluid 60L (60x60%=36 L cairan tubuh total, dari total tsb 1/3 adalah ECF=12L, dari ECF 20% adalah plasma=2,4L). Ppt dr SF: fisiologi cairan tubuh."}, "skip": false, "skip_reason": ""}]</script>
+<script>
+(function(){
+"use strict";
+
+const POOL = JSON.parse(document.getElementById('question-data').textContent);
+const SESSION_SIZE = 110;
+const EXAM_MINUTES = 90;
+const LS_KEY = 'premedical1_cbt_state_v1';
+
+const CAT_LABELS = {};
+POOL.forEach(q=>{ CAT_LABELS[q.kategori]=(CAT_LABELS[q.kategori]||0)+1; });
+
+// ---------- utility ----------
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function letters(){ return ['A','B','C','D','E']; }
+
+function stratifiedSample(pool, n){
+  const byCat = {};
+  pool.forEach(q=>{ (byCat[q.kategori]=byCat[q.kategori]||[]).push(q); });
+  const cats = Object.keys(byCat);
+  const total = pool.length;
+  let picked = [];
+  let remaining = n;
+  cats.forEach((c,idx)=>{
+    const share = idx===cats.length-1 ? remaining : Math.round(byCat[c].length/total*n);
+    const take = Math.min(share, byCat[c].length);
+    picked = picked.concat(shuffle(byCat[c]).slice(0, take));
+    remaining -= take;
+  });
+  if(picked.length < n){
+    const usedIds = new Set(picked.map(q=>q.id));
+    const rest = shuffle(pool.filter(q=>!usedIds.has(q.id)));
+    picked = picked.concat(rest.slice(0, n-picked.length));
+  }
+  return shuffle(picked).slice(0, n);
+}
+
+// ---------- state ----------
+let state = null;
+
+function buildNewSession(shuffleQuestions){
+  let selected = stratifiedSample(POOL, Math.min(SESSION_SIZE, POOL.length));
+  if(!shuffleQuestions){
+    selected = selected.slice().sort((a,b)=>a.id-b.id);
+  }
+  const questions = selected.map(q=>{
+    const letterOrder = shuffle(letters());
+    const shuffledOptions = {};
+    let newCorrectLetter = null;
+    letterOrder.forEach((origLetter, idx)=>{
+      const newLetter = letters()[idx];
+      shuffledOptions[newLetter] = q.options[origLetter];
+      if(origLetter === q.correct) newCorrectLetter = newLetter;
+    });
+    return {
+      id: q.id,
+      kategori: q.kategori,
+      vignette: q.vignette,
+      options: shuffledOptions,
+      correct: newCorrectLetter,
+      skdi: q.skdi,
+      skdi_note: q.skdi_note,
+      pembahasan: q.pembahasan
+    };
+  });
+  return {
+    questions,
+    answers: {},
+    flags: {},
+    current: 0,
+    remainingSeconds: EXAM_MINUTES*60,
+    timerStarted: false,
+    finished: false,
+    startedAt: null
+  };
+}
+
+function saveState(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){}
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return null;
+    return JSON.parse(raw);
+  }catch(e){ return null; }
+}
+function clearState(){
+  try{ localStorage.removeItem(LS_KEY); }catch(e){}
+}
+
+// ---------- start screen ----------
+const elPoolTotal = document.getElementById('pool-total');
+const elCatList = document.getElementById('cat-list');
+const elResumeBanner = document.getElementById('resume-banner');
+const elBtnStart = document.getElementById('btn-start');
+const elBtnResume = document.getElementById('btn-resume');
+const elBtnClear = document.getElementById('btn-clear');
+const elToggleShuffle = document.getElementById('toggle-shuffle-q');
+
+elPoolTotal.textContent = POOL.length;
+Object.keys(CAT_LABELS).sort((a,b)=>CAT_LABELS[b]-CAT_LABELS[a]).forEach(c=>{
+  const pill = document.createElement('span');
+  pill.className='cat-pill';
+  pill.textContent = c+' ('+CAT_LABELS[c]+')';
+  elCatList.appendChild(pill);
+});
+
+const existing = loadState();
+if(existing && !existing.finished){
+  elResumeBanner.classList.remove('hidden');
+  elBtnClear.style.display='block';
+}
+if(existing){
+  elBtnClear.style.display='block';
+}
+
+elBtnStart.addEventListener('click', ()=>{
+  state = buildNewSession(elToggleShuffle.checked);
+  saveState();
+  enterExam();
+});
+elBtnResume.addEventListener('click', ()=>{
+  state = existing;
+  saveState();
+  enterExam();
+});
+elBtnClear.addEventListener('click', ()=>{
+  clearState();
+  elResumeBanner.classList.add('hidden');
+  elBtnClear.style.display='none';
+});
+
+// ---------- exam screen ----------
+const screenStart = document.getElementById('start-screen');
+const screenExam = document.getElementById('exam-screen');
+const screenResult = document.getElementById('result-screen');
+const elNavGrid = document.getElementById('nav-grid');
+const elTimerBox = document.getElementById('timer-box');
+const elTimerDisplay = document.getElementById('timer-display');
+const elQCount = document.getElementById('q-count');
+const elQCatPill = document.getElementById('q-cat-pill');
+const elQVignette = document.getElementById('q-vignette');
+const elQOptions = document.getElementById('q-options');
+const elBtnFlag = document.getElementById('btn-flag');
+const elBtnPrev = document.getElementById('btn-prev');
+const elBtnNext = document.getElementById('btn-next');
+const elPembahasanWrap = document.getElementById('pembahasan-wrap');
+const elBtnFinishExam = document.getElementById('btn-finish-exam');
+
+let timerInterval = null;
+
+function enterExam(){
+  screenStart.classList.add('hidden');
+  screenResult.classList.add('hidden');
+  screenExam.classList.remove('hidden');
+  buildNavGrid();
+  renderQuestion();
+  startTimerLoop();
+}
+
+function buildNavGrid(){
+  elNavGrid.innerHTML='';
+  state.questions.forEach((q, idx)=>{
+    const btn = document.createElement('button');
+    btn.className='nav-btn';
+    btn.textContent = idx+1;
+    btn.addEventListener('click', ()=>{ state.current = idx; saveState(); renderQuestion(); });
+    elNavGrid.appendChild(btn);
+  });
+  refreshNavGrid();
+}
+function refreshNavGrid(){
+  const btns = elNavGrid.children;
+  for(let i=0;i<btns.length;i++){
+    const b = btns[i];
+    b.classList.toggle('answered', !!state.answers[i]);
+    b.classList.toggle('flagged', !!state.flags[i]);
+    b.classList.toggle('current', i===state.current);
+  }
+}
+
+function formatTime(sec){
+  sec = Math.max(0, sec|0);
+  const h = Math.floor(sec/3600);
+  const m = Math.floor((sec%3600)/60);
+  const s = sec%60;
+  return [h,m,s].map(v=>String(v).padStart(2,'0')).join(':');
+}
+
+function startTimerLoop(){
+  if(timerInterval) clearInterval(timerInterval);
+  updateTimerDisplay();
+  timerInterval = setInterval(()=>{
+    if(!state.timerStarted || state.finished) return;
+    state.remainingSeconds--;
+    if(state.remainingSeconds <= 0){
+      state.remainingSeconds = 0;
+      updateTimerDisplay();
+      saveState();
+      finishExam();
+      return;
+    }
+    updateTimerDisplay();
+    if(state.remainingSeconds % 5 === 0) saveState();
+  }, 1000);
+}
+function updateTimerDisplay(){
+  elTimerDisplay.textContent = formatTime(state.remainingSeconds);
+  elTimerBox.classList.toggle('low', state.remainingSeconds < 300);
+}
+
+function renderQuestion(){
+  const idx = state.current;
+  const q = state.questions[idx];
+  const answered = state.answers[idx];
+
+  elQCount.textContent = 'Soal '+(idx+1)+' dari '+state.questions.length;
+  elQCatPill.textContent = q.kategori;
+  elQVignette.textContent = q.vignette;
+
+  elBtnFlag.classList.toggle('active', !!state.flags[idx]);
+  elBtnFlag.innerHTML = (state.flags[idx] ? '&#9873; Ditandai ragu-ragu' : '&#9873; Tandai ragu-ragu');
+
+  elQOptions.innerHTML='';
+  letters().forEach(L=>{
+    const row = document.createElement('div');
+    row.className='opt';
+    if(answered){
+      if(L===q.correct) row.classList.add('correct-reveal');
+      else if(L===answered) row.classList.add('wrong-reveal');
+    } else if(L===answered){
+      row.classList.add('selected');
+    }
+    const letterEl = document.createElement('div');
+    letterEl.className='letter';
+    letterEl.textContent = L;
+    const txtEl = document.createElement('div');
+    txtEl.className='txt';
+    txtEl.textContent = q.options[L];
+    row.appendChild(letterEl);
+    row.appendChild(txtEl);
+    if(answered){
+      if(L===q.correct){
+        const tag=document.createElement('span'); tag.className='opt-tag tag-correct'; tag.textContent='KUNCI'; row.appendChild(tag);
+      } else if(L===answered){
+        const tag=document.createElement('span'); tag.className='opt-tag tag-wrong'; tag.textContent='PILIHANMU'; row.appendChild(tag);
+      }
+    }
+    row.addEventListener('click', ()=>selectAnswer(idx, L));
+    elQOptions.appendChild(row);
+  });
+
+  elBtnPrev.disabled = idx===0;
+  elBtnNext.disabled = idx===state.questions.length-1;
+
+  renderPembahasan(idx);
+  refreshNavGrid();
+}
+
+function selectAnswer(idx, letter){
+  if(state.answers[idx]) return; // already answered, locked
+  state.answers[idx] = letter;
+  if(!state.timerStarted){
+    state.timerStarted = true;
+    state.startedAt = Date.now();
+  }
+  saveState();
+  renderQuestion();
+}
+
+function renderPembahasan(idx){
+  const q = state.questions[idx];
+  const answered = state.answers[idx];
+  elPembahasanWrap.innerHTML='';
+  if(!answered) return;
+  const box = document.createElement('div');
+  box.className='pembahasan-box';
+  const reason = q.pembahasan.correct_reason || 'Pembahasan tidak tersedia dari sumber untuk soal ini.';
+  box.innerHTML = `
+    <h3>Pembahasan</h3>
+    <div class="pb-row">
+      <span class="pb-tag key">Kunci: ${q.correct}</span>
+    </div>
+    <div class="pb-section">
+      <h4>Penjelasan</h4>
+      <p></p>
+    </div>
+  `;
+  elPembahasanWrap.appendChild(box);
+  box.querySelector('.pb-section p').textContent = reason;
+}
+
+elBtnFlag.addEventListener('click', ()=>{
+  const idx = state.current;
+  state.flags[idx] = !state.flags[idx];
+  saveState();
+  renderQuestion();
+});
+elBtnPrev.addEventListener('click', ()=>{
+  if(state.current>0){ state.current--; saveState(); renderQuestion(); }
+});
+elBtnNext.addEventListener('click', ()=>{
+  if(state.current<state.questions.length-1){ state.current++; saveState(); renderQuestion(); }
+});
+elBtnFinishExam.addEventListener('click', ()=>{
+  const unanswered = state.questions.length - Object.keys(state.answers).length;
+  const msg = unanswered>0
+    ? `Masih ada ${unanswered} soal belum dijawab. Yakin ingin menyelesaikan ujian sekarang?`
+    : 'Yakin ingin menyelesaikan dan mengumpulkan ujian sekarang?';
+  if(confirm(msg)) finishExam();
+});
+
+function finishExam(){
+  state.finished = true;
+  saveState();
+  if(timerInterval) clearInterval(timerInterval);
+  showResult();
+}
+
+// ---------- result screen ----------
+function showResult(){
+  screenExam.classList.add('hidden');
+  screenResult.classList.remove('hidden');
+
+  let correct=0, wrong=0, empty=0;
+  const catStats = {};
+  state.questions.forEach((q, idx)=>{
+    const ans = state.answers[idx];
+    if(!catStats[q.kategori]) catStats[q.kategori] = {correct:0,total:0};
+    catStats[q.kategori].total++;
+    if(!ans) empty++;
+    else if(ans===q.correct){ correct++; catStats[q.kategori].correct++; }
+    else wrong++;
+  });
+  const total = state.questions.length;
+  const pct = total? Math.round(correct/total*100) : 0;
+
+  document.getElementById('score-percent').textContent = pct+'%';
+  document.getElementById('stat-correct').textContent = correct;
+  document.getElementById('stat-wrong').textContent = wrong;
+  document.getElementById('stat-empty').textContent = empty;
+
+  const catListEl = document.getElementById('cat-score-list');
+  catListEl.innerHTML='';
+  Object.keys(catStats).sort().forEach(c=>{
+    const s = catStats[c];
+    const p = s.total? Math.round(s.correct/s.total*100):0;
+    const row = document.createElement('div');
+    row.className='cat-score-row';
+    row.innerHTML = `<div class="name">${c}</div><div class="bar-track"><div class="bar-fill" style="width:${p}%"></div></div><div class="frac">${s.correct}/${s.total}</div>`;
+    catListEl.appendChild(row);
+  });
+
+  document.getElementById('review-area').innerHTML='';
+}
+
+document.getElementById('btn-review').addEventListener('click', ()=>{
+  const area = document.getElementById('review-area');
+  if(area.innerHTML){ area.innerHTML=''; return; }
+  state.questions.forEach((q, idx)=>{
+    const ans = state.answers[idx];
+    const wrap = document.createElement('div');
+    wrap.className='q-card';
+    wrap.style.marginTop='16px';
+    let optsHtml='';
+    letters().forEach(L=>{
+      let cls='opt';
+      if(L===q.correct) cls+=' correct-reveal';
+      else if(L===ans) cls+=' wrong-reveal';
+      optsHtml += `<div class="${cls}"><div class="letter">${L}</div><div class="txt">${q.options[L]}</div></div>`;
+    });
+    const reason = (q.pembahasan.correct_reason || 'Pembahasan tidak tersedia dari sumber untuk soal ini.').replace(/</g,'&lt;');
+    wrap.innerHTML = `
+      <div class="q-toprow"><div class="q-count">Soal ${idx+1}</div><span class="q-cat-pill">${q.kategori}</span></div>
+      <div class="vignette">${q.vignette.replace(/</g,'&lt;')}</div>
+      <div>${optsHtml}</div>
+      <div class="pembahasan-box" style="box-shadow:none;border:none;padding:16px 0 0;">
+        <div class="pb-row"><span class="pb-tag key">Kunci: ${q.correct}</span></div>
+        <div class="pb-section"><h4>Penjelasan</h4><p>${reason}</p></div>
+      </div>
+    `;
+    area.appendChild(wrap);
+  });
+});
+
+document.getElementById('btn-restart').addEventListener('click', ()=>{
+  clearState();
+  location.reload();
+});
+
+// ---------- resume on load if mid-exam ----------
+if(existing && !existing.finished && existing.questions && existing.questions.length){
+  // keep on start screen until user clicks resume; but sync timer ticking is paused until resumed
+}
+})();
+</script>
+</body>
+</html>
