@@ -59,7 +59,7 @@
     afterDatasetsDraw(chart) {
       const ctx = chart.ctx;
       ctx.save();
-      ctx.font = '700 11px Nunito, system-ui, sans-serif';
+      ctx.font = '700 11px "Plus Jakarta Sans", system-ui, sans-serif';
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'left';
       chart.data.datasets.forEach((ds, i) => {
@@ -93,7 +93,7 @@
     const childDataset = {
       label: 'Anak',
       data: pts,
-      borderColor: '#1b2733',
+      borderColor: '#16283a',
       borderWidth: 3,
       pointRadius: 6,
       pointHoverRadius: 9,
